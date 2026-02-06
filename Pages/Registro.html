@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es" data-bs-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <title>PokeMarket - Registro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- CSS compartido -->
+  <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body class="bg-pokeballs">
+
+
+  <div class="bg-pokeballs d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR PokeMarket Premium Style -->
+    <nav class="navbar navbar-main shadow-sm sticky-top">
+      <div class="container d-flex align-items-center justify-content-between">
+        <!-- Lado izquierdo: logo + nombre -->
+        <div class="d-flex align-items-center gap-3">
+          <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="../Index.html">
+            <img src="../img/Masterball.png" alt="Masterball" style="width: 32px; height: 32px;">
+            <span class="brand-text">PokeMarket</span>
+          </a>
+        </div>
+
+        <!-- Lado derecho: tema -->
+        <div class="d-flex align-items-center gap-3 flex-wrap justify-content-end">
+          <!-- Switch claro/oscuro -->
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-sun small text-warning"></i>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input theme-switch" type="checkbox" id="darkModeSwitch"
+                aria-label="Cambiar entre modo claro y oscuro">
+            </div>
+            <i class="bi bi-moon-stars small text-secondary-emphasis"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CARD REGISTRO -->
+    <main class="container flex-grow-1 d-flex justify-content-center align-items-center py-5">
+      <div class="card shadow-lg w-100" style="max-width: 460px;">
+        <div class="card-header card-header-poke text-center">
+          <img src="../img/Masterball.png" alt="Masterball" style="width: 56px; height: 56px;" class="mb-2">
+          <h5 class="mb-0 fw-bold">Entrenador Pokémon</h5>
+        </div>
+
+        <div class="card-body">
+          <p class="text-center text-muted small mb-3" id="stepIndicator">Paso 1 de 3</p>
+
+          <form id="formRegistro" class="needs-validation" novalidate>
+            <!-- PASO 1 -->
+            <section id="step1">
+              <div class="mb-3">
+                <label for="pais" class="form-label">País</label>
+                <select class="form-select" id="pais" name="pais" required>
+                  <option value="">Selecciona tu país</option>
+                  <option value="AR">Argentina</option>
+                  <option value="AU">Australia</option>
+                  <option value="BE">Bélgica</option>
+                  <option value="BR">Brasil</option>
+                  <option value="CA">Canadá</option>
+                  <option value="CL">Chile</option>
+                  <option value="CO">Colombia</option>
+                  <option value="DE">Alemania</option>
+                  <option value="DK">Dinamarca</option>
+                  <option value="ES">España</option>
+                  <option value="FR">Francia</option>
+                  <option value="GB">Reino Unido</option>
+                  <option value="IE">Irlanda</option>
+                  <option value="IT">Italia</option>
+                  <option value="JP">Japón</option>
+                  <option value="MX">México</option>
+                  <option value="NL">Países Bajos</option>
+                  <option value="PE">Perú</option>
+                  <option value="PT">Portugal</option>
+                  <option value="SE">Suecia</option>
+                  <option value="US">Estados Unidos</option>
+                </select>
+                <div class="invalid-feedback">Selecciona tu país.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Fecha de nacimiento</label>
+                <div class="row g-2">
+                  <div class="col-4">
+                    <select class="form-select" id="dia" required>
+                      <option value="">Día</option>
+                    </select>
+                    <div class="invalid-feedback">Día obligatorio.</div>
+                  </div>
+                  <div class="col-4">
+                    <select class="form-select" id="mes" required>
+                      <option value="">Mes</option>
+                      <option value="1">Enero</option>
+                      <option value="2">Febrero</option>
+                      <option value="3">Marzo</option>
+                      <option value="4">Abril</option>
+                      <option value="5">Mayo</option>
+                      <option value="6">Junio</option>
+                      <option value="7">Julio</option>
+                      <option value="8">Agosto</option>
+                      <option value="9">Septiembre</option>
+                      <option value="10">Octubre</option>
+                      <option value="11">Noviembre</option>
+                      <option value="12">Diciembre</option>
+                    </select>
+                    <div class="invalid-feedback">Mes obligatorio.</div>
+                  </div>
+                  <div class="col-4">
+                    <select class="form-select" id="anio" required>
+                      <option value="">Año</option>
+                    </select>
+                    <div class="invalid-feedback">Año obligatorio.</div>
+                  </div>
+                </div>
+                <div class="form-text">Debes tener al menos 18 años para registrarte.</div>
+                <div class="text-danger small d-none" id="edadError">
+                  Lo sentimos, debes ser mayor de 18 años para jugar a PokeMarket.
+                </div>
+              </div>
+
+              <div class="d-grid mb-3">
+                <button type="button" class="btn btn-poke" id="btnSiguiente1">Siguiente</button>
+              </div>
+
+              <div class="text-center">
+                <p class="mb-2">¿Ya tienes cuenta?</p>
+                <a href="InicioSesion.html" class="btn btn-outline-secondary btn-sm">
+                  Iniciar sesión
+                </a>
+              </div>
+            </section>
+
+            <!-- PASO 2 -->
+            <section id="step2" class="d-none">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" id="nombre" name="nombre" maxlength="15" required
+                    aria-describedby="nombreHelp">
+                </div>
+                <div id="nombreHelp" class="form-text">
+                  Este será tu nombre visible en PokeMarket.
+                </div>
+                <div class="invalid-feedback">
+                  El nombre es obligatorio y máximo 15 caracteres.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope-fill"></i>
+                  </span>
+                  <input type="email" class="form-control" id="email" name="email" required
+                    aria-describedby="emailHelp">
+                </div>
+                <div id="emailHelp" class="form-text">
+                  Usaremos tu correo para avisarte de subastas y compras.
+                </div>
+                <div class="invalid-feedback">
+                  Introduce un correo electrónico válido.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-shield-lock-fill"></i>
+                  </span>
+                  <input type="password" class="form-control" id="password" name="password" required minlength="8"
+                    aria-describedby="passHelp">
+                  <button class="btn btn-outline-secondary unown-btn closed" type="button" id="togglePass1"
+                    aria-label="Mostrar u ocultar contraseña" style="width: 48px;">
+                    <img src="../img/unown-eye.png" class="unown-icon" alt="Ojo">
+                  </button>
+                </div>
+                <div id="passHelp" class="form-text">
+                  Mínimo 8 caracteres. Usa una contraseña que recuerdes.
+                </div>
+                <div class="invalid-feedback">
+                  La contraseña es obligatoria y debe tener al menos 8 caracteres.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="password2" class="form-label">Repetir contraseña</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-shield-lock"></i>
+                  </span>
+                  <input type="password" class="form-control" id="password2" name="password2" required>
+                  <button class="btn btn-outline-secondary unown-btn closed" type="button" id="togglePass2"
+                    aria-label="Mostrar u ocultar repetición de contraseña" style="width: 48px;">
+                    <img src="../img/unown-eye.png" class="unown-icon" alt="Ojo">
+                  </button>
+                </div>
+                <div class="invalid-feedback">
+                  Las contraseñas no coinciden.
+                </div>
+              </div>
+
+              <div class="d-grid mb-3">
+                <button type="button" class="btn btn-poke" id="btnSiguiente2">
+                  Siguiente
+                </button>
+              </div>
+
+              <div class="text-center">
+                <p class="mb-2">¿Ya tienes cuenta?</p>
+                <a href="InicioSesion.html" class="btn btn-outline-secondary btn-sm">
+                  Iniciar sesión
+                </a>
+              </div>
+            </section>
+
+            <!-- PASO 3 -->
+            <section id="step3" class="d-none">
+              <div class="mb-3 text-center">
+                <p class="mb-2 fw-semibold">Elige tu foto de perfil</p>
+                <small class="text-muted">Selecciona un Pokémon o sube tu imagen favorita.</small>
+              </div>
+
+              <div class="row g-3 mb-3 justify-content-center">
+                <!-- 10 avatares -->
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/pikachu.jpg" alt="Pikachu" class="avatar-option"
+                    data-avatar="../img/avatars/pikachu.jpg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/Bulbasaur.jpeg" alt="Bulbasaur" class="avatar-option"
+                    data-avatar="../img/avatars/Bulbasaur.jpeg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/charmander.jpg" alt="Charmander" class="avatar-option"
+                    data-avatar="../img/avatars/charmander.jpg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/squirtle.jpg" alt="Squirtle" class="avatar-option"
+                    data-avatar="../img/avatars/squirtle.jpg">
+                </div>
+
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/jigglipuff.jpg" alt="Jigglypuff" class="avatar-option"
+                    data-avatar="../img/avatars/jigglipuff.jpg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/meowth.jpeg" alt="Meowth" class="avatar-option"
+                    data-avatar="../img/avatars/meowth.jpeg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/psyduck.jpeg" alt="Psyduck" class="avatar-option"
+                    data-avatar="../img/avatars/psyduck.jpeg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/snorlax.png" alt="Snorlax" class="avatar-option"
+                    data-avatar="../img/avatars/snorlax.png">
+                </div>
+
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/eevee.jpg" alt="Eevee" class="avatar-option"
+                    data-avatar="../img/avatars/eevee.jpg">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                  <img src="../img/avatars/pokeball.png" alt="Pokeball" class="avatar-option"
+                    data-avatar="../img/avatars/pokeball.png">
+                </div>
+              </div>
+
+              <!-- Buscar en galería -->
+              <div class="mb-3">
+                <label for="avatarFile" class="form-label">Buscar en galería</label>
+                <div class="input-group">
+                  <span class="input-group-text icon-circle">
+                    <i class="bi bi-image"></i>
+                  </span>
+                  <input class="form-control" type="file" id="avatarFile" accept="image/*">
+                </div>
+                <div class="form-text">
+                  Formatos aceptados: JPG, PNG, WEBP. Tu imagen se recortará en un círculo.
+                </div>
+              </div>
+
+              <div class="mb-3 text-center">
+                <p class="mb-1 small text-muted">Vista previa</p>
+                <img id="avatarPreview" src="" alt="Vista previa avatar" class="avatar-preview d-none">
+              </div>
+
+              <button type="submit" class="btn btn-poke w-100 mb-3">
+                Registrarse
+              </button>
+
+              <div class="text-center">
+                <p class="mb-2">¿Ya tienes cuenta?</p>
+                <a href="InicioSesion.html" class="btn btn-outline-secondary btn-sm">
+                  Iniciar sesión
+                </a>
+              </div>
+            </section>
+          </form>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- MODAL ÉXITO -->
+  <div class="modal fade" id="registroOK" tabindex="-1" aria-labelledby="registroOKLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header border-0">
+          <h5 class="modal-title w-100" id="registroOKLabel">Registro completo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalAvatar" src="" alt="Avatar" class="img-fluid rounded-circle mb-3"
+            style="width: 90px; height: 90px; object-fit: cover;">
+          <h6 id="modalNombre" class="mb-3"></h6>
+          <p class="text-muted mb-0">
+            ¡Bienvenido a PokeMarket! Tu cuenta se ha creado correctamente.
+          </p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <a href="../Index.html" class="btn btn-poke">
+            Continuar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+      const switchElement = document.getElementById('darkModeSwitch');
+
+      const savedTheme = localStorage.getItem('bsTheme') || 'light';
+      html.setAttribute('data-bs-theme', savedTheme);
+      if (switchElement) {
+        switchElement.checked = savedTheme === 'dark';
+        switchElement.addEventListener('change', function () {
+          const theme = this.checked ? 'dark' : 'light';
+          html.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('bsTheme', theme);
+        });
+      }
+    });
+
+    (() => {
+      'use strict';
+
+      const form = document.getElementById('formRegistro');
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+      const btnSig1 = document.getElementById('btnSiguiente1');
+      const btnSig2 = document.getElementById('btnSiguiente2');
+      const stepInd = document.getElementById('stepIndicator');
+      const edadError = document.getElementById('edadError');
+
+      const diaSelect = document.getElementById('dia');
+      const mesSelect = document.getElementById('mes');
+      const anioSelect = document.getElementById('anio');
+
+      const pass1 = document.getElementById('password');
+      const pass2 = document.getElementById('password2');
+      const togglePass1 = document.getElementById('togglePass1');
+      const togglePass2 = document.getElementById('togglePass2');
+
+      const avatarOptions = document.querySelectorAll('.avatar-option');
+      const avatarFile = document.getElementById('avatarFile');
+      const avatarPreview = document.getElementById('avatarPreview');
+
+      let selectedAvatarSrc = "";
+
+      // Rellenar días
+      for (let d = 1; d <= 31; d++) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        diaSelect.appendChild(opt);
+      }
+
+      // Rellenar años
+      const currentYear = new Date().getFullYear();
+      for (let y = currentYear; y >= 1950; y--) {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        anioSelect.appendChild(opt);
+      }
+
+      function calcularEdad() {
+        const dia = parseInt(diaSelect.value, 10);
+        const mes = parseInt(mesSelect.value, 10) - 1;
+        const anio = parseInt(anioSelect.value, 10);
+
+        if (!dia || !mesSelect.value || !anio) return null;
+
+        const hoy = new Date();
+        const nacimiento = new Date(anio, mes, dia);
+
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const m = hoy.getMonth() - nacimiento.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
+          edad--;
+        }
+        return edad;
+      }
+
+      function togglePassword(input, button) {
+        if (input.type === 'password') {
+          input.type = 'text';
+          // Ver -> Ojo Abierto
+          button.classList.remove('closed');
+          button.classList.add('open');
+        } else {
+          input.type = 'password';
+          // Ocultar -> Ojo Cerrado
+          button.classList.remove('open');
+          button.classList.add('closed');
+        }
+      }
+
+      if (togglePass1) togglePass1.addEventListener('click', () => togglePassword(pass1, togglePass1));
+      if (togglePass2) togglePass2.addEventListener('click', () => togglePassword(pass2, togglePass2));
+
+      // Paso 1 -> Paso 2
+      btnSig1.addEventListener('click', () => {
+        edadError.classList.add('d-none');
+
+        const pais = document.getElementById('pais');
+
+        if (!pais.value) {
+          pais.classList.add('is-invalid');
+        } else {
+          pais.classList.remove('is-invalid');
+        }
+
+        if (!diaSelect.value) diaSelect.classList.add('is-invalid'); else diaSelect.classList.remove('is-invalid');
+        if (!mesSelect.value) mesSelect.classList.add('is-invalid'); else mesSelect.classList.remove('is-invalid');
+        if (!anioSelect.value) anioSelect.classList.add('is-invalid'); else anioSelect.classList.remove('is-invalid');
+
+        if (!pais.value || !diaSelect.value || !mesSelect.value || !anioSelect.value) return;
+
+        const edad = calcularEdad();
+        if (edad === null || edad < 18) {
+          edadError.classList.remove('d-none');
+          return;
+        }
+
+        step1.classList.add('d-none');
+        step2.classList.remove('d-none');
+        stepInd.textContent = 'Paso 2 de 3';
+      });
+
+      // Paso 2 -> Paso 3
+      btnSig2.addEventListener('click', () => {
+        pass2.setCustomValidity('');
+
+        if (pass1.value !== pass2.value) {
+          pass2.setCustomValidity('Las contraseñas no coinciden');
+        }
+
+        const fields = ['nombre', 'email', 'password', 'password2'].map(id => document.getElementById(id));
+        let valido = true;
+
+        fields.forEach(f => {
+          if (!f.checkValidity()) {
+            valido = false;
+          }
+        });
+
+        if (!valido) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        step2.classList.add('d-none');
+        step3.classList.remove('d-none');
+        stepInd.textContent = 'Paso 3 de 3';
+      });
+
+      // Selección de avatar por Pokémon
+      avatarOptions.forEach(img => {
+        img.addEventListener('click', () => {
+          avatarOptions.forEach(i => i.classList.remove('selected'));
+          img.classList.add('selected');
+          selectedAvatarSrc = img.getAttribute('data-avatar');
+          avatarPreview.src = selectedAvatarSrc;
+          avatarPreview.classList.remove('d-none');
+        });
+      });
+
+      // Subida desde galería
+      avatarFile.addEventListener('change', event => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          selectedAvatarSrc = e.target.result;
+          avatarPreview.src = selectedAvatarSrc;
+          avatarPreview.classList.remove('d-none');
+          avatarOptions.forEach(i => i.classList.remove('selected'));
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Envío final
+      form.addEventListener('submit', event => {
+        pass2.setCustomValidity('');
+
+        if (pass1.value !== pass2.value) {
+          pass2.setCustomValidity('Las contraseñas no coinciden');
+        }
+
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        event.preventDefault();
+        form.classList.remove('was-validated');
+
+        const nombre = document.getElementById('nombre').value || 'Entrenador Pokémon';
+        const modalNombre = document.getElementById('modalNombre');
+        const modalAvatar = document.getElementById('modalAvatar');
+
+        modalNombre.textContent = nombre;
+        if (selectedAvatarSrc) {
+          modalAvatar.src = selectedAvatarSrc;
+        } else {
+          modalAvatar.src = '../img/avatars/pokeball.png';
+        }
+
+        // Guardar datos para Index
+        localStorage.setItem('pm_user_name', nombre);
+        if (selectedAvatarSrc) {
+          localStorage.setItem('pm_user_avatar', selectedAvatarSrc);
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('registroOK'));
+        modal.show();
+      });
+
+      // Al cerrar el modal, ir a Index.html
+      const registroOKModalEl = document.getElementById('registroOK');
+      registroOKModalEl.addEventListener('hidden.bs.modal', () => {
+        window.location.href = '../Index.html';
+      });
+    })();
+  </script>
+
+</body>
+
+</html>

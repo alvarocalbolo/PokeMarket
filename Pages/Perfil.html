@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <title>PokeMarket - Perfil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- CSS global -->
+  <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body class="bg-pokeballs">
+
+
+  <!-- NAVBAR (optimizado para móvil) -->
+  <nav class="navbar navbar-main shadow-sm sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- Izquierda: logo + nombre + links -->
+      <div class="d-flex align-items-center gap-3">
+        <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="../Index.html">
+          <img src="../img/Masterball.png" alt="Masterball" style="width:32px;height:32px;">
+          <span class="brand-text">PokeMarket</span>
+        </a>
+
+        <!-- Links de navegación (solo desktop) -->
+        <div class="d-none d-lg-flex align-items-center gap-2">
+          <a href="../Index.html" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-house-door me-1"></i>Inicio
+          </a>
+          <a href="Colección.html" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-collection me-1"></i>Colección
+          </a>
+        </div>
+      </div>
+
+      <!-- Derecha: créditos + perfil (sin botones móviles) -->
+      <div class="d-flex align-items-center gap-2 flex-nowrap">
+
+        <!-- Créditos globales -->
+        <div class="d-flex align-items-center gap-1" id="globalCredits">
+          <i class="bi bi-coin text-warning"></i>
+          <span class="fw-bold">0</span>
+        </div>
+
+        <!-- Dropdown perfil -->
+        <div class="dropdown">
+          <button class="btn btn-profile d-flex align-items-center" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar" id="navbarAvatar">
+            <span class="d-none d-lg-inline user-name ms-2" id="navbarUserName">
+              Entrenador
+            </span>
+            <i class="bi bi-caret-down-fill ms-1 small d-none d-lg-inline"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="profileDropdown">
+            <li class="px-3 py-2">
+              <div class="d-flex align-items-center">
+                <img src="../img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar me-2" id="dropdownAvatar">
+                <div class="min-w-0">
+                  <div class="fw-semibold small text-truncate" id="dropdownUserName">Entrenador</div>
+                  <div class="text-muted xsmall text-truncate" id="dropdownUserEmail">
+                    entrenador@pokemarket.com
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <hr class="dropdown-divider my-1">
+            </li>
+            <li>
+              <a class="dropdown-item small" href="../Index.html">
+                <i class="bi bi-house-door me-2"></i>Inicio
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item small" href="Colección.html">
+                <i class="bi bi-collection me-2"></i>Colección
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider my-1">
+            </li>
+            <li>
+              <a class="dropdown-item small" href="Perfil.html">
+                <i class="bi bi-person-badge me-2"></i>Ver perfil
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item small" href="InicioSesion.html" id="logoutLink">
+                <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PERFIL -->
+  <main class="py-4">
+    <div class="container">
+
+      <!-- CABECERA PERFIL (con micro-animaciones) -->
+      <section class="profile-header card border-0 shadow-sm mb-4 profile-header-animated">
+        <div class="card-body">
+          <div class="row g-3 align-items-center">
+            <!-- Avatar grande -->
+            <div class="col-auto">
+              <div class="profile-avatar-wrapper profile-avatar-glow">
+                <img src="img/avatars/pokeball.png" alt="Avatar perfil" class="profile-avatar" id="profileAvatar">
+              </div>
+            </div>
+
+            <!-- Nombre + bio + acciones -->
+            <div class="col">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <h1 class="h4 mb-0 me-2" id="profileName">Entrenador</h1>
+                <span class="badge bg-poke-username">@entrenador</span>
+              </div>
+
+              <p class="mb-2 text-muted small" id="profileEmail">
+                entrenador@pokemarket.com
+              </p>
+
+              <p class="mb-3 profile-bio small" id="profileBio">
+                Coleccionista de cartas Pokémon, cazador de grails y adicto a las ruletas legendarias.
+              </p>
+
+              <div class="d-flex flex-wrap align-items-center gap-3 mb-3 profile-stats">
+                <div class="profile-stat">
+                  <span class="profile-stat-number" id="statCartasVenta">0</span>
+                  <span class="profile-stat-label">Cartas en venta</span>
+                </div>
+                <div class="profile-stat">
+                  <span class="profile-stat-number" id="statSeguidores">0</span>
+                  <span class="profile-stat-label">Seguidores</span>
+                </div>
+                <div class="profile-stat">
+                  <span class="profile-stat-number" id="statSiguiendo">0</span>
+                  <span class="profile-stat-label">Siguiendo</span>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 align-items-center">
+                <button class="btn btn-poke btn-sm profile-btn-animated" data-bs-toggle="modal"
+                  data-bs-target="#editarPerfilModal">
+                  <i class="bi bi-pencil-square me-1"></i>Editar perfil
+                </button>
+                <button class="btn btn-outline-secondary btn-sm profile-btn-ghost" data-bs-toggle="offcanvas"
+                  data-bs-target="#shareProfileSheet">
+                  <i class="bi bi-share me-1"></i>Compartir perfil
+                </button>
+
+                <!-- Buscador discreto de cartas en perfil -->
+                <div class="ms-auto ms-lg-3">
+                  <div class="input-group input-group-sm profile-search-input" style="max-width: 240px;">
+                    <span class="input-group-text xsmall">
+                      <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control form-control-sm xsmall" id="profileCardSearch"
+                      placeholder="Buscar carta en tu perfil...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABS PERFIL (solo En venta + Favoritas) -->
+      <section class="profile-tabs card border-0 shadow-sm profile-tabs-animated">
+        <div class="card-header border-0 bg-transparent">
+          <ul class="nav nav-pills profile-nav-pills" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="venta-tab" data-bs-toggle="pill" data-bs-target="#tab-venta"
+                type="button" role="tab" aria-controls="tab-venta" aria-selected="true">
+                <i class="bi bi-shop-window me-1"></i>En venta
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="favoritas-tab" data-bs-toggle="pill" data-bs-target="#tab-favoritas"
+                type="button" role="tab" aria-controls="tab-favoritas" aria-selected="false">
+                <i class="bi bi-heart-fill me-1"></i>Favoritas
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-body">
+          <div class="tab-content" id="profileTabsContent">
+            <!-- TAB EN VENTA -->
+            <div class="tab-pane fade show active" id="tab-venta" role="tabpanel" aria-labelledby="venta-tab">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h6 mb-0">Cartas en venta</h2>
+                <button class="btn btn-sm btn-poke profile-btn-animated" data-bs-toggle="modal"
+                  data-bs-target="#selectCollectionCardModal">
+                  <i class="bi bi-plus-lg me-1"></i>Añadir carta
+                </button>
+              </div>
+              <div class="row g-3" id="gridCartasVenta">
+                <!-- plantilla venta: ahora clicable + animación -->
+                <div class="col-6 col-md-4 col-lg-3 d-none" id="plantillaCartaVenta">
+                  <article class="card card-carta h-100 border-0 card-perfil-venta card-perfil-venta-clickable">
+                    <div class="card-carta-frame">
+                      <div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                        <span class="text-muted xsmall">Imagen carta</span>
+                      </div>
+                    </div>
+                    <div class="card-body p-2">
+                      <div class="d-flex justify-content-between align-items-start mb-1">
+                        <h3 class="card-title mb-0 small carta-nombre text-truncate">Nombre carta</h3>
+                        <span class="badge xsmall carta-rareza-badge">R</span>
+                      </div>
+                      <p class="mb-1 xsmall text-muted carta-rareza">Rareza</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-semibold carta-precio small">0,00 €</span>
+                        <span class="xsmall text-muted carta-obtenida">-</span>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <p class="text-muted small mb-0" id="textoSinCartasVenta">
+                  Todavía no has puesto ninguna carta a la venta. Usa el botón “Añadir carta” para empezar.
+                </p>
+              </div>
+            </div>
+
+            <!-- TAB FAVORITAS -->
+            <div class="tab-pane fade" id="tab-favoritas" role="tabpanel" aria-labelledby="favoritas-tab">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h6 mb-0">Cartas favoritas</h2>
+                <button class="btn btn-sm btn-outline-secondary profile-btn-ghost" id="btnAddFavorita"
+                  data-bs-toggle="modal" data-bs-target="#favoriteSelectModal">
+                  <i class="bi bi-heart me-1"></i>Elegir favoritas
+                </button>
+              </div>
+              <div class="row g-3" id="gridFavoritas">
+                <p class="text-muted small mb-0" id="textoSinFavoritas">
+                  Marca cartas como favoritas para verlas aquí de forma rápida.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODAL EDITAR PERFIL -->
+  <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content profile-modal">
+        <div class="modal-header border-0">
+          <h1 class="modal-title h5" id="editarPerfilModalLabel">Editar perfil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarPerfil" novalidate>
+            <!-- Avatar centrado + 2 opciones -->
+            <div class="mb-3 text-center">
+              <div class="profile-avatar-wrapper mb-2 mx-auto profile-avatar-glow">
+                <img src="img/avatars/pokeball.png" alt="Avatar" class="profile-avatar" id="editarAvatarPreview">
+              </div>
+              <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <!-- Cambiar foto desde galería -->
+                <label class="btn btn-outline-secondary btn-sm mb-0 profile-btn-ghost">
+                  <i class="bi bi-image me-1"></i>Galería
+                  <input type="file" class="d-none" id="editarAvatarInput" accept="image/*">
+                </label>
+
+                <!-- Cambiar foto predeterminada -->
+                <button type="button" class="btn btn-outline-secondary btn-sm mb-0 profile-btn-ghost"
+                  data-bs-toggle="collapse" data-bs-target="#avatarPredeterminadoCollapse" aria-expanded="false"
+                  aria-controls="avatarPredeterminadoCollapse">
+                  <i class="bi bi-emoji-smile me-1"></i>Avatar predeterminado
+                </button>
+              </div>
+
+              <!-- Selección de avatares predeterminados -->
+              <div class="collapse mt-3" id="avatarPredeterminadoCollapse">
+                <div class="row g-3 justify-content-center">
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/pikachu.jpg" alt="Pikachu" class="avatar-option"
+                      data-avatar-default="../img/avatars/pikachu.jpg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/Bulbasaur.jpeg" alt="Bulbasaur" class="avatar-option"
+                      data-avatar-default="../img/avatars/Bulbasaur.jpeg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/charmander.jpg" alt="Charmander" class="avatar-option"
+                      data-avatar-default="../img/avatars/charmander.jpg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/squirtle.jpg" alt="Squirtle" class="avatar-option"
+                      data-avatar-default="../img/avatars/squirtle.jpg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/jigglipuff.jpg" alt="Jigglypuff" class="avatar-option"
+                      data-avatar-default="../img/avatars/jigglipuff.jpg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/meowth.jpeg" alt="Meowth" class="avatar-option"
+                      data-avatar-default="../img/avatars/meowth.jpeg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/psyduck.jpeg" alt="Psyduck" class="avatar-option"
+                      data-avatar-default="../img/avatars/psyduck.jpeg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/snorlax.png" alt="Snorlax" class="avatar-option"
+                      data-avatar-default="../img/avatars/snorlax.png">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/eevee.jpg" alt="Eevee" class="avatar-option"
+                      data-avatar-default="../img/avatars/eevee.jpg">
+                  </div>
+                  <div class="col-3 d-flex justify-content-center">
+                    <img src="../img/avatars/pokeball.png" alt="Pokeball" class="avatar-option"
+                      data-avatar-default="../img/avatars/pokeball.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="editarNombre" class="form-label small">Nombre</label>
+              <input type="text" class="form-control form-control-sm" id="editarNombre" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="editarBio" class="form-label small">Descripción</label>
+              <textarea class="form-control form-control-sm" id="editarBio" rows="3"
+                placeholder="Cuenta algo sobre ti como entrenador Pokémon..."></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="editarEmail" class="form-label small">Correo electrónico</label>
+              <input type="email" class="form-control form-control-sm" id="editarEmail" required
+                placeholder="tunombre@correo.com">
+              <div class="invalid-feedback xsmall">
+                Introduce un correo electrónico válido.
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-poke btn-sm" id="btnGuardarPerfil">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SELECCIONAR CARTA DESDE COLECCIÓN (EN VENTA) -->
+  <div class="modal fade" id="selectCollectionCardModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content profile-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title h6">
+            <i class="bi bi-collection me-1"></i>Seleccionar carta de tu colección
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-2 mb-2">
+            <div class="col-md-6">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text xsmall"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control form-control-sm xsmall" id="saleSearchName"
+                  placeholder="Nombre o set">
+              </div>
+            </div>
+            <div class="col-md-3 col-6">
+              <select class="form-select form-select-sm xsmall" id="saleSearchRarity">
+                <option value="all">Rareza: Todas</option>
+                <option value="common">Común</option>
+                <option value="uncommon">Infrecuente</option>
+                <option value="rare">Rara</option>
+                <option value="superrare">Super rara</option>
+                <option value="elite">Élite</option>
+                <option value="epic">Épica</option>
+                <option value="mythic">Mítica</option>
+                <option value="legendary">Legendaria</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-6 text-end xsmall text-muted d-flex align-items-center justify-content-end">
+              <span id="saleSelectorCount">0 resultados</span>
+            </div>
+          </div>
+          <div class="row g-2" id="saleCollectionGrid">
+            <p class="xsmall text-muted mb-0">Cargando colección...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL FAVORITAS: SELECCIONAR DE TU COLECCIÓN -->
+  <div class="modal fade" id="favoriteSelectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content profile-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title h6">
+            <i class="bi bi-heart me-1"></i>Elegir cartas favoritas
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-2 mb-2">
+            <div class="col-md-5">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text xsmall"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control form-control-sm xsmall" id="favoriteSearchName"
+                  placeholder="Nombre o set">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <select class="form-select form-select-sm xsmall" id="favoriteSearchRarity">
+                <option value="all">Rareza: Todas</option>
+                <option value="common">Común</option>
+                <option value="uncommon">Infrecuente</option>
+                <option value="rare">Rara</option>
+                <option value="superrare">Super rara</option>
+                <option value="elite">Élite</option>
+                <option value="epic">Épica</option>
+                <option value="mythic">Mítica</option>
+                <option value="legendary">Legendaria</option>
+              </select>
+            </div>
+            <div class="col-md-3 xsmall text-muted d-flex align-items-center justify-content-end">
+              <span id="favoriteSelectorCount">0 resultados</span>
+            </div>
+          </div>
+          <div class="row g-2" id="favoriteCollectionGrid">
+            <p class="xsmall text-muted mb-0">Cargando tus cartas...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE CARTA EN VENTA -->
+  <div class="modal fade" id="saleDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card-detail-modal">
+        <div class="card-detail-glow"></div>
+        <div class="card-detail-rays"></div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-4 text-center">
+              <div class="card-detail-frame">
+                <img id="saleDetailImage" src="" alt="Carta" class="card-detail-image">
+              </div>
+              <div class="mt-2">
+                <span class="badge xsmall" id="saleDetailRarity"></span>
+                <span class="badge bg-dark-subtle text-light-emphasis xsmall ms-1" id="saleDetailHolo"
+                  style="display:none;">Holo</span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h2 class="h5 fw-bold mb-0" id="saleDetailName">Nombre carta</h2>
+                <span class="xsmall text-muted" id="saleDetailId"></span>
+              </div>
+              <p class="xsmall text-muted mb-2" id="saleDetailSet">Set</p>
+
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Precio de venta</span>
+                    <div class="small fw-semibold" id="saleDetailPrice">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Fecha obtención</span>
+                    <div class="small fw-semibold" id="saleDetailObtained">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-detail-meta xsmall mb-2">
+                <i class="bi bi-info-circle me-1"></i>
+                <span id="saleDetailMeta"></span>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="xsmall text-muted" id="saleDetailIndexInfo"></span>
+                <div class="d-flex gap-2">
+                  <button type="button" class="btn btn-outline-danger btn-sm" id="saleDetailRemoveBtn">
+                    Quitar de venta
+                  </button>
+                  <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE CARTA FAVORITA -->
+  <div class="modal fade" id="favoriteDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card-detail-modal">
+        <div class="card-detail-glow"></div>
+        <div class="card-detail-rays"></div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-4 text-center">
+              <div class="card-detail-frame">
+                <img id="favDetailImage" src="" alt="Carta" class="card-detail-image">
+              </div>
+              <div class="mt-2">
+                <span class="badge xsmall" id="favDetailRarity"></span>
+                <span class="badge bg-dark-subtle text-light-emphasis xsmall ms-1" id="favDetailHolo"
+                  style="display:none;">Holo</span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h2 class="h5 fw-bold mb-0" id="favDetailName">Nombre carta</h2>
+                <span class="xsmall text-muted" id="favDetailId"></span>
+              </div>
+              <p class="xsmall text-muted mb-2" id="favDetailSet">Set</p>
+
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Tipo</span>
+                    <div class="small fw-semibold" id="favDetailTypes">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Fecha obtención</span>
+                    <div class="small fw-semibold" id="favDetailObtained">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Precio estimado</span>
+                    <div class="small fw-semibold" id="favDetailPrice">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Propietarios globales</span>
+                    <div class="small fw-semibold" id="favDetailOwners">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-detail-meta xsmall mb-2">
+                <i class="bi bi-info-circle me-1"></i>
+                <span id="favDetailMeta"></span>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="xsmall text-muted" id="favDetailIndexInfo"></span>
+                <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+              </div>
+
+              <!-- Corazón profesional para quitar de favoritas -->
+              <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-sm btn-favorite-heart position-relative" type="button" id="favDetailHeartBtn">
+                  <i class="bi bi-heart-fill heart-normal"></i>
+                  <i class="bi bi-heartbreak-fill heart-broken"></i>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFCANVAS COMPARTIR PERFIL -->
+  <div class="offcanvas offcanvas-bottom offcanvas-share" tabindex="-1" id="shareProfileSheet"
+    aria-labelledby="shareProfileSheetLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title xsmall text-uppercase text-muted" id="shareProfileSheetLabel">
+        Compartir perfil
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mb-2 small">
+        Comparte tu perfil de entrenador con tus amigos:
+      </div>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button class="btn btn-light btn-sm share-chip" type="button" id="btnShareInstagram">
+          <i class="bi bi-instagram me-1 text-danger"></i>Instagram
+        </button>
+        <button class="btn btn-light btn-sm share-chip" type="button" id="btnShareWhatsApp">
+          <i class="bi bi-whatsapp me-1 text-success"></i>WhatsApp
+        </button>
+        <button class="btn btn-light btn-sm share-chip" type="button" id="btnShareTwitter">
+          <i class="bi bi-twitter-x me-1"></i>X (Twitter)
+        </button>
+        <button class="btn btn-light btn-sm share-chip" type="button" id="btnShareCopyLink">
+          <i class="bi bi-link-45deg me-1"></i>Copiar enlace
+        </button>
+      </div>
+
+      <div class="input-group input-group-sm">
+        <span class="input-group-text xsmall"><i class="bi bi-person"></i></span>
+        <input type="text" class="form-control form-control-sm xsmall" id="shareProfileUrl" readonly>
+        <button class="btn btn-outline-secondary btn-sm xsmall" type="button" id="btnShareCopyInline">
+          Copiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script perfil (mismo JS que ya tienes, con mejoras para: 
+     - renderSales -> hace las cartas clicables y abre saleDetailModal
+     - al quitar de ventas, si la carta no está en pm_collection también se limpia 
+     - corazón roto en favoritas usando la clase .heart-remove-mode) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+
+      // Tema oscuro por defecto (sin switch)
+      html.setAttribute('data-bs-theme', 'dark');
+      localStorage.setItem('bsTheme', 'dark');
+
+      // --- CRÉDITOS / MONEDAS COMPARTIDOS CON INDEX ---
+      const globalCreditsEl = document.getElementById('globalCredits');
+      let balance = 0;
+      const storedCredits = localStorage.getItem('pm_credits');
+      if (storedCredits) {
+        const parsed = parseInt(storedCredits, 10);
+        if (!isNaN(parsed)) {
+          balance = parsed;
+        }
+      }
+      function syncCreditsUIProfile() {
+        if (!globalCreditsEl) return;
+        globalCreditsEl.innerHTML = `
+          <i class="bi bi-coin text-warning"></i>
+          <span class="fw-bold">${balance}</span>
+        `;
+      }
+      syncCreditsUIProfile();
+
+      // --- DATOS USUARIO ---
+      const defaultName = 'Entrenador';
+      const defaultEmail = 'entrenador@pokemarket.com';
+      const defaultAvatar = '../img/avatars/pokeball.png';
+      const defaultBio = 'Coleccionista de cartas Pokémon, cazador de grails y adicto a las ruletas legendarias.';
+
+      const name = localStorage.getItem('pm_user_name') || defaultName;
+      const email = localStorage.getItem('pm_user_email') || defaultEmail;
+      const avatar = localStorage.getItem('pm_user_avatar') || defaultAvatar;
+      const bio = localStorage.getItem('pm_user_bio') || defaultBio;
+
+      // Navbar
+      const navbarUserName = document.getElementById('navbarUserName');
+      const dropdownUserName = document.getElementById('dropdownUserName');
+      const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+      const navbarAvatar = document.getElementById('navbarAvatar');
+      const dropdownAvatar = document.getElementById('dropdownAvatar');
+
+      if (navbarUserName) navbarUserName.textContent = name;
+      if (dropdownUserName) dropdownUserName.textContent = name;
+      if (dropdownUserEmail) dropdownUserEmail.textContent = email;
+      if (navbarAvatar) navbarAvatar.src = avatar;
+      if (dropdownAvatar) dropdownAvatar.src = avatar;
+
+      // Cabecera perfil
+      const profileName = document.getElementById('profileName');
+      const profileEmail = document.getElementById('profileEmail');
+      const profileAvatar = document.getElementById('profileAvatar');
+      const profileBio = document.getElementById('profileBio');
+
+      if (profileName) profileName.textContent = name;
+      if (profileEmail) profileEmail.textContent = email;
+      if (profileAvatar) profileAvatar.src = avatar;
+      if (profileBio) profileBio.textContent = bio;
+
+      // Handler estilo @user
+      const handlerBadge = document.querySelector('.badge.bg-poke-username');
+      if (handlerBadge) {
+        const base = email.split('@')[0] || 'entrenador';
+        handlerBadge.textContent = '@' + base;
+      }
+
+      // --- EDITAR PERFIL (MODAL) ---
+      const editarNombre = document.getElementById('editarNombre');
+      const editarEmail = document.getElementById('editarEmail');
+      const editarBio = document.getElementById('editarBio');
+      const editarAvatarPreview = document.getElementById('editarAvatarPreview');
+      const editarAvatarInput = document.getElementById('editarAvatarInput');
+      const btnGuardarPerfil = document.getElementById('btnGuardarPerfil');
+
+      if (editarNombre) editarNombre.value = name;
+      if (editarEmail) editarEmail.value = email;
+      if (editarBio) editarBio.value = bio;
+      if (editarAvatarPreview) editarAvatarPreview.src = avatar;
+
+      // Previsualizar avatar galería
+      if (editarAvatarInput) {
+        editarAvatarInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (ev) {
+            const dataUrl = ev.target.result;
+            if (editarAvatarPreview) editarAvatarPreview.src = dataUrl;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Seleccionar avatar predeterminado
+      const avatarDefaultOptions = document.querySelectorAll('[data-avatar-default]');
+      avatarDefaultOptions.forEach(img => {
+        img.addEventListener('click', () => {
+          const selectedUrl = img.getAttribute('data-avatar-default');
+          if (!selectedUrl) return;
+          avatarDefaultOptions.forEach(i => i.classList.remove('selected'));
+          img.classList.add('selected');
+          if (editarAvatarPreview) editarAvatarPreview.src = selectedUrl;
+        });
+      });
+
+      // Guardar cambios perfil
+      if (btnGuardarPerfil) {
+        btnGuardarPerfil.addEventListener('click', () => {
+          const form = document.getElementById('formEditarPerfil');
+          if (form && !form.checkValidity()) {
+            form.classList.add('was-validated');
+            return;
+          }
+
+          const nuevoNombre = editarNombre ? editarNombre.value.trim() : name;
+          const nuevoEmail = editarEmail ? editarEmail.value.trim() : email;
+          const nuevaBio = editarBio ? editarBio.value.trim() : bio;
+          let nuevoAvatar = avatar;
+
+          if (editarAvatarPreview && editarAvatarPreview.src) {
+            nuevoAvatar = editarAvatarPreview.src;
+          }
+
+          localStorage.setItem('pm_user_name', nuevoNombre || defaultName);
+          localStorage.setItem('pm_user_email', nuevoEmail || defaultEmail);
+          localStorage.setItem('pm_user_bio', nuevaBio || defaultBio);
+          localStorage.setItem('pm_user_avatar', nuevoAvatar || defaultAvatar);
+
+          if (navbarUserName) navbarUserName.textContent = nuevoNombre || defaultName;
+          if (dropdownUserName) dropdownUserName.textContent = nuevoNombre || defaultName;
+          if (dropdownUserEmail) dropdownUserEmail.textContent = nuevoEmail || defaultEmail;
+          if (navbarAvatar) navbarAvatar.src = nuevoAvatar || defaultAvatar;
+          if (dropdownAvatar) dropdownAvatar.src = nuevoAvatar || defaultAvatar;
+          if (profileName) profileName.textContent = nuevoNombre || defaultName;
+          if (profileEmail) profileEmail.textContent = nuevoEmail || defaultEmail;
+          if (profileAvatar) profileAvatar.src = nuevoAvatar || defaultAvatar;
+          if (profileBio) profileBio.textContent = nuevaBio || defaultBio;
+          if (handlerBadge) {
+            const base = (nuevoEmail || defaultEmail).split('@')[0] || 'entrenador';
+            handlerBadge.textContent = '@' + base;
+          }
+
+          const modalEl = document.getElementById('editarPerfilModal');
+          const modalInstance = bootstrap.Modal.getInstance(modalEl);
+          modalInstance.hide();
+        });
+      }
+
+      // --- COLECCIÓN GLOBAL ---
+      let collection = [];
+      const rarityLabels = {
+        common: 'Común',
+        uncommon: 'Infrecuente',
+        rare: 'Rara',
+        superrare: 'Super rara',
+        elite: 'Élite',
+        epic: 'Épica',
+        mythic: 'Mítica',
+        legendary: 'Legendaria'
+      };
+
+      function loadCollection() {
+        const raw = localStorage.getItem('pm_collection') || '[]';
+        try {
+          const data = JSON.parse(raw);
+          collection = Array.isArray(data) ? data.map((c, idx) => ({ ...c, _idx: idx })) : [];
+        } catch {
+          collection = [];
+        }
+      }
+
+      loadCollection();
+
+      function rarityKey(card) {
+        return card.rarityInternal || 'common';
+      }
+      function rarityBadgeClass(card) {
+        return 'badge rarity-' + (card.rarityInternal || 'common');
+      }
+      function rarityLabel(card) {
+        const key = card.rarityInternal || 'common';
+        return card.rarityLabel || rarityLabels[key] || key;
+      }
+      function cardPriceText(card) {
+        const price = card.priceEur ?? card.priceUsd ?? null;
+        if (price === null) return '-';
+        return card.priceEur ? card.priceEur.toFixed(2) + ' €' : card.priceUsd.toFixed(2) + ' $';
+      }
+      function formatDate(iso) {
+        if (!iso) return '-';
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '-';
+        return d.toLocaleString('es-ES', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        });
+      }
+      function estimateOwners(card) {
+        const basePrice = card.priceEur ?? card.priceUsd ?? 0;
+        if (!basePrice || basePrice <= 0) return '≈ 50 000';
+        if (basePrice < 1) return '≈ 40 000';
+        if (basePrice < 2) return '≈ 25 000';
+        if (basePrice < 5) return '≈ 15 000';
+        if (basePrice < 10) return '≈ 7 500';
+        if (basePrice < 20) return '≈ 3 000';
+        if (basePrice < 40) return '≈ 1 200';
+        if (basePrice < 80) return '≈ 550';
+        return '≈ 120';
+      }
+
+      // --- CARTAS EN VENTA ---
+      const gridCartasVenta = document.getElementById('gridCartasVenta');
+      const plantillaCartaVenta = document.getElementById('plantillaCartaVenta');
+      const textoSinCartasVenta = document.getElementById('textoSinCartasVenta');
+      const statCartasVenta = document.getElementById('statCartasVenta');
+
+      function getSalesFromStorage() {
+        const raw = localStorage.getItem('pm_cards_sale') || '[]';
+        try {
+          const data = JSON.parse(raw);
+          return Array.isArray(data) ? data : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function saveSalesToStorage(list) {
+        localStorage.setItem('pm_cards_sale', JSON.stringify(list));
+      }
+
+      function renderSales() {
+        if (!gridCartasVenta || !plantillaCartaVenta) return;
+        const ventas = getSalesFromStorage();
+
+        gridCartasVenta.querySelectorAll('.col-6').forEach(col => {
+          if (col !== plantillaCartaVenta) col.remove();
+        });
+
+        if (!ventas.length) {
+          if (textoSinCartasVenta) textoSinCartasVenta.classList.remove('d-none');
+        } else {
+          if (textoSinCartasVenta) textoSinCartasVenta.classList.add('d-none');
+          ventas.forEach((v, idx) => {
+            const col = plantillaCartaVenta.cloneNode(true);
+            col.id = '';
+            col.classList.remove('d-none');
+            const cardEl = col.querySelector('.card-perfil-venta');
+            const frame = col.querySelector('.card-carta-frame');
+            const placeholder = col.querySelector('.carta-img-placeholder');
+            const nombreEl = col.querySelector('.carta-nombre');
+            const rarezaEl = col.querySelector('.carta-rareza');
+            const rarezaBadge = col.querySelector('.carta-rareza-badge');
+            const precioEl = col.querySelector('.carta-precio');
+            const obtEl = col.querySelector('.carta-obtenida');
+
+            if (cardEl) {
+              cardEl.dataset.cardId = v.id || '';
+              cardEl.dataset.saleIndex = idx;
+              cardEl.classList.add('sale-card-clickable');
+            }
+            if (nombreEl) nombreEl.textContent = v.name || 'Carta';
+            if (rarezaEl) rarezaEl.textContent = rarityLabel(v);
+            if (rarezaBadge) {
+              rarezaBadge.textContent = rarityLabel(v);
+              rarezaBadge.className = 'badge xsmall ' + rarityBadgeClass(v);
+            }
+            if (precioEl) precioEl.textContent = cardPriceText(v);
+            if (obtEl) obtEl.textContent = v.obtainedAt ? formatDate(v.obtainedAt) : '-';
+
+            if (frame && v.image) {
+              placeholder.innerHTML = '';
+              const img = document.createElement('img');
+              img.src = v.image;
+              img.alt = v.name || 'Carta';
+              img.className = 'carta-img-real';
+              frame.appendChild(img);
+            }
+
+            gridCartasVenta.appendChild(col);
+          });
+
+          // añadir handler clic -> detalle venta
+          gridCartasVenta.querySelectorAll('.sale-card-clickable').forEach(card => {
+            card.addEventListener('click', () => {
+              const idx = parseInt(card.dataset.saleIndex, 10);
+              openSaleDetail(idx);
+            });
+          });
+        }
+
+        if (statCartasVenta) statCartasVenta.textContent = ventas.length;
+      }
+
+      renderSales();
+
+      // Modal seleccionar carta desde colección para ventas
+      const saleSearchName = document.getElementById('saleSearchName');
+      const saleSearchRarity = document.getElementById('saleSearchRarity');
+      const saleCollectionGrid = document.getElementById('saleCollectionGrid');
+      const saleSelectorCount = document.getElementById('saleSelectorCount');
+
+      function filterCollectionForSale() {
+        if (!saleCollectionGrid) return;
+        const txt = (saleSearchName.value || '').toLowerCase();
+        const rare = saleSearchRarity.value || 'all';
+
+        let filtered = collection.filter(c => {
+          const n = (c.name || '').toLowerCase();
+          const s = (c.setName || '').toLowerCase();
+          const r = c.rarityInternal || '';
+          if (txt && !n.includes(txt) && !s.includes(txt)) return false;
+          if (rare !== 'all' && r !== rare) return false;
+          return true;
+        });
+
+        saleCollectionGrid.innerHTML = '';
+        if (!filtered.length) {
+          saleCollectionGrid.innerHTML = '<p class="xsmall text-muted mb-0">No hay cartas que coincidan.</p>';
+        } else {
+          const frag = document.createDocumentFragment();
+          filtered.forEach(card => {
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4 col-lg-3';
+            col.innerHTML = `
+          <article class="card card-carta h-100 card-selectable" data-collection-idx="${card._idx}">
+            <div class="card-carta-frame">
+              ${card.image
+                ? `<img src="${card.image}" class="carta-img-real" alt="${card.name}">`
+                : `<div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                       <span class="xsmall text-muted">Sin imagen</span>
+                     </div>`
+              }
+            </div>
+            <div class="card-body p-2">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+                <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
+              </div>
+              <p class="xsmall text-muted mb-1 text-truncate">${card.setName || '-'}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="xsmall">${cardPriceText(card)}</span>
+                <span class="badge bg-dark-subtle text-light-emphasis xsmall">${card.holographic ? 'Holo' : 'No holo'}</span>
+              </div>
+            </div>
+          </article>
+        `;
+            frag.appendChild(col);
+          });
+          saleCollectionGrid.appendChild(frag);
+        }
+        if (saleSelectorCount) saleSelectorCount.textContent = filtered.length + ' resultados';
+
+        saleCollectionGrid.querySelectorAll('.card-selectable').forEach(el => {
+          el.addEventListener('click', () => {
+            const idx = parseInt(el.getAttribute('data-collection-idx'), 10);
+            const card = collection[idx];
+            if (!card) return;
+            const ventas = getSalesFromStorage();
+            // evitar duplicados de venta por id
+            if (!ventas.some(v => v.id === card.id)) {
+              ventas.push({
+                id: card.id || 'card-' + idx,
+                name: card.name,
+                rarityInternal: card.rarityInternal,
+                rarityLabel: card.rarityLabel,
+                priceEur: card.priceEur,
+                priceUsd: card.priceUsd,
+                image: card.image,
+                setName: card.setName,
+                obtainedAt: card.obtainedAt,
+                holographic: card.holographic
+              });
+              saveSalesToStorage(ventas);
+            }
+            renderSales();
+            const modalEl = document.getElementById('selectCollectionCardModal');
+            const instance = bootstrap.Modal.getInstance(modalEl);
+            instance.hide();
+          });
+        });
+      }
+
+      if (saleSearchName) saleSearchName.addEventListener('input', filterCollectionForSale);
+      if (saleSearchRarity) saleSearchRarity.addEventListener('change', filterCollectionForSale);
+
+      const selectCollectionModalEl = document.getElementById('selectCollectionCardModal');
+      if (selectCollectionModalEl) {
+        selectCollectionModalEl.addEventListener('shown.bs.modal', () => {
+          filterCollectionForSale();
+        });
+      }
+
+      // DETALLE CARTA EN VENTA + QUITAR
+      const saleDetailModalEl = document.getElementById('saleDetailModal');
+      const saleDetailModal = saleDetailModalEl ? new bootstrap.Modal(saleDetailModalEl) : null;
+      const saleDetailImage = document.getElementById('saleDetailImage');
+      const saleDetailRarity = document.getElementById('saleDetailRarity');
+      const saleDetailHolo = document.getElementById('saleDetailHolo');
+      const saleDetailName = document.getElementById('saleDetailName');
+      const saleDetailId = document.getElementById('saleDetailId');
+      const saleDetailSet = document.getElementById('saleDetailSet');
+      const saleDetailPrice = document.getElementById('saleDetailPrice');
+      const saleDetailObtained = document.getElementById('saleDetailObtained');
+      const saleDetailMeta = document.getElementById('saleDetailMeta');
+      const saleDetailIndexInfo = document.getElementById('saleDetailIndexInfo');
+      const saleDetailRemoveBtn = document.getElementById('saleDetailRemoveBtn');
+
+      let currentSaleIndex = null;
+
+      function openSaleDetail(idx) {
+        if (!saleDetailModal) return;
+        const ventas = getSalesFromStorage();
+        if (idx < 0 || idx >= ventas.length) return;
+        const card = ventas[idx];
+        currentSaleIndex = idx;
+
+        if (saleDetailImage) saleDetailImage.src = card.image || '../img/avatars/pokeball.png';
+        if (saleDetailRarity) {
+          saleDetailRarity.textContent = rarityLabel(card);
+          saleDetailRarity.className = 'badge xsmall ' + rarityBadgeClass(card);
+        }
+        if (saleDetailHolo) saleDetailHolo.style.display = card.holographic ? 'inline-block' : 'none';
+        if (saleDetailName) saleDetailName.textContent = card.name || 'Carta en venta';
+        if (saleDetailId) saleDetailId.textContent = card.id ? 'ID: ' + card.id : '';
+        if (saleDetailSet) saleDetailSet.textContent = card.setName ? 'Set: ' + card.setName : 'Set: desconocido';
+        if (saleDetailPrice) saleDetailPrice.textContent = cardPriceText(card);
+        if (saleDetailObtained) saleDetailObtained.textContent = card.obtainedAt ? formatDate(card.obtainedAt) : '-';
+        if (saleDetailMeta) saleDetailMeta.textContent = 'Oferta activa en tu perfil de PokeMarket. Puedes quitarla cuando quieras desde este panel.';
+        if (saleDetailIndexInfo) saleDetailIndexInfo.textContent = 'Carta en venta #' + (idx + 1) + ' de ' + ventas.length;
+
+        saleDetailModal.show();
+      }
+
+      if (saleDetailRemoveBtn) {
+        saleDetailRemoveBtn.addEventListener('click', () => {
+          if (currentSaleIndex === null) return;
+          let ventas = getSalesFromStorage();
+          const removed = ventas[currentSaleIndex];
+          ventas = ventas.filter((_, i) => i !== currentSaleIndex);
+          saveSalesToStorage(ventas);
+
+          // si la carta no está en colección, limpiar rastro opcional (aquí no hace falta borrar nada más
+          // porque las ventas se basan solo en pm_cards_sale y la colección es independiente)
+
+          renderSales();
+          if (saleDetailModal) saleDetailModal.hide();
+          currentSaleIndex = null;
+        });
+      }
+
+      // --- FAVORITAS ---
+      const gridFavoritas = document.getElementById('gridFavoritas');
+      const textoSinFavoritas = document.getElementById('textoSinFavoritas');
+      const favoriteSearchName = document.getElementById('favoriteSearchName');
+      const favoriteSearchRarity = document.getElementById('favoriteSearchRarity');
+      const favoriteCollectionGrid = document.getElementById('favoriteCollectionGrid');
+      const favoriteSelectorCount = document.getElementById('favoriteSelectorCount');
+
+      function getFavoritesFromStorage() {
+        const raw = localStorage.getItem('pm_profile_favorites') || '[]';
+        try {
+          const data = JSON.parse(raw);
+          return Array.isArray(data) ? data : [];
+        } catch {
+          return [];
+        }
+      }
+      function saveFavorites(list) {
+        localStorage.setItem('pm_profile_favorites', JSON.stringify(list));
+      }
+
+      function renderFavorites() {
+        if (!gridFavoritas) return;
+        const list = getFavoritesFromStorage();
+
+        gridFavoritas.querySelectorAll('.col-6').forEach(col => col.remove());
+
+        if (!list.length) {
+          if (textoSinFavoritas) textoSinFavoritas.classList.remove('d-none');
+          return;
+        }
+        if (textoSinFavoritas) textoSinFavoritas.classList.add('d-none');
+
+        const frag = document.createDocumentFragment();
+        list.forEach((card, idx) => {
+          const col = document.createElement('div');
+          col.className = 'col-6 col-md-4 col-lg-3';
+          col.innerHTML = `
+        <article class="card card-carta h-100 card-favorite-clickable" data-fav-id="${card.id || ('fav-' + idx)}">
+          <div class="card-carta-frame">
+            ${card.image
+              ? `<img src="${card.image}" class="carta-img-real" alt="${card.name}">`
+              : `<div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                     <span class="xsmall text-muted">Sin imagen</span>
+                   </div>`
+            }
+          </div>
+          <div class="card-body p-2">
+            <div class="d-flex justify-content-between align-items-start mb-1">
+              <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+              <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
+            </div>
+            <p class="xsmall text-muted mb-0 text-truncate">${card.setName || '-'}</p>
+          </div>
+        </article>
+      `;
+          frag.appendChild(col);
+        });
+        gridFavoritas.appendChild(frag);
+
+        gridFavoritas.querySelectorAll('.card-favorite-clickable').forEach(el => {
+          el.addEventListener('click', () => {
+            const id = el.getAttribute('data-fav-id');
+            openFavoriteDetail(id);
+          });
+        });
+      }
+
+      function filterCollectionForFavorites() {
+        if (!favoriteCollectionGrid) return;
+        const txt = (favoriteSearchName.value || '').toLowerCase();
+        const rare = favoriteSearchRarity.value || 'all';
+
+        let filtered = collection.filter(c => {
+          const n = (c.name || '').toLowerCase();
+          const s = (c.setName || '').toLowerCase();
+          const r = c.rarityInternal || '';
+          if (txt && !n.includes(txt) && !s.includes(txt)) return false;
+          if (rare !== 'all' && r !== rare) return false;
+          return true;
+        });
+
+        favoriteCollectionGrid.innerHTML = '';
+        if (!filtered.length) {
+          favoriteCollectionGrid.innerHTML = '<p class="xsmall text-muted mb-0">No hay cartas que coincidan.</p>';
+        } else {
+          const frag = document.createDocumentFragment();
+          filtered.forEach(card => {
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4 col-lg-3';
+            col.innerHTML = `
+          <article class="card card-carta h-100 card-selectable-favorite" data-collection-idx="${card._idx}">
+            <div class="card-carta-frame">
+              ${card.image
+                ? `<img src="${card.image}" class="carta-img-real" alt="${card.name}">`
+                : `<div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                       <span class="xsmall text-muted">Sin imagen</span>
+                     </div>`
+              }
+            </div>
+            <div class="card-body p-2">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+                <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
+              </div>
+              <p class="xsmall text-muted mb-0 text-truncate">${card.setName || '-'}</p>
+            </div>
+          </article>
+        `;
+            frag.appendChild(col);
+          });
+          favoriteCollectionGrid.appendChild(frag);
+        }
+        if (favoriteSelectorCount) favoriteSelectorCount.textContent = filtered.length + ' resultados';
+
+        favoriteCollectionGrid.querySelectorAll('.card-selectable-favorite').forEach(el => {
+          el.addEventListener('click', () => {
+            const idx = parseInt(el.getAttribute('data-collection-idx'), 10);
+            const card = collection[idx];
+            if (!card) return;
+            const favs = getFavoritesFromStorage();
+            if (!favs.some(f => f.id === card.id)) {
+              favs.push({
+                id: card.id || ('fav-' + idx),
+                name: card.name,
+                image: card.image,
+                rarityInternal: card.rarityInternal,
+                rarityLabel: card.rarityLabel,
+                setName: card.setName,
+                obtainedAt: card.obtainedAt,
+                holographic: card.holographic,
+                types: card.types
+              });
+              saveFavorites(favs);
+            }
+            renderFavorites();
+            const modalEl = document.getElementById('favoriteSelectModal');
+            const instance = bootstrap.Modal.getInstance(modalEl);
+            instance.hide();
+          });
+        });
+      }
+
+      if (favoriteSearchName) favoriteSearchName.addEventListener('input', filterCollectionForFavorites);
+      if (favoriteSearchRarity) favoriteSearchRarity.addEventListener('change', filterCollectionForFavorites);
+
+      const favoriteSelectModalEl = document.getElementById('favoriteSelectModal');
+      if (favoriteSelectModalEl) {
+        favoriteSelectModalEl.addEventListener('shown.bs.modal', () => {
+          filterCollectionForFavorites();
+        });
+      }
+
+      renderFavorites();
+
+      // --- DETALLE FAVORITA + CORAZÓN PROFESIONAL (hover = corazón roto) ---
+      const favDetailModalEl = document.getElementById('favoriteDetailModal');
+      const favoriteDetailModal = favDetailModalEl ? new bootstrap.Modal(favDetailModalEl) : null;
+      const favDetailImage = document.getElementById('favDetailImage');
+      const favDetailRarity = document.getElementById('favDetailRarity');
+      const favDetailHolo = document.getElementById('favDetailHolo');
+      const favDetailName = document.getElementById('favDetailName');
+      const favDetailId = document.getElementById('favDetailId');
+      const favDetailSet = document.getElementById('favDetailSet');
+      const favDetailTypes = document.getElementById('favDetailTypes');
+      const favDetailObtained = document.getElementById('favDetailObtained');
+      const favDetailPrice = document.getElementById('favDetailPrice');
+      const favDetailOwners = document.getElementById('favDetailOwners');
+      const favDetailMeta = document.getElementById('favDetailMeta');
+      const favDetailIndexInfo = document.getElementById('favDetailIndexInfo');
+      const favDetailHeartBtn = document.getElementById('favDetailHeartBtn');
+
+      let currentFavId = null;
+
+      function openFavoriteDetail(id) {
+        if (!favoriteDetailModal) return;
+        const favs = getFavoritesFromStorage();
+        const idx = favs.findIndex(f => f.id === id);
+        if (idx === -1) return;
+        const card = favs[idx];
+        currentFavId = id;
+
+        if (favDetailImage) favDetailImage.src = card.image || '../img/avatars/pokeball.png';
+        if (favDetailRarity) {
+          favDetailRarity.textContent = rarityLabel(card);
+          favDetailRarity.className = 'badge xsmall ' + rarityBadgeClass(card);
+        }
+        if (favDetailHolo) favDetailHolo.style.display = card.holographic ? 'inline-block' : 'none';
+        if (favDetailName) favDetailName.textContent = card.name || 'Carta favorita';
+        if (favDetailId) favDetailId.textContent = card.id ? 'ID: ' + card.id : '';
+        if (favDetailSet) favDetailSet.textContent = card.setName ? 'Set: ' + card.setName : 'Set: desconocido';
+        if (favDetailTypes) {
+          const types = Array.isArray(card.types) && card.types.length ? card.types.join(' / ') : 'Desconocido';
+          favDetailTypes.textContent = types;
+        }
+        if (favDetailObtained) favDetailObtained.textContent = formatDate(card.obtainedAt);
+        if (favDetailPrice) favDetailPrice.textContent = cardPriceText(card);
+        if (favDetailOwners) favDetailOwners.textContent = estimateOwners(card);
+
+        if (favDetailIndexInfo) {
+          favDetailIndexInfo.textContent = 'Favorita #' + (idx + 1) + ' de ' + favs.length;
+        }
+
+        if (favDetailMeta) {
+          const firstOwner = card.obtainedAt ? 'Primer propietario: tú (obtenida en sobre en tu cuenta).' : 'Propietario actual: tú.';
+          const raritySentence = 'Rareza: ' + rarityLabel(card) + '.';
+          const transferInfo = ' Historial de portadores simulado a partir del valor de la carta.';
+          favDetailMeta.textContent = firstOwner + ' ' + raritySentence + transferInfo;
+        }
+
+        if (favDetailHeartBtn) {
+          favDetailHeartBtn.classList.remove('heart-remove-mode');
+        }
+
+        favoriteDetailModal.show();
+      }
+
+      if (favDetailHeartBtn) {
+        favDetailHeartBtn.addEventListener('mouseenter', () => {
+          favDetailHeartBtn.classList.add('heart-remove-mode');
+        });
+        favDetailHeartBtn.addEventListener('mouseleave', () => {
+          favDetailHeartBtn.classList.remove('heart-remove-mode');
+        });
+        favDetailHeartBtn.addEventListener('click', () => {
+          if (!currentFavId) return;
+          const favs = getFavoritesFromStorage();
+          const next = favs.filter(f => f.id !== currentFavId);
+          saveFavorites(next);
+          renderFavorites();
+          if (favoriteDetailModal) favoriteDetailModal.hide();
+          currentFavId = null;
+        });
+      }
+
+      // --- BUSCADOR PERFIL (filtra en venta + favoritas) ---
+      const profileCardSearch = document.getElementById('profileCardSearch');
+      if (profileCardSearch) {
+        profileCardSearch.addEventListener('input', () => {
+          const txt = profileCardSearch.value.toLowerCase();
+          // filtrar cards en venta
+          if (gridCartasVenta) {
+            gridCartasVenta.querySelectorAll('.card-perfil-venta').forEach(card => {
+              const nameEl = card.querySelector('.carta-nombre');
+              const name = (nameEl ? nameEl.textContent : '').toLowerCase();
+              const col = card.closest('.col-6');
+              if (col) col.style.display = name.includes(txt) ? '' : 'none';
+            });
+          }
+          // filtrar favoritas
+          if (gridFavoritas) {
+            gridFavoritas.querySelectorAll('.card-favorite-clickable').forEach(card => {
+              const titleEl = card.querySelector('span.small');
+              const name = (titleEl ? titleEl.textContent : '').toLowerCase();
+              const col = card.closest('.col-6');
+              if (col) col.style.display = name.includes(txt) ? '' : 'none';
+            });
+          }
+        });
+      }
+
+      // --- COMPARTIR PERFIL ---
+      const shareProfileUrlInput = document.getElementById('shareProfileUrl');
+      const btnShareInstagram = document.getElementById('btnShareInstagram');
+      const btnShareWhatsApp = document.getElementById('btnShareWhatsApp');
+      const btnShareTwitter = document.getElementById('btnShareTwitter');
+      const btnShareCopyLink = document.getElementById('btnShareCopyLink');
+      const btnShareCopyInline = document.getElementById('btnShareCopyInline');
+
+      const profileUrl = window.location.href;
+      if (shareProfileUrlInput) shareProfileUrlInput.value = profileUrl;
+
+      function safeOpen(url) {
+        window.open(url, '_blank', 'noopener');
+      }
+
+      if (btnShareInstagram) {
+        btnShareInstagram.addEventListener('click', () => {
+          navigator.clipboard && navigator.clipboard.writeText(profileUrl);
+          alert('Enlace de perfil copiado. Pégalo en tu historia o bio de Instagram.');
+        });
+      }
+      if (btnShareWhatsApp) {
+        btnShareWhatsApp.addEventListener('click', () => {
+          const text = encodeURIComponent('Échale un vistazo a mi perfil de PokeMarket: ' + profileUrl);
+          safeOpen('https://wa.me/?text=' + text);
+        });
+      }
+      if (btnShareTwitter) {
+        btnShareTwitter.addEventListener('click', () => {
+          const text = encodeURIComponent('Mi perfil de PokeMarket');
+          const url = encodeURIComponent(profileUrl);
+          safeOpen('https://twitter.com/intent/tweet?text=' + text + '&url=' + url);
+        });
+      }
+      function copyShareLink() {
+        if (!navigator.clipboard) {
+          const tmp = document.createElement('input');
+          tmp.value = profileUrl;
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand('copy');
+          document.body.removeChild(tmp);
+        } else {
+          navigator.clipboard.writeText(profileUrl);
+        }
+        alert('Enlace de perfil copiado al portapapeles.');
+      }
+      if (btnShareCopyLink) btnShareCopyLink.addEventListener('click', copyShareLink);
+      if (btnShareCopyInline) btnShareCopyInline.addEventListener('click', copyShareLink);
+
+      // --- LOGOUT ---
+      const logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('pm_user_name');
+          localStorage.removeItem('pm_user_email');
+          localStorage.removeItem('pm_user_avatar');
+          localStorage.removeItem('pm_user_bio');
+          localStorage.removeItem('pm_cards_sale');
+          localStorage.removeItem('pm_collection');
+          localStorage.removeItem('pm_profile_wishlist');
+          localStorage.removeItem('pm_profile_favorites');
+          window.location.href = 'InicioSesion.html';
+        });
+      }
+
+      // Verificar que Bootstrap está cargado
+      if (typeof bootstrap !== 'undefined') {
+        console.log('Bootstrap cargado correctamente');
+      } else {
+        console.error('Bootstrap NO está cargado');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <title>PokeMarket - Colección</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../CSS/style.css">
+  <script src="../js/api-service.js"></script>
+</head>
+
+<body class="bg-pokeballs">
+
+  <nav class="navbar navbar-main shadow-sm sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- Izquierda: logo + nombre + links -->
+      <div class="d-flex align-items-center gap-3">
+        <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="../Index.html">
+          <img src="../img/Masterball.png" alt="Masterball" style="width:32px;height:32px;">
+          <span class="brand-text">PokeMarket</span>
+        </a>
+
+        <div class="d-none d-md-flex align-items-center gap-2">
+          <a href="../Index.html" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-house-door me-1"></i>Inicio
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Derecha: botón inicio móvil + perfil -->
+      <div class="d-flex align-items-center gap-2 flex-nowrap">
+
+        <!-- Botón Inicio en móvil -->
+        <a href="../Index.html" class="btn btn-outline-light btn-sm d-md-none d-inline-flex align-items-center">
+          <i class="bi bi-house-door"></i>
+          <span class="d-none d-sm-inline ms-1">Inicio</span>
+        </a>
+
+        <!-- Dropdown perfil -->
+        <div class="dropdown">
+          <button class="btn btn-profile d-flex align-items-center" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar" id="navbarAvatar">
+            <span class="d-none d-lg-inline user-name ms-2" id="navbarUserName">Entrenador</span>
+            <i class="bi bi-caret-down-fill ms-1 small d-none d-lg-inline"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="profileDropdown">
+            <li class="px-3 py-2">
+              <div class="d-flex align-items-center">
+                <img src="../img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar me-2" id="dropdownAvatar">
+                <div class="min-w-0">
+                  <div class="fw-semibold small text-truncate" id="dropdownUserName">Entrenador</div>
+                  <div class="text-muted xsmall text-truncate" id="dropdownUserEmail">
+                    entrenador@pokemarket.com
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <hr class="dropdown-divider my-1">
+            </li>
+            <li>
+              <a class="dropdown-item small" href="Perfil.html">
+                <i class="bi bi-person-badge me-2"></i>Ver perfil
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item small" href="InicioSesion.html" id="logoutLink">
+                <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <main class="py-4">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+        <div>
+          <h1 class="h4 fw-bold mb-1">Colección</h1>
+          <nav class="nav nav-pills nav-collection-tabs mt-2" id="collectionTabs" role="tablist">
+            <button class="nav-link active" id="tab-mycards" data-bs-toggle="pill" data-bs-target="#view-mycards"
+              type="button" role="tab">
+              <i class="bi bi-stack me-1"></i>Mis Cartas
+            </button>
+            <button class="nav-link" id="tab-album" data-bs-toggle="pill" data-bs-target="#view-album" type="button"
+              role="tab">
+              <i class="bi bi-journal-album me-1"></i>Álbum de Cromos
+            </button>
+          </nav>
+        </div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <button class="btn btn-stats btn-sm" type="button" id="btnShowStats">
+            <i class="bi bi-graph-up-arrow me-1"></i>Gráfico
+          </button>
+          <button class="btn btn-outline-danger btn-sm" type="button" id="btnDevDelete">
+            <i class="bi bi-trash3 me-1"></i>Borrar cartas (DEV)
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="collectionTabContent">
+        <!-- VISTA: MIS CARTAS (Inventario) -->
+        <div class="tab-pane fade show active" id="view-mycards" role="tabpanel">
+          <div class="row g-3">
+            <!-- Filtros -->
+            <aside class="col-lg-3">
+              <section class="card border-0 shadow-sm rounded-4 mb-3">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h6 fw-semibold mb-0">
+                      <i class="bi bi-funnel me-1"></i>Filtros
+                    </h2>
+                    <span id="cardsCounter" class="xsmall text-muted">0 cartas</span>
+                  </div>
+
+                  <!-- Buscar -->
+                  <div class="mb-3">
+                    <label class="form-label xsmall text-uppercase text-muted mb-1">Buscar</label>
+                    <input type="text" class="form-control form-control-sm" id="searchText" placeholder="Nombre o set">
+                  </div>
+
+                  <!-- Rareza -->
+                  <div class="mb-3">
+                    <label class="form-label xsmall text-uppercase text-muted mb-1">Rareza</label>
+                    <select class="form-select form-select-sm" id="rarityFilter">
+                      <option value="all">Todas</option>
+                      <option value="common">Base Set</option>
+                    </select>
+                  </div>
+
+                  <!-- Holo -->
+                  <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="filterHolo">
+                    <label class="form-check-label small" for="filterHolo">
+                      Solo holográficas
+                    </label>
+                  </div>
+
+                  <!-- Precio -->
+                  <div class="mb-3">
+                    <label class="form-label xsmall text-uppercase text-muted mb-1">Precio (EUR)</label>
+                    <div class="d-flex gap-2 align-items-center">
+                      <input type="number" class="form-control form-control-sm" id="priceMin" placeholder="Mín">
+                      <input type="number" class="form-control form-control-sm" id="priceMax" placeholder="Máx">
+                    </div>
+                    <div class="form-text xsmall">
+                      Si una carta no tiene precio, se trata como 0.
+                    </div>
+                  </div>
+
+                  <!-- Orden -->
+                  <div class="mb-3">
+                    <label class="form-label xsmall text-uppercase text-muted mb-1">Ordenar por</label>
+                    <select class="form-select form-select-sm" id="sortBy">
+                      <option value="date">Más recientes</option>
+                      <option value="name">Nombre (A–Z)</option>
+                      <option value="rarity">Rareza</option>
+                      <option value="price">Precio (desc)</option>
+                    </select>
+                  </div>
+
+                  <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="btnApplyFilters">
+                      Aplicar
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="btnClearFilters">
+                      Limpiar
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </aside>
+
+            <!-- Grid -->
+            <section class="col-lg-9">
+              <div class="row" id="cardsGrid"></div>
+            </section>
+          </div>
+        </div>
+
+        <!-- VISTA: ÁLBUM DE CROMOS -->
+        <div class="tab-pane fade" id="view-album" role="tabpanel">
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body">
+              <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                  <label class="form-label xsmall text-uppercase text-muted mb-1">Seleccionar Set / Expansión</label>
+                  <select class="form-select form-select-sm" id="albumSetSelector">
+                    <option value="" disabled selected>Cargando sets...</option>
+                  </select>
+                </div>
+                <div class="col-md-8">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div id="albumProgressInfo">
+                      <span class="xsmall text-muted">Cargando álbum...</span>
+                    </div>
+                    <div class="progress flex-grow-1 mx-3" style="height: 10px; max-width: 300px;">
+                      <div class="progress-bar bg-success" id="albumProgressBar" role="progressbar" style="width: 0%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="album-sticker-grid" id="albumStickerGrid">
+            <!-- Sticlers JS -->
+            <div class="text-center py-5">
+              <div class="spinner-border text-primary" role="status"></div>
+              <p class="mt-2 text-muted xsmall">Consultando bases de datos de Pokémon...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal detalle carta -->
+  <div class="modal fade" id="cardDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card-detail-modal">
+        <div class="card-detail-glow"></div>
+        <div class="card-detail-rays"></div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-4 text-center">
+              <div class="card-detail-frame">
+                <img id="detailImage" src="" alt="Carta" class="card-detail-image">
+              </div>
+              <div class="mt-2">
+                <span class="badge xsmall" id="detailRarityBadge"></span>
+                <span class="badge bg-dark-subtle text-light-emphasis xsmall ms-1" id="detailHoloBadge"
+                  style="display:none;">Holo</span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h2 class="h5 fw-bold mb-0" id="detailName">Nombre carta</h2>
+                <span class="xsmall text-muted" id="detailId"></span>
+              </div>
+              <p class="xsmall text-muted mb-2" id="detailSet">Set</p>
+
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Tipo</span>
+                    <div class="small fw-semibold" id="detailTypes">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Fecha obtención</span>
+                    <div class="small fw-semibold" id="detailObtainedAt">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Precio estimado</span>
+                    <div class="small fw-semibold" id="detailPrice">-</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-detail-stat">
+                    <span class="xsmall text-muted text-uppercase">Propietarios globales</span>
+                    <div class="small fw-semibold" id="detailOwners">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-2 mb-2">
+                <div class="col-12">
+                  <div class="card-detail-stat h-100">
+                    <span class="xsmall text-muted text-uppercase d-block mb-1">Descripción / Efecto</span>
+                    <div class="small" id="detailDescription" style="max-height: 80px; overflow-y: auto;">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-detail-meta xsmall mb-2">
+                <i class="bi bi-info-circle me-1"></i>
+                <span id="detailMetaText"></span>
+              </div>
+
+              <div class="mt-3 d-flex justify-content-between align-items-center">
+                <span class="xsmall text-muted" id="detailIndexInfo"></span>
+                <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal estadísticas / gráfico -->
+  <div class="modal fade" id="collectionStatsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content collection-stats-modal">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-semibold">
+            <i class="bi bi-graph-up-arrow me-1 text-warning"></i>Estadísticas de colección
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body pt-2">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="stats-card">
+                <h6 class="xsmall text-uppercase text-muted mb-2">Resumen rápido</h6>
+                <ul class="list-unstyled xsmall mb-0" id="statsSummaryList"></ul>
+              </div>
+              <div class="stats-card mt-3">
+                <h6 class="xsmall text-uppercase text-muted mb-2">Top rarezas</h6>
+                <ul class="list-unstyled xsmall mb-0" id="statsTopRarities"></ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stats-card h-100">
+                <h6 class="xsmall text-uppercase text-muted mb-2">Distribución por rareza</h6>
+                <div class="stats-bar-wrapper">
+                  <div class="stats-bar-row" data-rarity="common">
+                    <span class="stats-bar-label fw-bold">Base Set</span>
+                    <div class="stats-bar-track">
+                      <div class="stats-bar-fill rarity-common" id="bar-common"></div>
+                    </div>
+                    <span class="stats-bar-value xsmall" id="bar-common-label"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+      const switchElement = document.getElementById('darkModeSwitch');
+
+      const savedTheme = localStorage.getItem('bsTheme') || 'light';
+      html.setAttribute('data-bs-theme', savedTheme);
+      if (switchElement) {
+        switchElement.checked = savedTheme === 'dark';
+        switchElement.addEventListener('change', function () {
+          const theme = this.checked ? 'dark' : 'light';
+          html.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('bsTheme', theme);
+        });
+      }
+
+      const defaultName = 'Entrenador';
+      const defaultEmail = 'entrenador@pokemarket.com';
+      const defaultAvatar = '../img/avatars/pokeball.png';
+
+      const name = localStorage.getItem('pm_user_name') || defaultName;
+      const email = localStorage.getItem('pm_user_email') || defaultEmail;
+      const avatar = localStorage.getItem('pm_user_avatar') || defaultAvatar;
+
+      const navbarUserName = document.getElementById('navbarUserName');
+      const dropdownUserName = document.getElementById('dropdownUserName');
+      const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+      const navbarAvatar = document.getElementById('navbarAvatar');
+      const dropdownAvatar = document.getElementById('dropdownAvatar');
+
+      if (navbarUserName) navbarUserName.textContent = name;
+      if (dropdownUserName) dropdownUserName.textContent = name;
+      if (dropdownUserEmail) dropdownUserEmail.textContent = email;
+      if (navbarAvatar) navbarAvatar.src = avatar;
+      if (dropdownAvatar) dropdownAvatar.src = avatar;
+
+      const logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('pm_user_name');
+          localStorage.removeItem('pm_user_email');
+          localStorage.removeItem('pm_user_avatar');
+          localStorage.removeItem('pm_user_bio');
+          localStorage.removeItem('pm_cards_sale');
+          localStorage.removeItem('pm_collection');
+          window.location.href = 'InicioSesion.html';
+        });
+      }
+
+      /* ============================
+         COLECCIÓN
+         ============================ */
+      let collection = [];
+      const cardsGrid = document.getElementById('cardsGrid');
+      const cardsCounter = document.getElementById('cardsCounter');
+
+      const searchTextInput = document.getElementById('searchText');
+      const rarityFilter = document.getElementById('rarityFilter');
+      const filterHolo = document.getElementById('filterHolo');
+      const priceMinInput = document.getElementById('priceMin');
+      const priceMaxInput = document.getElementById('priceMax');
+      const sortBySelect = document.getElementById('sortBy');
+      const btnApply = document.getElementById('btnApplyFilters');
+      const btnClear = document.getElementById('btnClearFilters');
+
+      const btnDevDelete = document.getElementById('btnDevDelete');
+      const btnShowStats = document.getElementById('btnShowStats');
+
+      // Modal detalle carta
+      const cardDetailModalEl = document.getElementById('cardDetailModal');
+      const cardDetailModal = cardDetailModalEl ? new bootstrap.Modal(cardDetailModalEl) : null;
+
+      // Álbum de Cromos Elements
+      const albumSetSelector = document.getElementById('albumSetSelector');
+      const albumStickerGrid = document.getElementById('albumStickerGrid');
+      const albumProgressInfo = document.getElementById('albumProgressInfo');
+      const albumProgressBar = document.getElementById('albumProgressBar');
+
+      const detailImage = document.getElementById('detailImage');
+      const detailRarityBadge = document.getElementById('detailRarityBadge');
+      const detailHoloBadge = document.getElementById('detailHoloBadge');
+      const detailName = document.getElementById('detailName');
+      const detailId = document.getElementById('detailId');
+      const detailSet = document.getElementById('detailSet');
+      const detailTypes = document.getElementById('detailTypes');
+      const detailObtainedAt = document.getElementById('detailObtinedAt') || document.getElementById('detailObtainedAt');
+      const detailPrice = document.getElementById('detailPrice');
+      const detailOwners = document.getElementById('detailOwners');
+      const detailMetaText = document.getElementById('detailMetaText');
+      const detailIndexInfo = document.getElementById('detailIndexInfo');
+      const detailDescription = document.getElementById('detailDescription');
+
+      // Modal estadísticas
+      const collectionStatsModalEl = document.getElementById('collectionStatsModal');
+      const collectionStatsModal = collectionStatsModalEl ? new bootstrap.Modal(collectionStatsModalEl) : null;
+      const statsSummaryList = document.getElementById('statsSummaryList');
+      const statsTopRarities = document.getElementById('statsTopRarities');
+
+      const rarityOrder = ['common'];
+      const rarityLabels = {
+        common: 'Base Set'
+      };
+
+      function loadCollection() {
+        const raw = localStorage.getItem('pm_collection') || '[]';
+        try {
+          const data = JSON.parse(raw);
+          collection = Array.isArray(data) ? data.map((c, idx) => ({ ...c, _idx: idx })) : [];
+          fixCollectionData(); // Migración de datos corruptos
+        } catch {
+          collection = [];
+        }
+      }
+
+      /**
+       * MIGRACIÓN: Corrige cartas con "Carta desconocida" o sin imagen
+       * provocadas por sesiones anteriores con bugs.
+       */
+      function fixCollectionData() {
+        let changed = false;
+        collection.forEach(card => {
+          // Reparar IDs faltantes si existe el id (ej. base1-1)
+          if (card.id && (!card.setId || !card.localId)) {
+            const parts = card.id.split('-');
+            if (parts.length >= 2) {
+              card.setId = card.setId || parts[0];
+              card.localId = card.localId || parts[1];
+              changed = true;
+            }
+          }
+
+          if (!card.name || card.name === 'Carta desconocida' || !card.setName || card.setName === 'Set desconocido' || (card.image && !card.image.includes('.png'))) {
+            if (card.id && card.id.includes('base1')) {
+              if (card.image && !card.image.includes('.png')) {
+                card.image = `${card.image}/high.png`;
+                changed = true;
+              }
+              if (!card.setName || card.setName === 'Set desconocido') {
+                card.setName = 'Base Set';
+                changed = true;
+              }
+              if (!card.setId) {
+                card.setId = 'base1';
+                changed = true;
+              }
+              if (!card.localId) {
+                card.localId = card.id.split('-')[1];
+                changed = true;
+              }
+            }
+          }
+        });
+        if (changed) saveCollection();
+      }
+
+      /* ============================
+         ÁLBUM DE CROMOS LOGIC
+         ============================ */
+
+      async function initAlbum() {
+        if (!albumSetSelector) return;
+
+        try {
+          const sets = await ApiService.fetchSets();
+          albumSetSelector.innerHTML = sets.map(set => `<option value="${set.id}">${set.name} (${set.cardCount} cartas)</option>`).join('');
+
+          // Default selection
+          if (sets.length > 0) {
+            const firstSetId = sets[0].id;
+            albumSetSelector.value = firstSetId;
+            loadAlbumSet(firstSetId);
+          }
+
+          albumSetSelector.addEventListener('change', (e) => loadAlbumSet(e.target.value));
+        } catch (err) {
+          console.error('Error initializing album:', err);
+          if (albumStickerGrid) {
+            albumStickerGrid.innerHTML = '<p class="text-center text-danger xsmall">Error al conectar con la API de Pokémon.</p>';
+          }
+        }
+      }
+
+      async function loadAlbumSet(setId) {
+        if (!albumStickerGrid) return;
+
+        albumStickerGrid.innerHTML = `
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2 text-muted xsmall">Sincronizando con TCGdex (${setId})...</p>
+          </div>
+        `;
+
+        try {
+          const cards = await ApiService.fetchCardsBySet(setId);
+          renderAlbum(cards, setId);
+        } catch (err) {
+          console.error('Error loading album set:', err);
+          albumStickerGrid.innerHTML = '<p class="text-center text-danger small">Error al cargar el álbum. Prueba a recargar la página.</p>';
+        }
+      }
+
+      function isCardOwned(setId, localId) {
+        // Ownership check: must match setId and localId
+        return collection.some(c => {
+          const cSetId = c.setId || (c.id ? c.id.split('-')[0] : '');
+          const cLocalId = c.localId || (c.id ? c.id.split('-')[1] : '');
+          return cSetId === setId && String(cLocalId) === String(localId);
+        });
+      }
+
+      function renderAlbum(cards, setId) {
+        albumStickerGrid.innerHTML = '';
+        let ownedCount = 0;
+
+        const fragment = document.createDocumentFragment();
+        cards.forEach((card, index) => {
+          const isOwned = isCardOwned(setId, card.localId);
+          if (isOwned) ownedCount++;
+
+          const stickerCol = document.createElement('div');
+          stickerCol.className = 'sticker-col';
+          stickerCol.style.width = '100%'; // Asegurar que ocupa su celda del grid
+
+          // TCGdex requires /low.png or /high.png
+          const displayImg = card.image ? `${card.image}/low.png` : '../img/avatars/pokeball.png';
+
+          stickerCol.innerHTML = `
+            <div class="album-sticker ${isOwned ? 'owned' : 'unowned'}" title="${card.name}" data-album-idx="${index}" style="cursor:pointer">
+              <div class="sticker-inner">
+                <img src="${displayImg}" alt="${card.name}" loading="lazy" onerror="this.src='../img/avatars/pokeball.png'">
+                <div class="sticker-overlay">
+                  <span class="sticker-number">#${card.localId}</span>
+                </div>
+              </div>
+            </div>
+          `;
+
+          stickerCol.querySelector('.album-sticker').addEventListener('click', async () => {
+            if (isOwned) {
+              const colCard = collection.find(c => c.setId === setId && String(c.localId) === String(card.localId));
+              openCardDetail(colCard || card, colCard ? colCard._idx : -1);
+            } else {
+              // Mostrar carta en Blanco y Negro (B/W) en el modal
+              openCardDetail({
+                ...card,
+                name: '???',
+                description: 'Esta carta aún no está en tu colección. ¡Colecciónala para ver su detalle!',
+                obtainedAt: null,
+                types: ['???'],
+                // Usamos la imagen pero forzamos un estado B/W si el modal lo soporta o vía CSS parcial
+                isUnownedView: true
+              }, -1);
+            }
+          });
+
+          fragment.appendChild(stickerCol);
+        });
+
+        albumStickerGrid.appendChild(fragment);
+
+        // Progreso
+        const total = cards.length;
+        const percent = total > 0 ? (ownedCount / total) * 100 : 0;
+        if (albumProgressInfo) {
+          albumProgressInfo.innerHTML = `<span class="fw-bold">${ownedCount}</span> de <span class="fw-bold">${total}</span> cartas <span class="text-muted">(${percent.toFixed(1)}%)</span>`;
+        }
+        if (albumProgressBar) {
+          albumProgressBar.style.width = `${percent}%`;
+        }
+      }
+
+      function saveCollection() {
+        const copy = collection.map(({ _idx, ...rest }) => rest);
+        localStorage.setItem('pm_collection', JSON.stringify(copy));
+      }
+
+      function rarityRank(key) {
+        const idx = rarityOrder.indexOf(key);
+        return idx === -1 ? 0 : idx;
+      }
+
+      function applyFilters() {
+        const text = searchTextInput.value.trim().toLowerCase();
+        const rarity = rarityFilter.value;
+        const holoOnly = filterHolo.checked;
+        const minPrice = parseFloat(priceMinInput.value) || 0;
+        const maxPrice = parseFloat(priceMaxInput.value) || Infinity;
+        const sortBy = sortBySelect.value;
+
+        let filtered = collection.filter(card => {
+          const name = (card.name || '').toLowerCase();
+          const set = (card.setName || '').toLowerCase();
+          const types = (card.types || []).join(' ').toLowerCase();
+
+          if (text && !name.includes(text) && !set.includes(text) && !types.includes(text)) return false;
+
+          const internalRarity = card.rarityInternal || '';
+          if (rarity !== 'all' && internalRarity !== rarity) return false;
+
+          if (holoOnly && !card.holographic) return false;
+
+          const price = card.priceEur ?? card.priceUsd ?? 0;
+          if (price < minPrice || price > maxPrice) return false;
+
+          return true;
+        });
+
+        filtered.sort((a, b) => {
+          switch (sortBy) {
+            case 'name':
+              return (a.name || '').localeCompare(b.name || '');
+            case 'rarity':
+              return rarityRank(a.rarityInternal) - rarityRank(b.rarityInternal);
+            case 'price':
+              return (b.priceEur ?? b.priceUsd ?? 0) - (a.priceEur ?? a.priceUsd ?? 0);
+            case 'date':
+            default:
+              return new Date(b.obtainedAt || 0) - new Date(a.obtainedAt || 0);
+          }
+        });
+
+        renderCollection(filtered);
+      }
+
+      function renderCollection(cards) {
+        cardsGrid.innerHTML = '';
+
+        // Agrupar cartas repetidas
+        const grouped = cards.reduce((acc, card) => {
+          const key = card.id || `${card.setId}-${card.localId}`;
+          if (!acc[key]) acc[key] = { ...card, count: 0 };
+          acc[key].count++;
+          return acc;
+        }, {});
+
+        const groupedCards = Object.values(grouped);
+        cardsCounter.textContent = `Mostrando ${groupedCards.length} tipos (${cards.length} totales)`;
+
+        if (!groupedCards.length) {
+          cardsGrid.innerHTML = '<p class="text-muted small">No hay cartas que coincidan con los filtros.</p>';
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        groupedCards.forEach(card => {
+          const col = document.createElement('div');
+          col.className = 'col-6 col-md-4 col-lg-3 mb-3';
+
+          const rarityKey = card.rarityInternal || 'common';
+          // Simplificamos: Todos son "Base Set" o el nombre del Set
+          const rarityLabel = card.setName || 'Base Set';
+          const rarityClass = `rarity-${rarityKey}`;
+          const price = card.priceEur ?? card.priceUsd ?? null;
+          const priceText = price !== null
+            ? (card.priceEur ? `${card.priceEur.toFixed(2)} €` : `${card.priceUsd.toFixed(2)} $`)
+            : '-';
+
+          const typesHtml = (card.types || ['Normal']).map(t => `<span class="badge-type ${t.toLowerCase()}">${t}</span>`).join('');
+          const description = card.description || '';
+
+          col.innerHTML = `
+        <div class="card card-carta card-carta-clickable h-100" data-card-id="${card.id}">
+          ${card.image
+              ? `<div class="card-carta-frame">
+                   <img src="${card.image}" class="carta-img-real" alt="${card.name}">
+                   ${card.count > 1 ? `<div class="card-stack-badge">${card.count}</div>` : ''}
+                 </div>`
+              : `<div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                   <span class="xsmall">Sin imagen</span>
+                 </div>`}
+          <div class="card-body p-2 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-1">
+              <span class="small fw-semibold text-truncate" title="${card.name || ''}">
+                ${card.name || 'Carta desconocida'}
+              </span>
+              <span class="badge ${rarityClass}">${rarityLabel}</span>
+            </div>
+            <div class="mb-1">
+              ${typesHtml}
+            </div>
+            <div class="xsmall text-muted text-truncate mb-1">
+              ${card.setName || 'Base Set'}
+            </div>
+            <div class="description-text mb-2">
+              ${description}
+            </div>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="fw-bold text-success" style="font-size: 0.85rem;">${priceText}</span>
+              ${card.holographic ? '<span class="badge bg-warning-subtle text-warning-emphasis xsmall">Holo</span>' : ''}
+            </div>
+          </div>
+        </div>
+      `;
+
+          fragment.appendChild(col);
+        });
+
+        cardsGrid.appendChild(fragment);
+
+        cardsGrid.querySelectorAll('.card-carta-clickable').forEach(cardEl => {
+          cardEl.addEventListener('click', () => {
+            const cardId = cardEl.getAttribute('data-card-id');
+            const baseCard = grouped[cardId];
+            if (!baseCard || !cardDetailModal) return;
+            openCardDetail(baseCard, baseCard._idx);
+          });
+        });
+      }
+
+      function clearFilters() {
+        searchTextInput.value = '';
+        rarityFilter.value = 'all';
+        filterHolo.checked = false;
+        priceMinInput.value = '';
+        priceMaxInput.value = '';
+        sortBySelect.value = 'date';
+        applyFilters();
+      }
+
+      btnApply.addEventListener('click', applyFilters);
+      btnClear.addEventListener('click', clearFilters);
+
+      searchTextInput.addEventListener('input', () => applyFilters());
+      rarityFilter.addEventListener('change', applyFilters);
+      filterHolo.addEventListener('change', applyFilters);
+      priceMinInput.addEventListener('change', applyFilters);
+      priceMaxInput.addEventListener('change', applyFilters);
+      sortBySelect.addEventListener('change', applyFilters);
+
+      /* ============================
+         DETALLE CARTA
+         ============================ */
+
+      function formatDate(iso) {
+        if (!iso) return '-';
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '-';
+        return d.toLocaleString('es-ES', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        });
+      }
+
+      function estimateOwners(card) {
+        const basePrice = card.priceEur ?? card.priceUsd ?? 0;
+        if (!basePrice || basePrice <= 0) return '≈ 50 000';
+        if (basePrice < 1) return '≈ 40 000';
+        if (basePrice < 2) return '≈ 25 000';
+        if (basePrice < 5) return '≈ 15 000';
+        if (basePrice < 10) return '≈ 7 500';
+        if (basePrice < 20) return '≈ 3 000';
+        if (basePrice < 40) return '≈ 1 200';
+        if (basePrice < 80) return '≈ 550';
+        return '≈ 120';
+      }
+
+      function openCardDetail(card, idx) {
+        if (!cardDetailModal) return;
+
+        const rarityKey = card.rarityInternal || 'common';
+        const rarityLabel = card.setName || 'Base Set';
+        const priceText = card.priceEur ? `${card.priceEur.toFixed(2)} €` : (card.priceUsd ? `${card.priceUsd.toFixed(2)} $` : 'Sin datos');
+
+        if (detailImage) {
+          detailImage.src = card.image ? card.image.replace('/low.png', '/high.png') : '../img/avatars/pokeball.png';
+          detailImage.classList.toggle('grayscale-bw', !!card.isUnownedView);
+        }
+
+        if (detailRarityBadge) {
+          detailRarityBadge.textContent = rarityLabel;
+          detailRarityBadge.className = 'badge xsmall rarity-' + rarityKey;
+        }
+
+        if (detailHoloBadge) {
+          detailHoloBadge.style.display = card.holographic ? 'inline-block' : 'none';
+        }
+
+        if (detailName) detailName.textContent = (card.isUnownedView) ? '???' : (card.name || 'Carta desconocida');
+        if (detailId) detailId.textContent = card.id ? `ID: ${card.id}` : '';
+        if (detailSet) detailSet.textContent = `Set: ${card.setName || 'Base Set'}`;
+
+        if (detailTypes) {
+          const typesHtml = (card.types || ['Normal']).map(t => `<span class="badge-type ${t.toLowerCase()}">${t}</span>`).join('');
+          detailTypes.innerHTML = typesHtml;
+        }
+
+        if (detailDescription) {
+          detailDescription.textContent = card.isUnownedView
+            ? 'Esta carta aún no está en tu colección. ¡Colecciónala para ver su detalle!'
+            : (card.description || 'Sin descripción disponible para esta carta.');
+        }
+
+        if (detailObtainedAt) {
+          detailObtainedAt.textContent = card.obtainedAt ? formatDate(card.obtainedAt) : 'No obtenida';
+        }
+
+        if (detailPrice) {
+          detailPrice.textContent = card.isUnownedView ? '???' : priceText;
+        }
+
+        if (detailOwners && typeof estimateOwners === 'function') {
+          detailOwners.textContent = estimateOwners(card);
+        }
+
+        cardDetailModal.show();
+      }
+
+      /* ============================
+         ESTADÍSTICAS / GRÁFICO
+         ============================ */
+
+      function computeStats() {
+        const total = collection.length;
+        let holoCount = 0;
+        let totalValue = 0;
+        const rarityCounts = {};
+        rarityOrder.forEach(r => { rarityCounts[r] = 0; });
+
+        collection.forEach(c => {
+          // Consolidamos todo en 'common' (que es "Base Set") para las estadísticas
+          const key = 'common';
+          rarityCounts[key] += 1;
+
+          if (c.holographic) holoCount++;
+          const price = c.priceEur ?? c.priceUsd ?? 0;
+          totalValue += price;
+        });
+
+        return { total, holoCount, totalValue, rarityCounts };
+      }
+
+      function renderStatsModal() {
+        if (!collectionStatsModal) return;
+
+        const { total, holoCount, totalValue, rarityCounts } = computeStats();
+
+        if (statsSummaryList) {
+          statsSummaryList.innerHTML = '';
+          const li1 = document.createElement('li');
+          li1.innerHTML = `<span>Total de cartas:</span> <span class="fw-semibold ms-1">${total}</span>`;
+          const li2 = document.createElement('li');
+          li2.innerHTML = `<span>Cartas holográficas:</span> <span class="fw-semibold ms-1">${holoCount}</span>`;
+          const li3 = document.createElement('li');
+          li3.innerHTML = `<span>Valor estimado total:</span> <span class="fw-semibold ms-1">${totalValue.toFixed(2)} €</span>`;
+          statsSummaryList.appendChild(li1);
+          statsSummaryList.appendChild(li2);
+          statsSummaryList.appendChild(li3);
+        }
+
+        if (statsTopRarities) {
+          statsTopRarities.innerHTML = '';
+          const entries = Object.entries(rarityCounts)
+            .filter(([, v]) => v > 0)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 3);
+
+          if (!entries.length) {
+            const li = document.createElement('li');
+            li.textContent = 'Aún no hay cartas en la colección.';
+            statsTopRarities.appendChild(li);
+          } else {
+            entries.forEach(([key, count]) => {
+              const li = document.createElement('li');
+              li.className = 'd-flex justify-content-between mb-1';
+              const perc = total ? ((count / total) * 100).toFixed(1) : '0.0';
+              li.innerHTML = `
+            <span>${rarityLabels[key] || key}</span>
+            <span class="fw-semibold">${count} <span class="text-muted xsmall">(${perc}%)</span></span>
+          `;
+              statsTopRarities.appendChild(li);
+            });
+          }
+        }
+
+        const maxCount = Math.max(...Object.values(rarityCounts), 1);
+        rarityOrder.forEach(key => {
+          const bar = document.getElementById(`bar-${key}`);
+          const label = document.getElementById(`bar-${key}-label`);
+          const value = rarityCounts[key] || 0;
+          const perc = total ? ((value / total) * 100).toFixed(1) : '0.0';
+          if (bar) {
+            const width = maxCount ? (value / maxCount) * 100 : 0;
+            bar.style.width = `${width}%`;
+          }
+          if (label) {
+            label.textContent = `${value} (${perc}%)`;
+          }
+        });
+
+        collectionStatsModal.show();
+      }
+
+      if (btnShowStats) {
+        btnShowStats.addEventListener('click', () => {
+          renderStatsModal();
+        });
+      }
+
+      /* ============================
+         BORRADO DEV
+         ============================ */
+
+      if (btnDevDelete) {
+        btnDevDelete.addEventListener('click', () => {
+          const pwd = prompt('Contraseña de borrado (solo dev):');
+          if (pwd === null) return;
+          if (pwd !== '1234') {
+            alert('Contraseña incorrecta.');
+            return;
+          }
+          if (!confirm('¿Seguro que quieres borrar TODAS las cartas de la colección local?')) {
+            return;
+          }
+          collection = [];
+          saveCollection();
+          applyFilters();
+          alert('Colección borrada correctamente.');
+        });
+      }
+
+      /* ============================
+         INICIALIZACIÓN
+         ============================ */
+
+      loadCollection();
+      initAlbum();
+      applyFilters();
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,3311 @@
+/* ============================
+   PALETA Y TEMAS
+   ============================ */
+
+:root {
+  --poke-blue: #2563eb;
+  --poke-blue-soft: #1d4ed8;
+  --poke-blue-dark: #0b1120;
+  --poke-yellow: #facc15;
+  --poke-yellow-soft: #fde047;
+  --surface-light: #f3f4f6;
+  --surface-dark: #020617;
+  --text-light: #e5e7eb;
+  --text-dark: #0f172a;
+
+  /* Rarezas (colección y ruleta) */
+  --rarity-common: #9ca3af;
+  --rarity-uncommon: #22c55e;
+  --rarity-rare: #3b82f6;
+  --rarity-superrare: #8b5cf6;
+  --rarity-elite: #ec4899;
+  --rarity-epic: #f97316;
+  --rarity-mythic: #facc15;
+  --rarity-legendary: #fef08a;
+
+  /* Colores de Tipos Pokémon */
+  --type-fire: #ef4444;
+  --type-water: #3b82f6;
+  --type-grass: #22c55e;
+  --type-electric: #facc15;
+  --type-psychic: #a855f7;
+  --type-fighting: #b91c1c;
+  --type-darkness: #1e293b;
+  --type-metal: #94a3b8;
+  --type-fairy: #ec4899;
+  --type-dragon: #6366f1;
+  --type-colorless: #9ca3af;
+  --type-normal: #9ca3af;
+}
+
+/* Tema claro */
+html[data-bs-theme="light"] {
+  --bs-body-bg: var(--surface-light);
+  --bs-body-color: var(--text-dark);
+  --bs-card-bg: #ffffff;
+  --bs-card-border-color: rgba(15, 23, 42, 0.06);
+}
+
+/* Tema oscuro */
+html[data-bs-theme="dark"] {
+  --bs-body-bg: var(--surface-dark);
+  --bs-body-color: var(--text-light);
+  --bs-card-bg: #020617;
+  --bs-card-border-color: rgba(148, 163, 184, 0.25);
+}
+
+/* Capa de fondo para modo oscuro (Overlay solicitado #444 70%) */
+html[data-bs-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #444444;
+  opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Body */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+}
+
+/* Utilidades */
+.small {
+  font-size: 0.8rem;
+}
+
+.xsmall {
+  font-size: 0.75rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--bs-card-bg);
+  border-color: var(--bs-card-border-color);
+}
+
+/* Textos auxiliares */
+.form-text,
+.small,
+.text-muted {
+  color: inherit;
+  opacity: 0.8;
+}
+
+html[data-bs-theme="dark"] .invalid-feedback {
+  color: #fecaca;
+}
+
+/* Inputs coherentes */
+.form-control,
+.form-select {
+  background-color: var(--bs-card-bg);
+  color: var(--bs-body-color);
+  border-color: rgba(148, 163, 184, 0.6);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--poke-blue);
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.35);
+}
+
+/* Input-group base */
+.input-group-text {
+  background-color: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.6);
+  color: var(--bs-body-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html[data-bs-theme="dark"] .input-group-text {
+  background-color: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.6);
+  color: #e5e7eb;
+}
+
+/* ============================
+   NAVBARS
+   ============================ */
+
+/* ============================
+   UNOWN MASTER EYE (PRO-GRADE)
+   ============================ */
+
+.unown-btn {
+  position: relative;
+  width: 52px;
+  height: 42px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #fff !important;
+  /* Base for Multiply blend */
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
+  /* Important to clip the lids */
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode adjustment */
+html[data-bs-theme="dark"] .unown-btn {
+  background: #e2e8f0 !important;
+  /* Off-white for better blend in dark mode */
+}
+
+.unown-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* The Sprite */
+.unown-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  z-index: 5;
+  mix-blend-mode: multiply;
+  /* REMOVES THE WHITE BACKGROUND */
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+/* THE LID SYSTEM (The shutter) */
+.unown-btn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  /* Solid black to cover everything */
+  z-index: 10;
+  top: 0;
+  left: 0;
+  transform: scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The reference-inspired sealed line on the black lid */
+.unown-btn.closed::after {
+  transform: scaleY(1);
+  /* Precision SVG for the >-< shape */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'%3E%3Cpath d='M4,5 L16,5 M4,3 L6,5 L4,7 M16,3 L14,5 L16,7' stroke='white' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 18px 9px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* MAGICAL FOCUS ANIMATION (Open state) */
+.unown-btn.open .unown-icon {
+  animation: unown-focus-pulse 4s infinite ease-in-out;
+}
+
+@keyframes unown-focus-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(37, 99, 235, 0));
+  }
+
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.4));
+  }
+}
+
+/* BLINKING (Only when open) - We use ::before for the blink shutter to keep after for closed state */
+.unown-btn.open::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 12;
+  transform: scaleY(0);
+  animation: unown-pro-blink 6s infinite;
+  pointer-events: none;
+}
+
+@keyframes unown-pro-blink {
+
+  0%,
+  94%,
+  98%,
+  100% {
+    transform: scaleY(0);
+  }
+
+  96% {
+    transform: scaleY(1);
+  }
+}
+
+/* FLOAT EFFECT */
+.unown-btn.open .unown-icon {
+  animation: unown-hover-float 3.5s infinite ease-in-out;
+}
+
+@keyframes unown-hover-float {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1.05);
+  }
+
+  50% {
+    transform: translateY(-3px) scale(1.08);
+  }
+}
+
+/* ============================
+   COLECCIÓN TABS & ALBUM
+   ============================ */
+
+.nav-collection-tabs {
+  background: rgba(15, 23, 42, 0.4);
+  padding: 0.35rem;
+  border-radius: 12px;
+  display: inline-flex;
+}
+
+.nav-collection-tabs .nav-link {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+.nav-collection-tabs .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-collection-tabs .nav-link.active {
+  background: var(--poke-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Sticker Grid */
+.album-sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1.25rem;
+  padding: 1rem 0;
+}
+
+.album-sticker {
+  perspective: 1000px;
+  aspect-ratio: 2/2.8;
+}
+
+.sticker-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.album-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* Unowned State: B/W and masked */
+.album-sticker.unowned img {
+  filter: grayscale(1) brightness(0.3) contrast(1.2);
+  opacity: 0.4;
+}
+
+.album-sticker.unowned .sticker-inner {
+  background: repeating-linear-gradient(45deg,
+      #0f172a,
+      #0f172a 10px,
+      #1e293b 10px,
+      #1e293b 20px);
+}
+
+/* Owned State: Full color and effects */
+.album-sticker.owned .sticker-inner {
+  background: transparent;
+  border: 2px solid var(--poke-blue);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+  transform: translateY(-5px);
+}
+
+.album-sticker.owned img {
+  filter: none;
+  opacity: 1;
+}
+
+/* Sticker Hover Info */
+.sticker-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.sticker-number {
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+@media (max-width: 575.98px) {
+  .album-sticker-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+/* Card Stack Multiplier Badge */
+.card-stack-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #fbbf24;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 900;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  padding: 0;
+  pointer-events: none;
+}
+
+.card-carta-frame {
+  position: relative;
+}
+
+
+
+
+/* Navbar PokeMarket (Registro / Login) */
+.navbar-poke {
+  background: linear-gradient(90deg, var(--poke-blue-soft), var(--poke-blue));
+}
+
+.navbar-poke .navbar-brand,
+.navbar-poke .navbar-brand span,
+.navbar-poke .nav-link,
+.navbar-poke .form-check-label,
+.navbar-poke .bi-sun-fill,
+.navbar-poke .bi-moon-stars-fill {
+  color: #f9fafb;
+}
+
+.navbar-poke .form-check-input {
+  cursor: pointer;
+  border-color: rgba(248, 250, 252, 0.6);
+  background-color: transparent;
+}
+
+.navbar-poke .form-check-input:checked {
+  background-color: var(--poke-yellow);
+  border-color: var(--poke-yellow);
+}
+
+/* Navbar principal Index */
+.navbar-main {
+  background: radial-gradient(circle at top left, #1d283a 0, var(--poke-blue-dark) 45%, #020617 100%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  backdrop-filter: blur(18px);
+}
+
+.navbar-main.navbar-scrolled {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.65);
+}
+
+.navbar-main .brand-text {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f9fafb;
+}
+
+/* Logo antiguo Sanaball */
+.sanaball-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0, #ffffff 40%, #22c55e 41%, #16a34a 100%);
+  border: 2px solid #020617;
+  position: relative;
+  display: inline-block;
+}
+
+.sanaball-logo::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -2px;
+  right: -2px;
+  height: 4px;
+  background: #020617;
+  transform: translateY(-50%);
+}
+
+.sanaball-logo::after {
+  content: "S";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 800;
+  color: #f9fafb;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Links navbar Index */
+.navbar-main .nav-link {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #cbd5f5;
+  padding-inline: 0.9rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  border-radius: 999px;
+  transition: color 0.18s ease, background-color 0.18s ease, transform 0.15s ease;
+}
+
+.navbar-main .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--poke-yellow), #f97316);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.18s ease;
+  opacity: 0.9;
+}
+
+.navbar-main .nav-link:hover {
+  color: #f9fafb;
+  background-color: rgba(148, 163, 184, 0.14);
+  transform: translateY(-1px);
+}
+
+.navbar-main .nav-link:hover::after,
+.navbar-main .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.navbar-main .nav-link.active {
+  color: #f9fafb;
+  background-color: rgba(37, 99, 235, 0.35);
+}
+
+/* Botones navbar */
+.navbar-main .btn-outline-light.btn-sm {
+  font-size: 0.85rem;
+  padding-block: 0.3rem;
+  padding-inline: 0.9rem;
+  border-radius: 999px;
+  border-width: 1px;
+  border-color: rgba(248, 250, 252, 0.6);
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+
+.navbar-main .btn-outline-light.btn-sm:hover {
+  background-color: rgba(248, 250, 252, 0.08);
+  color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+/* Créditos navbar */
+#globalCredits {
+  font-size: 0.85rem;
+  color: #f9fafb;
+}
+
+/* Botón perfil navbar */
+.btn-profile {
+  background-color: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: #e5e7eb;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.btn-profile:hover,
+.btn-profile:focus {
+  background-color: rgba(15, 23, 42, 0.55);
+  border-color: rgba(248, 250, 252, 0.7);
+  color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.avatar-navbar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(248, 250, 252, 0.8);
+}
+
+.dropdown-menu {
+  font-size: 0.85rem;
+  border-radius: 0.6rem;
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+/* ============================
+   BOTONES GENERALES
+   ============================ */
+
+.btn-poke {
+  background-color: var(--poke-yellow) !important;
+  border-color: var(--poke-yellow) !important;
+  color: #1f2933 !important;
+  font-weight: 600;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+}
+
+.btn-poke:hover,
+.btn-poke:focus {
+  background-color: var(--poke-yellow-soft) !important;
+  border-color: var(--poke-yellow-soft) !important;
+  color: #111827 !important;
+  box-shadow: 0 8px 18px rgba(250, 204, 21, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Botón de estadísticas (Gráfico) */
+.btn-stats {
+  background-color: #00d1ff !important;
+  border-color: #00d1ff !important;
+  color: #000 !important;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 209, 255, 0.3);
+  border-radius: 8px;
+  /* Redondeado suave como en la imagen */
+}
+
+.btn-stats i {
+  color: #000 !important;
+}
+
+.btn-stats:hover {
+  background-color: #00f0ff !important;
+  color: #000 !important;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 209, 255, 0.5);
+}
+
+.btn-stats:active {
+  transform: scale(0.98);
+}
+
+.btn-outline-secondary {
+  border-width: 1px;
+}
+
+html[data-bs-theme="light"] .btn-outline-secondary {
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+html[data-bs-theme="dark"] .btn-outline-secondary {
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+html[data-bs-theme="dark"] .btn-outline-secondary:hover {
+  background-color: #4b5563;
+  border-color: #6b7280;
+}
+
+/* Botón Google (login) */
+.btn-google {
+  background-color: #ffffff;
+  border-color: #dadce0;
+  color: #3c4043;
+  font-weight: 500;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-google:hover {
+  background-color: #f7f8fc;
+  border-color: #dadce0;
+  color: #202124;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.16);
+}
+
+.btn-google i {
+  color: var(--poke-blue);
+}
+
+/* ============================
+   LOGOS REGISTRO/LOGIN
+   ============================ */
+
+.superball-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0, #ffffff 40%, #3c5aa6 41%, #3c5aa6 100%);
+  border: 2px solid #000;
+  position: relative;
+  display: inline-block;
+}
+
+.superball-logo::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -2px;
+  right: -2px;
+  height: 4px;
+  background: #000;
+  transform: translateY(-50%);
+}
+
+.superball-logo::after {
+  content: "S";
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 2px #000;
+}
+
+.pokeball-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #000;
+  position: relative;
+  display: inline-block;
+  background: transparent;
+}
+
+.pokeball-logo::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -3px;
+  right: -3px;
+  height: 3px;
+  background: #000;
+  transform: translateY(-50%);
+}
+
+.pokeball-logo::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: transparent;
+  border: 3px solid #000;
+  transform: translate(-50%, -50%);
+}
+
+/* ============================
+   FONDO GENERAL / LOGIN / PERFIL
+   ============================ */
+a .bg-pokeballs {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bs-body-bg);
+  background-image: url("../img/FondoClaro.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+html[data-bs-theme="dark"] .bg-pokeballs {
+  background-color: var(--bs-body-bg);
+  background-image: url("../img/FondoOscuro.png");
+}
+
+/* Cabecera amarilla de la card */
+.card-header-poke {
+  background-color: var(--poke-yellow);
+  color: #111827;
+}
+
+/* ============================
+   AVATARES / PERFIL NAVBAR
+   ============================ */
+
+.avatar-option {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.avatar-option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 3px rgba(255, 203, 5, 0.4);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.avatar-option.selected {
+  box-shadow: 0 0 0 3px rgba(255, 203, 5, 0.9);
+  border-color: rgba(0, 0, 0, 0.6);
+  transform: translateY(-3px);
+}
+
+.avatar-preview {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+/* ============================
+   PERFIL (PROFILE PAGE)
+   ============================ */
+
+.profile-header {
+  background-color: var(--bs-card-bg);
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+}
+
+.profile-header-animated {
+  animation: profileFadeIn 0.6s ease-out forwards;
+  transform-origin: top center;
+  opacity: 0;
+}
+
+@keyframes profileFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.profile-avatar-wrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid rgba(250, 204, 21, 0.85);
+  padding: 2px;
+  background: radial-gradient(circle at 30% 30%, #fef9c3 0, #facc15 40%, #f97316 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-glow {
+  box-shadow:
+    0 0 24px rgba(250, 204, 21, 0.75),
+    0 8px 18px rgba(15, 23, 42, 0.85);
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #020617;
+}
+
+.badge.bg-poke-username {
+  background-color: rgba(15, 23, 42, 0.75);
+  color: #e5e7eb;
+  border-radius: 999px;
+}
+
+html[data-bs-theme="light"] .badge.bg-poke-username {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.profile-bio {
+  max-width: 480px;
+}
+
+.profile-stats {
+  gap: 1.25rem;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-stat-number {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.profile-stat-label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Botones cabecera perfil */
+.profile-btn-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-btn-animated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.35), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateX(-30%);
+}
+
+.profile-btn-animated:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.profile-btn-ghost {
+  backdrop-filter: blur(10px);
+}
+
+/* Buscador en cabecera perfil */
+.profile-search-input {
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#profileCardSearch {
+  border-radius: 999px;
+}
+
+/* Tabs perfil */
+.profile-tabs {
+  border-radius: 1rem;
+  background-color: var(--bs-card-bg);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+}
+
+.profile-tabs-animated {
+  animation: profileTabsIn 0.7s ease-out 0.1s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes profileTabsIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-nav-pills .nav-link {
+  border-radius: 999px;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  color: #6b7280;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+}
+
+html[data-bs-theme="dark"] .profile-nav-pills .nav-link {
+  color: #e5e7eb;
+}
+
+.profile-nav-pills .nav-link.active {
+  background: linear-gradient(90deg, var(--poke-blue-soft), var(--poke-blue));
+  color: #f9fafb;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   CARTAS / COLECCIÓN / PERFIL
+   ============================ */
+
+.card-carta {
+  background-color: var(--bs-card-bg);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+  overflow: visible;
+  /* Permite ver el badge sin cortes */
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+.card-carta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
+  border-color: var(--poke-yellow);
+}
+
+.card-carta-frame {
+  position: relative;
+  overflow: visible;
+}
+
+.card-carta-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card-carta:hover .card-carta-frame::before {
+  opacity: 1;
+}
+
+.card-carta-clickable,
+.card-perfil-venta-clickable,
+.card-favorite-clickable {
+  cursor: pointer;
+  transform-origin: center bottom;
+}
+
+.card-carta-clickable:hover,
+.card-perfil-venta-clickable:hover,
+.card-favorite-clickable:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.carta-img-placeholder {
+  background: radial-gradient(circle at top, #1f2937 0, #020617 60%, #020617 100%);
+  color: #9ca3af;
+  height: 150px;
+}
+
+.carta-img-real {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  background-color: #020617;
+  display: block;
+  border-radius: 0.7rem 0.7rem 0 0;
+  /* Mantiene el redondeado de arriba */
+}
+
+/* Badges rareza colección */
+.badge.rarity-common {
+  background: rgba(156, 163, 175, 0.2);
+  color: #e5e7eb;
+  border: 1px solid rgba(156, 163, 175, 0.8);
+}
+
+.badge.rarity-uncommon {
+  background: rgba(34, 197, 94, 0.15);
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, 0.8);
+}
+
+.badge.rarity-rare {
+  background: rgba(59, 130, 246, 0.18);
+  color: #bfdbfe;
+  border: 1px solid rgba(59, 130, 246, 0.85);
+}
+
+.badge.rarity-superrare {
+  background: rgba(139, 92, 246, 0.18);
+  color: #ddd6fe;
+  border: 1px solid rgba(139, 92, 246, 0.9);
+}
+
+.badge.rarity-elite {
+  background: rgba(236, 72, 153, 0.18);
+  color: #f9a8d4;
+  border: 1px solid rgba(236, 72, 153, 0.9);
+}
+
+.badge.rarity-epic {
+  background: rgba(249, 115, 22, 0.18);
+  color: #fed7aa;
+  border: 1px solid rgba(249, 115, 22, 0.9);
+}
+
+.badge.rarity-mythic {
+  background: rgba(250, 204, 21, 0.25);
+  color: #fef3c7;
+  border: 1px solid rgba(250, 204, 21, 0.95);
+}
+
+.badge.rarity-legendary {
+  background: rgba(250, 250, 250, 0.25);
+  color: #fef3c7;
+  border: 1px solid rgba(250, 250, 250, 0.95);
+}
+
+/* ============================
+   CARD DETAIL MODALS (VENTA + FAVORITAS)
+   ============================ */
+
+.card-detail-modal {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: radial-gradient(circle at top, #020617 0, #020617 60%, #020617 100%);
+  color: #e5e7eb;
+}
+
+.card-detail-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 15% 0, rgba(250, 204, 21, 0.35), transparent 60%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.card-detail-rays {
+  position: absolute;
+  inset: -40%;
+  background-image: conic-gradient(from 0deg,
+      rgba(250, 250, 250, 0.0) 0deg,
+      rgba(250, 250, 250, 0.28) 40deg,
+      rgba(250, 250, 250, 0.0) 80deg);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  animation: detailRaysRotate 16s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes detailRaysRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card-detail-frame {
+  border-radius: 0.9rem;
+  padding: 4px;
+  background: radial-gradient(circle at top, #111827 0, #020617 60%, #020617 100%);
+  box-shadow:
+    0 0 25px rgba(15, 23, 42, 0.9),
+    0 20px 40px rgba(0, 0, 0, 0.9);
+}
+
+.card-detail-image {
+  width: 100%;
+  border-radius: 0.7rem;
+  object-fit: contain;
+  background-color: #020617;
+}
+
+.card-detail-stat {
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* ============================
+   CORAZÓN PROFESIONAL FAVORITAS
+   ============================ */
+
+.btn-favorite-heart {
+  background: transparent;
+  border: 1px solid rgba(248, 250, 252, 0.2);
+  color: #f97316;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.12s ease;
+}
+
+.btn-favorite-heart:hover {
+  background-color: rgba(15, 23, 42, 0.9);
+  border-color: rgba(248, 250, 252, 0.65);
+  transform: translateY(-1px);
+}
+
+.btn-favorite-heart .heart-normal,
+.btn-favorite-heart .heart-broken {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.btn-favorite-heart .heart-normal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-favorite-heart .heart-broken {
+  position: absolute;
+  right: 0.55rem;
+  opacity: 0;
+  transform: translateY(6px) scale(0.8);
+  color: #ef4444;
+}
+
+/* Modo roto al hacer hover */
+.btn-favorite-heart.heart-remove-mode .heart-normal {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.8);
+}
+
+.btn-favorite-heart.heart-remove-mode .heart-broken {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================
+   RULETA (CASINO INDEX) – SIN CAMBIOS FUNCIONALES
+   ============================ */
+
+.pegi-indicator {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 50px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+  z-index: 10;
+}
+
+.pegi-indicator:hover {
+  transform: translateY(-50%) scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 10px rgba(226, 6, 19, 0.8));
+}
+
+.pegi-indicator img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .pegi-indicator {
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: none;
+    margin: 0 auto 1rem;
+    width: 60px;
+  }
+
+  .pegi-indicator:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Header Ruletas Premium */
+.roulette-header {
+  padding: 1.5rem;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0) 75%);
+  margin-bottom: 2rem !important;
+}
+
+.roulette-header h1 {
+  font-size: 2.2rem;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  margin-bottom: 0.5rem;
+}
+
+.roulette-header p.text-muted {
+  color: #cad1e9 !important;
+  /* Más claro que el muted estándar */
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.roulette-header .text-uppercase {
+  letter-spacing: 0.2em;
+  color: var(--poke-yellow) !important;
+  font-weight: 800;
+  opacity: 1 !important;
+}
+
+/* Botón comprar créditos REDISEÑO PREMIUM */
+.btn-buy-credits {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #b91c1c 100%);
+  color: #fff !important;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow:
+    0 10px 25px rgba(234, 88, 12, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-buy-credits:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 15px 35px rgba(234, 88, 12, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-buy-credits:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.btn-buy-credits-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 10% 0, rgba(254, 240, 138, 0.9), transparent 55%);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Selector ruletas */
+.roulette-selector {
+  margin-bottom: 1.5rem;
+}
+
+.roulette-choice-card {
+  position: relative;
+  background: radial-gradient(circle at top, #020617 0, #020617 70%);
+  border-radius: 0.9rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.7);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.18s ease;
+}
+
+.roulette-choice-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.85);
+  border-color: rgba(248, 250, 252, 0.7);
+}
+
+.roulette-choice-card.active {
+  border-color: rgba(250, 204, 21, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(250, 204, 21, 0.7),
+    0 16px 32px rgba(15, 23, 42, 0.9);
+}
+
+.roulette-choice-card.legendary {
+  background: radial-gradient(circle at top, #1e293b 0, #020617 60%, #020617 100%);
+}
+
+.roulette-choice-badge {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fef9c3;
+  opacity: 0.9;
+}
+
+.roulette-choice-tags {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0.35rem;
+}
+
+.roulette-choice-tags li::before {
+  content: "• ";
+  color: #9ca3af;
+}
+
+.roulette-choice-price {
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+/* Card ruleta principal */
+.roulette-card {
+  background: radial-gradient(circle at top, #020617 0, #020617 55%, #020617 100%);
+  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+.roulette-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.6rem;
+  padding: 1px;
+  background: conic-gradient(from 180deg,
+      rgba(250, 204, 21, 0.95),
+      rgba(37, 99, 235, 0.9),
+      rgba(129, 140, 248, 0.95),
+      rgba(244, 114, 182, 0.95),
+      rgba(250, 204, 21, 0.95));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.roulette-card-header {
+  background: transparent;
+}
+
+.roulette-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rarezas pills */
+.roulette-rarities .rarity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background-color: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+
+.rarity-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Colores 1–8 */
+.rarity-1 .rarity-color-dot {
+  background: var(--rarity-common);
+}
+
+.rarity-2 .rarity-color-dot {
+  background: var(--rarity-uncommon);
+}
+
+.rarity-3 .rarity-color-dot {
+  background: var(--rarity-rare);
+}
+
+.rarity-4 .rarity-color-dot {
+  background: var(--rarity-superrare);
+}
+
+.rarity-5 .rarity-color-dot {
+  background: var(--rarity-elite);
+}
+
+.rarity-6 .rarity-color-dot {
+  background: var(--rarity-epic);
+}
+
+.rarity-7 .rarity-color-dot {
+  background: var(--rarity-mythic);
+}
+
+.rarity-8 .rarity-color-dot {
+  background: var(--rarity-legendary);
+}
+
+/* Ventana ruleta horizontal */
+.roulette-window-wrapper {
+  position: relative;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 70%, #020617 100%);
+  border-radius: 0.9rem;
+  padding: 0.9rem;
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.9),
+    inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+}
+
+.roulette-bottom-glow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60%;
+  height: 40px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.45), transparent 60%);
+  opacity: 0.7;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* Línea central */
+.roulette-highlight {
+  position: absolute;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(250, 204, 21, 0.95),
+      transparent);
+  box-shadow: 0 0 14px rgba(250, 204, 21, 1);
+  z-index: 3;
+}
+
+.roulette-window {
+  overflow: hidden;
+  border-radius: 0.6rem;
+  position: relative;
+  background: #020617;
+}
+
+.roulette-strip {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+/* bounce mínimo al final */
+.roulette-strip-bounce {
+  animation: rouletteBounce 0.25s ease-out;
+}
+
+@keyframes rouletteBounce {
+  0% {
+    transform: translateX(var(--roulette-offset, 0));
+  }
+
+  40% {
+    transform: translateX(calc(var(--roulette-offset, 0) - 5px));
+  }
+
+  100% {
+    transform: translateX(var(--roulette-offset, 0));
+  }
+}
+
+/* Items ruleta */
+.roulette-item {
+  min-width: 120px;
+  max-width: 120px;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  background: linear-gradient(to bottom, #020617, #020617);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roulette-item-inner {
+  width: 100%;
+  border-radius: 0.45rem;
+  padding: 0.3rem 0.35rem;
+  background: radial-gradient(circle at top, rgba(148, 163, 184, 0.2), transparent 60%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.roulette-item-rarity {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+
+.roulette-item-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Imagen de carta en ruleta */
+.roulette-item-image {
+  width: 28px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Colores por rareza */
+.roulette-item.rarity-common {
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.6);
+}
+
+.roulette-item.rarity-common .roulette-item-rarity {
+  color: #9ca3af;
+}
+
+.roulette-item.rarity-uncommon {
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.7),
+    0 0 14px rgba(34, 197, 94, 0.4);
+}
+
+.roulette-item.rarity-uncommon .roulette-item-rarity {
+  color: #4ade80;
+}
+
+.roulette-item.rarity-rare {
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.7),
+    0 0 16px rgba(59, 130, 246, 0.5);
+}
+
+.roulette-item.rarity-rare .roulette-item-rarity {
+  color: #60a5fa;
+}
+
+.roulette-item.rarity-superrare {
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.8),
+    0 0 18px rgba(139, 92, 246, 0.6);
+}
+
+.roulette-item.rarity-superrare .roulette-item-rarity {
+  color: #a855f7;
+}
+
+.roulette-item.rarity-elite {
+  box-shadow: inset 0 0 0 1px rgba(236, 72, 153, 0.8),
+    0 0 20px rgba(236, 72, 153, 0.7);
+}
+
+.roulette-item.rarity-elite .roulette-item-rarity {
+  color: #fb7185;
+}
+
+.roulette-item.rarity-epic {
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.9),
+    0 0 22px rgba(249, 115, 22, 0.8);
+}
+
+.roulette-item.rarity-epic .roulette-item-rarity {
+  color: #fdba74;
+}
+
+.roulette-item.rarity-mythic {
+  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.9),
+    0 0 24px rgba(250, 204, 21, 0.9);
+}
+
+.roulette-item.rarity-mythic .roulette-item-rarity {
+  color: #facc15;
+}
+
+.roulette-item.rarity-legendary {
+  box-shadow:
+    inset 0 0 0 1px rgba(250, 250, 250, 0.95),
+    0 0 30px rgba(250, 250, 250, 1);
+}
+
+.roulette-item.rarity-legendary .roulette-item-rarity {
+  color: #fef9c3;
+}
+
+/* Select autogiros */
+.roulette-autospins-select {
+  min-width: 120px;
+}
+
+/* Footer ruleta */
+.roulette-footer {
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 0 0 0.9rem 0.9rem;
+}
+
+/* Badge para cartas nuevas */
+.badge-new-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 900;
+  z-index: 100;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  animation: pulse-new-badge 1.5s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pulse-new-badge {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  }
+
+  100% {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+  }
+}
+
+/* Toast ruleta */
+.roulette-toast-container {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1080;
+  pointer-events: none;
+}
+
+.roulette-toast {
+  max-width: 280px;
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.roulette-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.roulette-toast-inner {
+  background: radial-gradient(circle at top, #0f172a 0, #020617 70%);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.roulette-toast-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+
+.roulette-toast-body {
+  font-size: 0.85rem;
+}
+
+/* Toast colores por rareza */
+.roulette-toast-inner.rarity-legendary {
+  border-color: rgba(250, 250, 250, 0.9);
+  box-shadow: 0 0 25px rgba(250, 250, 250, 0.8);
+}
+
+.roulette-toast-inner.rarity-mythic {
+  border-color: rgba(250, 204, 21, 0.8);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+}
+
+.roulette-toast-inner.rarity-epic {
+  border-color: rgba(249, 115, 22, 0.8);
+}
+
+.roulette-toast-inner.rarity-rare {
+  border-color: rgba(59, 130, 246, 0.8);
+}
+
+/* Aviso legal casi invisible */
+.roulette-disclaimer {
+  font-size: 0.5rem;
+  color: rgba(148, 163, 184, 0.2);
+}
+
+/* Modo claro ruleteo */
+html[data-bs-theme="light"] .roulette-card {
+  background: radial-gradient(circle at top, #e5f0ff 0, #dbeafe 40%, #eff6ff 100%);
+  color: #0f172a;
+}
+
+html[data-bs-theme="light"] .roulette-window-wrapper {
+  background: radial-gradient(circle at top, #dbeafe 0, #1d4ed8 70%, #1e293b 100%);
+}
+
+html[data-bs-theme="light"] .roulette-window {
+  background: #020617;
+}
+
+html[data-bs-theme="light"] .roulette-footer {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+html[data-bs-theme="light"] .roulette-choice-card {
+  background: radial-gradient(circle at top, #e5f0ff 0, #dbeafe 40%, #eff6ff 100%);
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+}
+
+html[data-bs-theme="light"] .roulette-choice-card.legendary {
+  background: radial-gradient(circle at top, #f3e8ff 0, #e0f2fe 45%, #eff6ff 100%);
+}
+
+/* ============================
+   MODAL RECOMPENSA DOPAMINA
+   ============================ */
+
+.reward-modal .modal-dialog {
+  max-width: 420px;
+}
+
+.reward-modal .modal-content.reward-modal-content {
+  position: relative;
+  background: radial-gradient(circle at top, #ffe082 0, #2b2342 55%, #120c25 100%);
+  border-radius: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  color: #fff;
+}
+
+.reward-modal .modal-body {
+  position: relative;
+  z-index: 2;
+}
+
+.reward-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25), transparent 60%);
+  opacity: 0;
+  transform: scale(0.7);
+  animation: rewardGlow 1s ease-out forwards;
+}
+
+.reward-rays {
+  position: absolute;
+  inset: -40%;
+  background-image: conic-gradient(from 0deg,
+      rgba(255, 255, 255, 0.0) 0deg,
+      rgba(255, 255, 255, 0.35) 40deg,
+      rgba(255, 255, 255, 0.0) 80deg);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: rewardRays 1.4s ease-out forwards;
+}
+
+.reward-card-wrapper {
+  position: relative;
+  margin: 12px auto;
+  width: 180px;
+  height: 240px;
+  perspective: 1000px;
+}
+
+.reward-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #fff 0, #d1c4e9 40%, #4527a0 100%);
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.35),
+    0 20px 40px rgba(0, 0, 0, 0.65);
+  transform-origin: center center;
+  animation: rewardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    rewardFloat 3.2s ease-in-out 0.7s infinite alternate;
+}
+
+.reward-card-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Animaciones reward */
+@keyframes rewardGlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+@keyframes rewardRays {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  80% {
+    opacity: 1;
+    transform: rotate(120deg) scale(1);
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: rotate(150deg) scale(1.05);
+  }
+}
+
+@keyframes rewardPop {
+  0% {
+    transform: scale(0.2) rotateX(30deg) translateY(40px);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.05) rotateX(0deg) translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotateX(0deg) translateY(0);
+  }
+}
+
+@keyframes rewardFloat {
+  0% {
+    transform: translateY(0) rotateZ(-1deg);
+  }
+
+  100% {
+    transform: translateY(-8px) rotateZ(1deg);
+  }
+}
+
+/* ============================
+   TIENDA INTEGRADA
+   ============================ */
+
+.tienda-section {
+  border-radius: 1rem;
+}
+
+/* Badge créditos tienda */
+#shopCredits {
+  border-radius: 999px;
+}
+
+/* Cartas del día */
+.tienda-card-dia {
+  border-radius: 0.9rem;
+  background: radial-gradient(circle at top, #020617 0, #020617 60%, #020617 100%);
+}
+
+html[data-bs-theme="light"] .tienda-card-dia {
+  background: radial-gradient(circle at top, #e5f0ff 0, #dbeafe 40%, #eff6ff 100%);
+}
+
+.tienda-card-dia .carta-img-placeholder {
+  height: 140px;
+}
+
+.tienda-dia-btn-comprar {
+  font-size: 0.75rem;
+  padding-inline: 0.55rem;
+}
+
+/* Botón recargar tienda */
+.btn-recargar-tienda {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #22c55e 0, #16a34a 35%, #14532d 100%);
+  border: 1px solid rgba(34, 197, 94, 0.8);
+  color: #ecfdf5;
+  box-shadow:
+    0 0 0 1px rgba(22, 163, 74, 0.6),
+    0 10px 22px rgba(22, 101, 52, 0.9);
+  padding-inline: 0.9rem;
+  font-size: 0.7rem;
+}
+
+.btn-recargar-tienda:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.9),
+    0 14px 28px rgba(22, 101, 52, 1);
+}
+
+.btn-recargar-tienda .recargar-icon-wrap {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #bbf7d0 0, #22c55e 45%, #16a34a 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+}
+
+.btn-recargar-tienda .recargar-icon-wrap i {
+  animation: recargarSpin 1.6s linear infinite;
+  font-size: 0.9rem;
+}
+
+@keyframes recargarSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sobres dopamina portada */
+.tienda-pack-card {
+  border-radius: 1rem;
+  background: radial-gradient(circle at top, #020617 0, #020617 65%, #020617 100%);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+html[data-bs-theme="light"] .tienda-pack-card {
+  background: radial-gradient(circle at top, #e5f0ff 0, #dbeafe 40%, #eff6ff 100%);
+}
+
+.tienda-pack-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 1);
+}
+
+.tienda-pack-art {
+  position: relative;
+  width: 120px;
+  height: 170px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Diferentes paletas por pack */
+.tienda-pack-art-basic {
+  background: conic-gradient(from 200deg,
+      rgba(248, 250, 252, 0.7),
+      rgba(129, 140, 248, 0.9),
+      rgba(59, 130, 246, 1),
+      rgba(248, 250, 252, 0.7));
+}
+
+.tienda-pack-art-competitive {
+  background: conic-gradient(from 140deg,
+      rgba(248, 250, 252, 0.6),
+      rgba(45, 212, 191, 0.95),
+      rgba(56, 189, 248, 0.95),
+      rgba(248, 250, 252, 0.6));
+}
+
+.tienda-pack-art-fire {
+  background: conic-gradient(from 120deg,
+      rgba(254, 243, 199, 0.9),
+      rgba(249, 115, 22, 0.98),
+      rgba(220, 38, 38, 0.98),
+      rgba(254, 243, 199, 0.9));
+}
+
+.tienda-pack-art-grail {
+  background: conic-gradient(from 160deg,
+      rgba(250, 250, 250, 1),
+      rgba(250, 204, 21, 1),
+      rgba(96, 165, 250, 1),
+      rgba(236, 72, 153, 1),
+      rgba(250, 250, 250, 1));
+}
+
+.tienda-pack-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tienda-pack-art::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(45deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(255, 255, 255, 0) 100%);
+  z-index: 2;
+  transition: all 0.5s;
+  pointer-events: none;
+  animation: packShine 4s infinite;
+}
+
+@keyframes packShine {
+  0% {
+    transform: translate(-10%, -10%);
+  }
+
+  20% {
+    transform: translate(10%, 10%);
+  }
+
+  100% {
+    transform: translate(10%, 10%);
+  }
+}
+
+.tienda-pack-emblem {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24 0%, #b45309 50%, #facc15 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.6),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 900;
+  z-index: 2;
+  border: 2.5px solid #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.tienda-pack-card:hover .tienda-pack-art {
+  animation: packFloat 1.3s ease-in-out infinite alternate;
+}
+
+@keyframes packFloat {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+/* APERTURA SOBRE – CARTA A CARTA */
+.pack-reveal-backdrop {
+  position: relative;
+  border-radius: 1rem;
+  padding: 10px;
+  background: radial-gradient(circle at top, #020617 0, #020617 60%, #0f172a 100%);
+  box-shadow:
+    0 0 30px rgba(59, 130, 246, 0.8),
+    inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.pack-reveal-card-slot {
+  width: 180px;
+  height: 260px;
+  margin: 0 auto;
+  perspective: 1200px;
+  position: relative;
+}
+
+.pack-reveal-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #e5e7eb 0, #9ca3af 40%, #020617 100%);
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.3),
+    0 20px 40px rgba(0, 0, 0, 0.8);
+  transform-origin: center;
+}
+
+/* Animaciones por rareza */
+@keyframes revealCommon {
+  0% {
+    transform: scale(0.4) rotateY(40deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.03) rotateY(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+@keyframes revealRare {
+  0% {
+    transform: scale(0.3) rotateY(60deg);
+    opacity: 0;
+    filter: brightness(1.8);
+  }
+
+  40% {
+    transform: scale(1.1) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+
+  100% {
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+@keyframes revealEpic {
+  0% {
+    transform: translateY(40px) scale(0.6);
+    opacity: 0;
+    box-shadow: 0 0 60px rgba(59, 130, 246, 1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.08);
+    opacity: 1;
+    box-shadow: 0 0 120px rgba(96, 165, 250, 1);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.9);
+  }
+}
+
+@keyframes revealLegendary {
+  0% {
+    transform: translateY(50px) scale(0.4) rotateZ(-8deg);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(250, 250, 250, 0);
+  }
+
+  40% {
+    transform: translateY(-10px) scale(1.1) rotateZ(4deg);
+    opacity: 1;
+    box-shadow: 0 0 140px rgba(250, 250, 250, 1);
+  }
+
+  70% {
+    transform: translateY(0) scale(1.06) rotateZ(0deg);
+  }
+
+  100% {
+    transform: translateY(-4px) scale(1);
+    box-shadow: 0 0 80px rgba(250, 204, 21, 1);
+  }
+}
+
+/* clases extra para glow según rareza */
+.pack-reveal-card-inner.rarity-common {
+  animation: revealCommon 0.5s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-uncommon {
+  animation: revealCommon 0.6s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-rare {
+  animation: revealRare 0.8s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-superrare {
+  animation: revealEpic 0.9s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-elite {
+  animation: revealEpic 1s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-epic {
+  animation: revealEpic 1.1s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-mythic {
+  animation: revealLegendary 1.1s ease-out;
+}
+
+.pack-reveal-card-inner.rarity-legendary {
+  animation: revealLegendary 1.3s ease-out;
+}
+
+/* ============================
+   PANEL PROBABILIDADES + ÚLTIMOS DROPS
+   ============================ */
+
+.stats-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stats-bar-label {
+  flex: 0 0 75px;
+  font-size: 0.7rem;
+}
+
+.stats-bar-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.4);
+  overflow: hidden;
+}
+
+.stats-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.8), rgba(248, 250, 252, 0.95));
+}
+
+/* Colores barra por rareza */
+.stats-bar-fill.rarity-common {
+  background: linear-gradient(90deg, rgba(156, 163, 175, 0.5), rgba(229, 231, 235, 0.9));
+}
+
+.stats-bar-fill.rarity-uncommon {
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.5), rgba(74, 222, 128, 0.9));
+}
+
+.stats-bar-fill.rarity-rare {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), rgba(129, 140, 248, 0.95));
+}
+
+.stats-bar-fill.rarity-superrare {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.6), rgba(196, 181, 253, 0.95));
+}
+
+.stats-bar-fill.rarity-elite {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.6), rgba(244, 114, 182, 0.95));
+}
+
+.stats-bar-fill.rarity-epic {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.7), rgba(253, 186, 116, 0.95));
+}
+
+.stats-bar-fill.rarity-mythic {
+  background: linear-gradient(90deg, rgba(250, 204, 21, 0.7), rgba(254, 240, 138, 0.98));
+}
+
+.stats-bar-fill.rarity-legendary {
+  background: linear-gradient(90deg, rgba(250, 250, 250, 0.8), rgba(253, 224, 71, 0.98));
+}
+
+.stats-bar-value {
+  flex: 0 0 42px;
+  text-align: right;
+  font-size: 0.7rem;
+}
+
+/* Lista últimos drops épicos */
+#lastDrops li {
+  padding: 0.15rem 0.25rem;
+  border-radius: 0.4rem;
+}
+
+#lastDrops li:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+/* ============================
+   RESPONSIVE - MOBILE FIRST OPTIMIZATION
+   ============================ */
+
+/* Tablet y pantallas medianas */
+@media (max-width: 991.98px) {
+  .roulette-window-wrapper {
+    padding-inline: 0.5rem;
+  }
+
+  .roulette-item {
+    min-width: 110px;
+    max-width: 110px;
+  }
+
+  /* Optimizar header de ruleta en tablet */
+  .roulette-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .roulette-header p {
+    font-size: 0.9rem;
+  }
+}
+
+/* MÓVIL - Optimización completa */
+@media (max-width: 767.98px) {
+
+  /* ===== NAVBAR MÓVIL ===== */
+  .navbar-main {
+    padding-block: 0.5rem;
+  }
+
+  .navbar-main .container {
+    padding-inline: 0.75rem;
+    flex-wrap: nowrap !important;
+  }
+
+  /* Logo más compacto */
+  .navbar-brand {
+    gap: 0.5rem !important;
+  }
+
+  .navbar-brand img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .navbar-brand .brand-text {
+    font-size: 0.9rem !important;
+  }
+
+  /* Botón Colección visible en móvil - SOLO ICONO */
+  .navbar-main .btn-outline-light {
+    padding: 0.35rem 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  /* Créditos más compactos */
+  #globalCredits {
+    font-size: 0.9rem;
+  }
+
+  /* Switch tema más pequeño */
+  .theme-switch {
+    transform: scale(0.9);
+  }
+
+  /* Avatar perfil más pequeño */
+  .avatar-navbar {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .btn-profile {
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* ===== HEADER RULETAS ===== */
+  .roulette-header {
+    padding: 1rem 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .roulette-header h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .roulette-header .text-uppercase {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
+  .roulette-header p.text-muted {
+    font-size: 0.85rem !important;
+    padding-inline: 1rem;
+  }
+
+  /* PEGI indicator en móvil - centrado arriba */
+  .pegi-indicator {
+    position: static !important;
+    transform: none !important;
+    margin: 0 auto 0.75rem !important;
+    width: 45px !important;
+  }
+
+  .pegi-indicator:hover {
+    transform: scale(1.08) !important;
+  }
+
+  /* ===== BOTÓN COMPRAR MONEDAS ===== */
+  .btn-buy-credits {
+    width: 100%;
+    max-width: 280px;
+    margin-inline: auto;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    justify-content: center;
+  }
+
+  /* ===== RULETA CARDS ===== */
+  .roulette-card {
+    border-radius: 1rem;
+    margin-inline: 0.5rem;
+  }
+
+  .roulette-card-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .roulette-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .roulette-card-body {
+    padding: 1rem 0.75rem;
+  }
+
+  /* Items de ruleta más pequeños */
+  .roulette-item {
+    min-width: 90px !important;
+    max-width: 90px !important;
+    height: 120px;
+  }
+
+  .roulette-item-inner {
+    padding: 0.5rem;
+  }
+
+  .roulette-item-name {
+    font-size: 0.65rem;
+  }
+
+  .roulette-item-rarity {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  /* Botón girar */
+  .btn-spin-roulette {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* ===== CARTAS ===== */
+  .card-carta {
+    border-radius: 0.75rem;
+  }
+
+  .card-carta-img {
+    height: 180px;
+  }
+
+  /* ===== MODALES ===== */
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem 1rem !important;
+  }
+
+  /* Modal PEGI */
+  #pegiModal .modal-body {
+    padding: 1.5rem 1rem !important;
+  }
+
+  #pegiModal h4 {
+    font-size: 1.3rem;
+  }
+
+  #pegiModal p,
+  #pegiModal li {
+    font-size: 0.9rem !important;
+  }
+
+  #pegiModal .btn {
+    font-size: 0.95rem !important;
+    padding: 0.7rem 1rem !important;
+  }
+
+  /* ===== SOBRES ===== */
+  .pack-card {
+    margin-inline: auto;
+    max-width: 280px;
+  }
+
+  /* ===== TOAST NOTIFICATIONS ===== */
+  .toast-container {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+  }
+
+  .toast {
+    max-width: 100% !important;
+  }
+}
+
+/* MÓVIL PEQUEÑO - Optimización extra */
+@media (max-width: 575.98px) {
+
+  /* Navbar aún más compacto */
+  .navbar-main .container {
+    gap: 0.5rem;
+  }
+
+  .navbar-brand .brand-text {
+    font-size: 0.85rem !important;
+  }
+
+  /* Ocultar texto del switch de tema */
+  .theme-switch+i {
+    font-size: 0.85rem;
+  }
+
+  /* Header ruleta */
+  .roulette-header h1 {
+    font-size: 1.3rem !important;
+  }
+
+  .roulette-header p.text-muted {
+    font-size: 0.8rem !important;
+  }
+
+  /* Ruleta items muy compactos */
+  .roulette-item {
+    min-width: 75px !important;
+    max-width: 75px !important;
+    height: 100px;
+  }
+
+  .roulette-item-img {
+    height: 50px;
+  }
+
+  .roulette-item-name {
+    font-size: 0.6rem;
+  }
+
+  .roulette-item-rarity {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  /* Botones más compactos */
+  .btn-spin-roulette {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-buy-credits {
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Cartas en grid más pequeñas */
+  .card-carta-img {
+    height: 160px;
+  }
+
+  /* Stats panel */
+  .stats-bar-label {
+    flex: 0 0 60px;
+    font-size: 0.65rem;
+  }
+
+  .stats-bar-value {
+    flex: 0 0 35px;
+    font-size: 0.65rem;
+  }
+}
+
+/* LANDSCAPE MÓVIL - Ajustes especiales */
+@media (max-width: 767.98px) and (orientation: landscape) {
+  .roulette-header {
+    padding: 0.75rem 0.5rem !important;
+  }
+
+  .roulette-header h1 {
+    font-size: 1.2rem !important;
+  }
+
+  .pegi-indicator {
+    width: 40px !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .modal-dialog {
+    max-width: 90vw;
+  }
+}
+
+/* ============================
+   CRITICAL MOBILE FIXES - PREVENT HORIZONTAL SCROLL
+   ============================ */
+
+@media (max-width: 767.98px) {
+
+  /* Force all containers to respect viewport width */
+  html,
+  body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  body {
+    position: relative;
+  }
+
+  /* Navbar fixes */
+  .navbar-main {
+    max-width: 100vw !important;
+    overflow-x: hidden;
+  }
+
+  .navbar-main .container {
+    max-width: 100% !important;
+    padding-inline: 0.5rem !important;
+  }
+
+  /* Main content container */
+  main {
+    max-width: 100vw !important;
+    overflow-x: hidden;
+    padding-inline: 0.5rem !important;
+  }
+
+  main .container {
+    max-width: 100% !important;
+    padding-inline: 0.5rem !important;
+  }
+
+  /* Roulette sections */
+  .roulette-card {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  .roulette-window-wrapper {
+    max-width: 100% !important;
+  }
+
+  .roulette-window {
+    max-width: 100% !important;
+  }
+
+  /* Cards and grids */
+  .row {
+    margin-inline: 0 !important;
+  }
+
+  .col,
+  [class*="col-"] {
+    padding-inline: 0.25rem !important;
+  }
+
+  /* Ensure no element can cause overflow */
+  * {
+    max-width: 100%;
+  }
+
+  /* Fix specific wide elements */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Buttons and inputs */
+  .btn,
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  /* ===== PROFILE PAGE MOBILE FIXES ===== */
+
+  /* Profile header */
+  .profile-header .row {
+    text-align: center;
+  }
+
+  .profile-header .col-auto {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .profile-avatar-wrapper {
+    margin: 0 auto !important;
+  }
+
+  .profile-stats {
+    justify-content: center !important;
+  }
+
+  .profile-stat {
+    min-width: 80px;
+  }
+
+  /* Profile buttons */
+  .profile-header .btn {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .profile-search-input {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-top: 0.5rem;
+  }
+
+  /* Profile tabs */
+  .profile-nav-pills {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-nav-pills .nav-link {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Profile cards grid */
+  .card-perfil-venta,
+  .card-carta {
+    font-size: 0.85rem;
+  }
+
+  /* Avatar selection grid */
+  .avatar-option {
+    width: 100% !important;
+    max-width: 60px;
+  }
+
+  /* Card detail modals */
+  .card-detail-modal .row {
+    flex-direction: column;
+  }
+
+  .card-detail-modal .col-md-4,
+  .card-detail-modal .col-md-8 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card-detail-image {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  /* Offcanvas */
+  .offcanvas-share {
+    max-height: 50vh;
+  }
+
+  /* Collection page mobile */
+  .btn-stats {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+
+  /* Navbar toggler */
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+  }
+
+  .navbar-collapse {
+    margin-top: 0.5rem;
+  }
+
+  .nav-links .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* ===== PERFIL PAGE NAVBAR FIXES ===== */
+
+  /* Make logo and brand text smaller on mobile */
+  .navbar-brand {
+    gap: 0.35rem !important;
+  }
+
+  .navbar-brand img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .navbar-brand .brand-text {
+    font-size: 0.85rem !important;
+  }
+
+  /* Make credits more compact */
+  #globalCredits {
+    font-size: 0.85rem;
+  }
+
+  #globalCredits i {
+    font-size: 0.9rem;
+  }
+
+  /* Profile button more compact */
+  .btn-profile {
+    padding: 0.2rem 0.4rem !important;
+  }
+
+  .avatar-navbar {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  /* Reduce navbar container padding */
+  .navbar-main .container {
+    padding-inline: 0.4rem !important;
+  }
+
+  /* Reduce gap between elements */
+  .navbar-main .d-flex {
+    gap: 0.4rem !important;
+  }
+}
+
+/* Extra small mobile - even more compact */
+@media (max-width: 375px) {
+  .navbar-brand .brand-text {
+    font-size: 0.75rem !important;
+  }
+
+  .navbar-brand img {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  #globalCredits {
+    font-size: 0.8rem;
+  }
+
+  .avatar-navbar {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .navbar-main .container {
+    padding-inline: 0.3rem !important;
+  }
+}
+
+/* ============================
+   DROPDOWN Z-INDEX FIX
+   ============================ */
+
+/* Ensure navbar is above all content */
+.navbar-main {
+  z-index: 1030 !important;
+}
+
+/* Ensure dropdown menu appears above everything */
+.dropdown-menu {
+  z-index: 1050 !important;
+}
+
+/* Ensure dropdown is positioned correctly */
+.navbar-main .dropdown {
+  position: relative;
+  z-index: 1040;
+}
+
+/* Fix for mobile - ensure dropdown appears above page content */
+@media (max-width: 767.98px) {
+
+  /* Remove sticky positioning on mobile - it conflicts with dropdowns */
+  .navbar-main {
+    position: relative !important;
+    z-index: 1050 !important;
+  }
+
+  /* Ensure body doesn't hide overflow */
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Dropdown menu positioning (móvil) */
+  .navbar-main .dropdown-menu {
+    position: absolute !important;
+    z-index: 9999 !important;
+    top: 100% !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    margin-top: 0.35rem !important;
+    min-width: 260px !important;
+    max-width: 92vw !important;
+  }
+
+  /* Dropdown container: mantener referencia relativa al botón
+     para que el menú se posicione justo debajo también en móvil */
+  .navbar-main .dropdown {
+    position: relative;
+  }
+
+  /* Ensure dropdown button is clickable */
+  .btn-profile {
+    position: relative;
+    z-index: 1051;
+  }
+
+  /* Ensure main content stays below */
+  main {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+  }
+
+  /* Prevent any section from overlapping */
+  section,
+  .card,
+  .collection-header,
+  .profile-header {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Fix dropdown backdrop: mantener el centrado */
+  .navbar-main .dropdown-menu.show {
+    display: block !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* ============================
+   TIENDA MONEDAS (Premium)
+   ============================ */
+
+.modal-coin-shop .modal-content {
+  background: radial-gradient(circle at top, #0f172a 0, #020617 100%);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #f1f5f9;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+}
+
+.modal-coin-shop .modal-header {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.modal-coin-shop .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.coin-pack-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.coin-pack-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, rgba(51, 65, 85, 0.8), rgba(30, 41, 59, 0.9));
+}
+
+/* Icons */
+.coin-pack-icon {
+  font-size: 3rem;
+  margin-block: 0.5rem;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+}
+
+.coin-pack-card:hover .coin-pack-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Amounts */
+.coin-pack-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.coin-pack-bonus {
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-height: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons (Price) */
+.coin-pack-price {
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coin-pack-card:hover .coin-pack-price {
+  background: var(--poke-yellow);
+  color: #020617;
+  border-color: var(--poke-yellow);
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+}
+
+/* TIER 1 - BRONZE/BASIC */
+.coin-pack-card.tier-1 {
+  border-top: 4px solid #cd7f32;
+}
+
+.coin-pack-card.tier-1 .coin-pack-icon {
+  color: #dea065;
+  filter: drop-shadow(0 0 10px rgba(205, 127, 50, 0.4));
+}
+
+.coin-pack-card.tier-1:hover {
+  border-color: #dea065;
+}
+
+/* TIER 2 - SILVER/POPULAR */
+.coin-pack-card.tier-2 {
+  border-top: 4px solid #94a3b8;
+}
+
+.coin-pack-card.tier-2 .coin-pack-icon {
+  background: -webkit-linear-gradient(#e2e8f0, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(148, 163, 184, 0.5));
+}
+
+.coin-pack-card.tier-2 .coin-pack-bonus {
+  color: #38bdf8;
+}
+
+.coin-pack-card.tier-2:hover {
+  border-color: #e2e8f0;
+  box-shadow: 0 20px 40px rgba(148, 163, 184, 0.2);
+}
+
+/* TIER 3 - GOLD/BEST */
+.coin-pack-card.tier-3 {
+  border-top: 4px solid #facc15;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+}
+
+.coin-pack-card.tier-3 .coin-pack-icon {
+  background: -webkit-linear-gradient(#fde047, #ca8a04);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(234, 179, 8, 0.6));
+}
+
+.coin-pack-card.tier-3 .coin-pack-amount {
+  background: -webkit-linear-gradient(#fde047, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coin-pack-card.tier-3 .coin-pack-bonus {
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.coin-pack-card.tier-3:hover {
+  border-color: #facc15;
+  box-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
+}
+
+/* BADGES */
+.pack-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.35rem 1rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+  z-index: 2;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  animation: pulse-badge 2s infinite;
+}
+
+.tier-3 .pack-badge {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.5);
+  top: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+/* ADMIN AREA */
+.admin-code-section {
+  background: rgba(2, 6, 23, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  margin-top: 1.5rem;
+}
+
+.admin-code-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #f8fafc;
+  text-align: center;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+
+.admin-code-input::placeholder {
+  color: rgba(148, 163, 184, 0.4);
+}
+
+.admin-code-input:focus {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: var(--poke-blue);
+  box-shadow: none;
+  color: #fff;
+}
+
+.grayscale-bw {
+  filter: grayscale(1) brightness(0.6) contrast(1.1) !important;
+}
+
+.pack-art-venusaur {
+  background-image: url("../img/pack-venusaur.png") !important;
+}
+
+.pack-art-charizard {
+  background-image: url("../img/pack-charizard.png") !important;
+}
+
+.pack-art-blastoise {
+  background-image: url("../img/pack-blastoise.png") !important;
+}
+
+/* Processing State */
+.coin-pack-card.processing {
+  pointer-events: none;
+  opacity: 0.7;
+}

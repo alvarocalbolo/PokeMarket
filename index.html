@@ -1,0 +1,1877 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <title>PokeMarket - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- CSS global compartido -->
+  <link rel="stylesheet" href="CSS/style.css">
+  <script src="js/api-service.js"></script>
+</head>
+
+<body class="bg-pokeballs">
+
+  <!-- NAVBAR PRINCIPAL INDEX -->
+  <nav class="navbar navbar-main shadow-sm sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- Lado izquierdo: logo + nombre + botón colección -->
+      <div class="d-flex align-items-center gap-3">
+        <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="Index.html">
+          <img src="img/Masterball.png" alt="Masterball" style="width: 32px; height: 32px;">
+          <span class="brand-text">PokeMarket</span>
+        </a>
+        <a href="Pages/Colección.html" class="btn btn-sm btn-outline-light d-inline-flex align-items-center gap-1">
+          <i class="bi bi-collection"></i>
+          <span class="d-none d-md-inline">Colección</span>
+        </a>
+      </div>
+ 
+      <!-- Lado derecho: créditos + perfil -->
+      <div class="d-flex align-items-center gap-2 flex-nowrap">
+
+        <!-- Créditos globales: solo icono + número -->
+        <div class="d-flex align-items-center gap-1" id="globalCredits">
+          <i class="bi bi-coin text-warning"></i>
+          <span class="fw-bold">0</span>
+        </div>
+
+        <!-- Dropdown perfil -->
+        <div class="dropdown">
+          <button class="btn btn-profile d-flex align-items-center" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar" id="navbarAvatar">
+            <span class="d-none d-lg-inline user-name ms-2" id="navbarUserName">
+              Entrenador
+            </span>
+            <i class="bi bi-caret-down-fill ms-1 small d-none d-lg-inline"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="profileDropdown">
+            <li class="px-3 py-2">
+              <div class="d-flex align-items-center">
+                <img src="img/avatars/pokeball.png" alt="Avatar" class="avatar-navbar me-2" id="dropdownAvatar">
+                <div class="min-w-0">
+                  <div class="fw-semibold small text-truncate" id="dropdownUserName">Entrenador</div>
+                  <div class="text-muted xsmall text-truncate" id="dropdownUserEmail">
+                    entrenador@pokemarket.com
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <hr class="dropdown-divider my-1">
+            </li>
+            <li>
+              <a class="dropdown-item small" href="Pages/Perfil.html">
+                <i class="bi bi-person-badge me-2"></i>Ver perfil
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item small" href="Pages/InicioSesion.html" id="logoutLink">
+                <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <main class="py-4">
+    <div class="container">
+
+      <!-- SECCIÓN RULETA PRINCIPAL -->
+      <section class="mb-4">
+        <header class="text-center mb-3 roulette-header position-relative">
+          <div class="pegi-indicator shadow-sm" data-bs-toggle="modal" data-bs-target="#pegiModal"
+            title="Información de clasificación y juego responsable">
+            <img src="img/pegi18.svg" alt="PEGI 18">
+          </div>
+          <p class="text-uppercase xsmall text-muted mb-1">Casino de cartas</p>
+          <h1 class="h3 fw-bold mb-1">Ruletas Insanas de PokeMarket</h1>
+          <p class="small text-muted mb-0">
+            Gira la ruleta, sube de rareza y convierte tus
+            <span class="text-warning fw-semibold"><i class="bi bi-coin text-warning"></i> monedas</span>
+            en cartas absurdamente buenas.
+          </p>
+        </header>
+
+        <!-- Botón comprar créditos -->
+        <div class="d-flex justify-content-center mb-3">
+          <button type="button" class="btn btn-buy-credits" data-bs-toggle="modal" data-bs-target="#creditShopModal">
+            <span class="btn-buy-credits-glow"></span>
+            <i class="bi bi-plus-circle-fill me-2"></i>Comprar monedas
+          </button>
+        </div>
+
+        <!-- Selector de ruletas (Solo Base Set) -->
+        <section class="roulette-selector mb-4">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+              <article class="roulette-choice-card active" data-wheel="common">
+                <div class="roulette-choice-badge">Original 1999</div>
+                <h2 class="h6 mb-1">Ruleta Base Set</h2>
+                <p class="xsmall mb-2 text-muted">Contiene todas las cartas de la colección original. ¡Haz clic para
+                  activar!</p>
+                <ul class="roulette-choice-tags xsmall mb-2">
+                  <li>Tipo: Colección Principal</li>
+                  <li>Coste por giro: <i class="bi bi-coin text-warning"></i> 400</li>
+                </ul>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="roulette-choice-price d-flex align-items-center gap-1">
+                    <i class="bi bi-coin text-warning small"></i>
+                    <span>400</span>
+                  </span>
+                  <span class="badge bg-warning-subtle text-warning-emphasis xsmall">Solo Base Set</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- RULETA + panel derecha -->
+        <div class="row g-4 align-items-start">
+
+          <!-- RULETA -->
+          <div class="col-lg-8">
+            <section class="roulette-card card border-0 shadow-lg rounded-4">
+              <div class="card-header border-0 roulette-card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <span class="badge bg-danger-subtle text-danger-emphasis xsmall me-2">
+                      <i class="bi bi-lightning-charge-fill me-1"></i>Ruleta activa
+                    </span>
+                    <span class="badge bg-warning-subtle text-warning-emphasis xsmall">
+                      Solo cartas del Base Set (1999)
+                    </span>
+                  </div>
+                  <div class="text-end">
+                    <span class="xsmall text-muted d-block">Balance</span>
+                    <span class="small fw-semibold text-success d-flex align-items-center justify-content-end gap-1"
+                      id="balanceCredits">
+                      <i class="bi bi-coin text-warning small"></i>
+                      <span>0</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body roulette-body">
+                <!-- Tipo de Set -->
+                <div class="roulette-rarities d-flex justify-content-center align-items-center mb-3">
+                  <div class="rarity-pill rarity-1"><span class="rarity-color-dot"></span>Base Set</div>
+                </div>
+
+                <!-- Ventana ruleta -->
+                <div class="roulette-window-wrapper mb-3">
+                  <div class="roulette-highlight"></div>
+                  <div class="roulette-window">
+                    <div class="roulette-strip" id="rouletteStrip"></div>
+                  </div>
+                  <div class="roulette-bottom-glow"></div>
+                </div>
+
+                <!-- Resultado -->
+                <div class="roulette-result text-center mb-3" id="rouletteResult">
+                  <span class="small text-info">
+                    <i class="bi bi-dice-5 me-1"></i>Cargando cartas TCG...
+                  </span>
+                </div>
+
+                <!-- Controles -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <div class="d-flex align-items-center gap-1">
+                      <span class="xsmall text-muted">Auto giros:</span>
+                      <select class="form-select form-select-sm roulette-autospins-select" id="autoCount">
+                        <option value="5">5 giros</option>
+                        <option value="10" selected>10 giros</option>
+                        <option value="15">15 giros</option>
+                        <option value="20">20 giros</option>
+                        <option value="25">25 giros</option>
+                        <option value="30">30 giros (MAX)</option>
+                      </select>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button class="btn btn-outline-secondary btn-sm" type="button" id="btnAuto" disabled>
+                        <i class="bi bi-arrow-repeat me-1"></i>Auto giros
+                      </button>
+                      <button class="btn btn-outline-danger btn-sm d-none" type="button" id="btnStopAuto">
+                        <i class="bi bi-stop-circle me-1"></i>Parar
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <div class="xsmall text-muted mb-1 d-flex align-items-center justify-content-end gap-1">
+                      <span>Coste por giro:</span>
+                      <span class="text-warning fw-semibold d-flex align-items-center gap-1" id="spinCost">
+                        <i class="bi bi-coin text-warning small"></i>
+                        <span>20</span>
+                      </span>
+                    </div>
+                    <button class="btn btn-poke btn-lg fw-semibold" id="btnSpin" disabled>
+                      <i class="bi bi-dice-5 me-1"></i>Girar 1 vez
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer border-0 roulette-footer xsmall text-muted">
+                Los objetos ganados se añaden automáticamente a tu colección. Puedes gestionarlos desde la página de
+                <a href="Pages/Colección.html" class="text-warning text-decoration-none fw-semibold">Colección</a>.
+              </div>
+            </section>
+          </div>
+
+          <!-- PANEL DERECHA -->
+          <div class="col-lg-4">
+            <section class="card border-0 shadow-sm rounded-4 mb-3">
+              <div class="card-body">
+                <h2 class="h6 fw-semibold mb-2"><i class="bi bi-graph-up-arrow me-1"></i>Probabilidades base</h2>
+                <ul class="list-unstyled mb-0 xsmall" id="baseProbList"></ul>
+              </div>
+            </section>
+
+            <section class="card border-0 shadow-sm rounded-4 mb-3">
+              <div class="card-body">
+                <h2 class="h6 fw-semibold mb-2"><i class="bi bi-activity me-1"></i>Tendencia de tus giros</h2>
+                <p class="xsmall text-muted">Basado en las últimas sesiones de ruleta.</p>
+                <ul class="list-unstyled mb-0 xsmall" id="currentProbList"></ul>
+              </div>
+            </section>
+
+            <section class="card border-0 shadow-sm rounded-4">
+              <div class="card-body">
+                <h2 class="h6 fw-semibold mb-2"><i class="bi bi-trophy-fill text-warning me-1"></i>Últimos drops épicos
+                </h2>
+                <ul class="list-unstyled mb-0 xsmall" id="lastDrops"></ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN TIENDA RÁPIDA -->
+      <hr class="my-5">
+
+      <section class="mb-4">
+        <header class="d-flex flex-wrap justify-content-between align-items-center mb-2">
+          <div>
+            <p class="text-uppercase xsmall text-muted mb-1">Mercado instantáneo</p>
+            <h2 class="h4 fw-semibold mb-1">Tienda de Cartas – Picks del Día</h2>
+            <p class="xsmall text-muted mb-0">Cartas seleccionadas por rareza, compradas al momento con tus mismas
+              monedas.</p>
+          </div>
+          <!-- Badge créditos tienda: solo icono + número -->
+          <span class="badge bg-dark-subtle text-light-emphasis xsmall d-flex align-items-center gap-1"
+            id="shopCredits">
+            <i class="bi bi-coin text-warning small"></i>
+            <span>0</span>
+          </span>
+        </header>
+      </section>
+
+      <!-- Cartas diarias -->
+      <section class="card border-0 shadow-sm mb-4 tienda-section">
+        <div class="card-header border-0 bg-transparent d-flex flex-wrap justify-content-between align-items-center">
+          <div>
+            <h3 class="h6 mb-1 text-uppercase text-muted xsmall">Selección diaria</h3>
+            <h4 class="h5 mb-0 fw-semibold">Cartas destacadas de hoy</h4>
+            <p class="xsmall text-muted mb-0">Rotación diaria, stock ilimitado por carta. Caza gangas antes de que
+              cambien.</p>
+          </div>
+          <div class="d-flex flex-column align-items-end gap-1">
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-sm btn-recargar-tienda d-flex align-items-center gap-1" id="btnRefreshDaily">
+                <span class="recargar-icon-wrap">
+                  <i class="bi bi-arrow-clockwise"></i>
+                </span>
+                <span class="xsmall fw-semibold text-uppercase">Recargar tienda</span>
+                <span class="badge bg-dark-subtle text-warning-emphasis xsmall d-flex align-items-center gap-1">
+                  <i class="bi bi-coin text-warning"></i>
+                  <span id="refreshCostLabel">1000</span>
+                </span>
+              </button>
+            </div>
+            <div class="text-end xsmall text-muted">
+              <span id="dailyResetLabel">Cambio diario a las 00:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3" id="dailyCardsGrid">
+            <!-- Plantilla -->
+            <div class="col-6 col-md-4 col-lg-3 d-none" id="dailyCardTemplate">
+              <article class="card card-carta h-100 tienda-card-dia">
+                <div class="card-carta-frame">
+                  <div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                    <span class="xsmall text-muted">Imagen carta</span>
+                  </div>
+                </div>
+                <div class="card-body p-2">
+                  <div class="d-flex justify-content-between align-items-start mb-1">
+                    <h5 class="small fw-semibold mb-0 text-truncate daily-name">Nombre carta</h5>
+                    <span class="badge xsmall daily-rarity">Rara</span>
+                  </div>
+                  <p class="xsmall text-muted mb-1 text-truncate daily-set">Set</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-1">
+                      <i class="bi bi-coin text-warning small"></i>
+                      <span class="small fw-semibold daily-price">120</span>
+                    </div>
+                    <button class="btn btn-sm btn-poke daily-buy-btn tienda-dia-btn-comprar">Comprar</button>
+                  </div>
+                  <p class="xsmall text-muted mt-1 mb-0 daily-stock">Stock: ∞</p>
+                </div>
+              </article>
+            </div>
+            <!-- /plantilla -->
+            <p class="text-muted small mb-0" id="dailyEmptyText">Cargando selección diaria...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN SOBRES -->
+      <section class="card border-0 shadow-sm mb-4 tienda-section">
+        <div class="card-header border-0 bg-transparent d-flex flex-wrap justify-content-between align-items-center">
+          <div>
+            <p class="text-uppercase xsmall text-muted mb-1">Fábrica de dopamina</p>
+            <h3 class="h5 mb-1 fw-semibold">Sobres PokeMarket – Abre y reza</h3>
+            <p class="xsmall text-muted mb-0">Cada carta del sobre tiene su propia probabilidad según el tipo de sobre.
+              Elige tu riesgo y mira qué sale.</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 align-items-stretch">
+            <!-- Lista de sobres -->
+            <div class="col-12">
+              <div class="row g-3" id="packsGrid">
+                <!-- Sobres Venusaur, Charizard, Blastoise -->
+                <div class="col-12 col-lg-4">
+                  <article class="card tienda-pack-card h-100" data-pack-id="base1_venusaur">
+                    <div class="card-body d-flex flex-column text-center">
+                      <div class="tienda-pack-art pack-art-venusaur mx-auto mb-3">
+                        <div class="tienda-pack-emblem">BS</div>
+                      </div>
+                      <h5 class="fw-bold mb-1">Sobre Venusaur</h5>
+                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
+                      <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-1">
+                          <i class="bi bi-coin text-warning small"></i>
+                          <span class="fw-bold">1500</span>
+                        </div>
+                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
+                          data-pack-id="base1_venusaur">Abrir</button>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                  <article class="card tienda-pack-card h-100" data-pack-id="base1_charizard">
+                    <div class="card-body d-flex flex-column text-center">
+                      <div class="tienda-pack-art pack-art-charizard mx-auto mb-3">
+                        <div class="tienda-pack-emblem">BS</div>
+                      </div>
+                      <h5 class="fw-bold mb-1">Sobre Charizard</h5>
+                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
+                      <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-1">
+                          <i class="bi bi-coin text-warning small"></i>
+                          <span class="fw-bold">1500</span>
+                        </div>
+                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
+                          data-pack-id="base1_charizard">Abrir</button>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                  <article class="card tienda-pack-card h-100" data-pack-id="base1_blastoise">
+                    <div class="card-body d-flex flex-column text-center">
+                      <div class="tienda-pack-art pack-art-blastoise mx-auto mb-3">
+                        <div class="tienda-pack-emblem">BS</div>
+                      </div>
+                      <h5 class="fw-bold mb-1">Sobre Blastoise</h5>
+                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
+                      <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-1">
+                          <i class="bi bi-coin text-warning small"></i>
+                          <span class="fw-bold">1500</span>
+                        </div>
+                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
+                          data-pack-id="base1_blastoise">Abrir</button>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <!-- Solo Sobre Base Set (Grail eliminado) -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="roulette-disclaimer text-center mt-4">
+        Probabilidades fijas por rareza, ruleta y tipo de sobre. Juega con cabeza y disfruta del vicio controlado.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- Toast notificaciones -->
+  <div class="roulette-toast-container" id="toastContainer"></div>
+
+  <!-- Modal recompensa carta (ruleta) -->
+  <div class="modal fade reward-modal" id="rewardModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content reward-modal-content">
+        <div class="reward-glow"></div>
+        <div class="reward-rays"></div>
+        <div class="modal-body text-center">
+          <p class="xsmall text-muted mb-1">¡Nueva recompensa!</p>
+          <h2 class="h5 fw-bold mb-2" id="rewardTitle">Has conseguido una carta</h2>
+
+          <div class="reward-card-wrapper">
+            <div class="reward-card-inner">
+              <img id="rewardImage" src="" alt="Carta obtenida">
+            </div>
+          </div>
+
+          <p class="mt-2 mb-1">
+            <span class="badge" id="rewardRarityBadge">Base Set</span>
+          </p>
+          <p class="small text-muted mb-0" id="rewardSetName"></p>
+
+          <div class="mt-3 d-flex justify-content-center gap-2">
+            <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal" id="rewardContinueBtn">
+              Seguir girando
+            </button>
+            <a href="Pages/Colección.html" class="btn btn-warning btn-sm" id="btnGoCollection">
+              Ir a colección
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal compra créditos -->
+  <div class="modal fade modal-coin-shop" id="creditShopModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <div>
+            <h5 class="modal-title fw-bold">Tienda de Monedas</h5>
+            <p class="xsmall text-muted mb-0">Compra monedas para seguir girando</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4 mb-4">
+            <!-- Pack 1 -->
+            <div class="col-12 col-md-4">
+              <div class="coin-pack-card tier-1" data-amount="2500" data-cost="2.99">
+                <div class="coin-pack-icon"><i class="bi bi-coin"></i></div>
+                <div class="coin-pack-amount">2,500</div>
+                <div class="coin-pack-bonus"><span
+                    class="badge bg-secondary-subtle text-secondary-emphasis xsmall">Básico</span></div>
+                <div class="coin-pack-price">2,99 €</div>
+              </div>
+            </div>
+            <!-- Pack 2 -->
+            <div class="col-12 col-md-4">
+              <div class="coin-pack-card tier-2" data-amount="12000" data-cost="9.99">
+                <div class="pack-badge">POPULAR</div>
+                <div class="coin-pack-icon"><i class="bi bi-layers-fill"></i></div>
+                <div class="coin-pack-amount">12,000</div>
+                <div class="coin-pack-bonus">+ 20% Extra</div>
+                <div class="coin-pack-price">9,99 €</div>
+              </div>
+            </div>
+            <!-- Pack 3 -->
+            <div class="col-12 col-md-4">
+              <div class="coin-pack-card tier-3" data-amount="75000" data-cost="49.99">
+                <div class="pack-badge">MEJOR VALOR</div>
+                <div class="coin-pack-icon"><i class="bi bi-trophy-fill"></i></div>
+                <div class="coin-pack-amount">75,000</div>
+                <div class="coin-pack-bonus">¡+ 50% GRATIS!</div>
+                <div class="coin-pack-price">49,99 €</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Section -->
+          <div class="admin-code-section">
+            <div class="d-flex flex-column flex-sm-row align-items-center gap-2 justify-content-center">
+              <label for="adminCodeInput" class="small text-muted mb-0">Código Promocional:</label>
+              <div class="input-group input-group-sm" style="max-width: 300px;">
+                <span class="input-group-text"><i class="bi bi-ticket-perforated"></i></span>
+                <input type="text" class="form-control admin-code-input" id="adminCodeInput"
+                  placeholder="AÑADIR CÓDIGO">
+                <button class="btn btn-poke fw-bold" type="button" id="btnRedeemCode">Canjear</button>
+              </div>
+            </div>
+            <p class="xsmall text-center text-muted mt-2 mb-0 opacity-50">Solo para administradores</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Modal info probabilidades sobre -->
+  <div class="modal fade" id="packInfoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title xsmall" id="packInfoTitle">Probabilidades sobre</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-unstyled xsmall mb-0" id="packInfoList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal apertura sobre (animación dopamina) -->
+  <div class="modal fade" id="openPackModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="openPackTitle">Sobre abierto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- Etapa reveal carta a carta -->
+          <div id="packRevealStage">
+            <div class="pack-reveal-backdrop">
+              <div class="pack-reveal-card-slot">
+                <!-- carta activa se pinta por JS -->
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <p class="xsmall text-muted mb-1" id="packRevealCounter">
+                Carta 1 de 6
+              </p>
+              <button class="btn btn-poke btn-sm" id="btnNextReveal">
+                Ver siguiente carta
+              </button>
+            </div>
+          </div>
+
+          <!-- Resumen final -->
+          <div id="packSummaryStage" class="d-none mt-3">
+            <h6 class="small fw-semibold mb-2">
+              <i class="bi bi-collection me-1"></i>
+              Resumen del sobre
+            </h6>
+            <div class="row g-2" id="packCardsGrid"></div>
+          </div>
+
+          <p class="xsmall text-muted mb-0 mt-2">
+            Las cartas se han añadido a tu colección.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <a href="Pages/Colección.html" class="btn btn-poke btn-sm">
+            Ver colección
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script principal: tema, usuario, ruleta, tienda, sobres -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const html = document.documentElement;
+      const switchElement = document.getElementById('darkModeSwitch');
+
+      const savedTheme = localStorage.getItem('bsTheme') || 'light';
+      html.setAttribute('data-bs-theme', savedTheme);
+      if (switchElement) {
+        switchElement.checked = savedTheme === 'dark';
+        switchElement.addEventListener('change', function () {
+          const theme = this.checked ? 'dark' : 'light';
+          html.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('bsTheme', theme);
+        });
+      }
+
+      const defaultName = 'Entrenador';
+      const defaultEmail = 'entrenador@pokemarket.com';
+      const defaultAvatar = 'img/avatars/pokeball.png';
+
+      const name = localStorage.getItem('pm_user_name') || defaultName;
+      const email = localStorage.getItem('pm_user_email') || defaultEmail;
+      const avatar = localStorage.getItem('pm_user_avatar') || defaultAvatar;
+
+      const navbarUserName = document.getElementById('navbarUserName');
+      const dropdownUserName = document.getElementById('dropdownUserName');
+      const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+      const navbarAvatar = document.getElementById('navbarAvatar');
+      const dropdownAvatar = document.getElementById('dropdownAvatar');
+
+      if (navbarUserName) navbarUserName.textContent = name;
+      if (dropdownUserName) dropdownUserName.textContent = name;
+      if (dropdownUserEmail) dropdownUserEmail.textContent = email;
+      if (navbarAvatar) navbarAvatar.src = avatar;
+      if (dropdownAvatar) dropdownAvatar.src = avatar;
+
+      const logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', () => {
+          localStorage.removeItem('pm_user_name');
+          localStorage.removeItem('pm_user_email');
+          localStorage.removeItem('pm_user_avatar');
+          localStorage.removeItem('pm_user_bio');
+          localStorage.removeItem('pm_cards_sale');
+          localStorage.removeItem('pm_collection');
+          localStorage.removeItem('pm_credits');
+        });
+      }
+
+      const rarityDefs = [
+        { id: 1, key: 'common', label: 'Base Set' },
+        { id: 2, key: 'uncommon', label: 'Base Set' },
+        { id: 3, key: 'rare', label: 'Base Set' },
+        { id: 4, key: 'superrare', label: 'Base Set' },
+        { id: 5, key: 'elite', label: 'Base Set' },
+        { id: 6, key: 'epic', label: 'Base Set' },
+        { id: 7, key: 'mythic', label: 'Base Set' },
+        { id: 8, key: 'legendary', label: 'Base Set' }
+      ];
+
+      const wheelsConfig = {
+        common: {
+          name: 'Ruleta Base Set',
+          cost: 400,
+          probs: {
+            common: 1.0
+          }
+        }
+      };
+
+      const packRarityProbs = {
+        base1_venusaur: {
+          name: 'Sobre Venusaur',
+          price: 1500,
+          cardCount: 3,
+          artClass: 'pack-art-venusaur',
+          probs: { common: 1.0 }
+        },
+        base1_charizard: {
+          name: 'Sobre Charizard',
+          price: 1500,
+          cardCount: 3,
+          artClass: 'pack-art-charizard',
+          probs: { common: 1.0 }
+        },
+        base1_blastoise: {
+          name: 'Sobre Blastoise',
+          price: 1500,
+          cardCount: 3,
+          artClass: 'pack-art-blastoise',
+          probs: { common: 1.0 }
+        }
+      };
+
+      const rarityPriceMap = {
+        common: 400,
+        uncommon: 800,
+        rare: 1600,
+        superrare: 3000,
+        elite: 5200,
+        epic: 8400,
+        mythic: 14000,
+        legendary: 24000
+      };
+
+      const TCG_API_BASE = 'https://api.tcgdex.net/v2/en/cards';
+
+      function fnv1aHash(str) {
+        let hash = 2166136261 >>> 0;
+        for (let i = 0; i < str.length; i++) {
+          hash ^= str.charCodeAt(i);
+          hash = Math.imul(hash, 16777619) >>> 0;
+        }
+        return hash >>> 0;
+      }
+
+      function mapApiRarityToInternal(price) {
+        return ApiService.calculateRarityByPrice(price);
+      }
+
+      const cardsByRarity = {
+        common: [], uncommon: [], rare: [],
+        superrare: [], elite: [], epic: [], mythic: [], legendary: []
+      };
+      window.cardsByRarity = cardsByRarity;
+
+      async function loadAllCardsFromApi() {
+        if (resultBox) {
+          resultBox.innerHTML = '<span class="xsmall text-muted"><i class="bi bi-sync-alt me-1"></i>Sincronizando mercado de cartas (TCGdex)...</span>';
+        }
+
+        try {
+          const sets = await ApiService.fetchSets();
+          // Filter to ONLY use Base Set 1
+          const baseSet = sets.find(s => s.id === 'base1');
+
+          if (!baseSet) {
+            console.warn("Base Set 1 not found in sets list.");
+          }
+
+          const targetSets = baseSet ? [baseSet] : [];
+
+          for (const set of targetSets) {
+            const cards = await ApiService.fetchCardsBySet(set.id);
+            cards.forEach(card => {
+              let rarityKey = 'common';
+              const apiRarity = (card.rarity || '').toLowerCase();
+              const localIdNum = parseInt(card.localId, 10) || 0;
+
+              // Mapeo experto para Base Set (base1)
+              if (apiRarity.includes('uncommon')) {
+                rarityKey = 'uncommon';
+              } else if (apiRarity.includes('rare')) {
+                rarityKey = 'rare';
+                // En Base Set original, del #1 al #16 son Holos
+                if (set.id === 'base1' && localIdNum <= 16) {
+                  rarityKey = 'superrare';
+                }
+              } else if (apiRarity.includes('ultra') || apiRarity.includes('ex')) {
+                rarityKey = 'superrare'; // Map to highest available in Base Set
+              } else if (apiRarity.includes('secret')) {
+                rarityKey = 'superrare'; // Map to highest available
+              }
+
+              const cardObj = {
+                id: card.id,
+                localId: card.localId,
+                setId: set.id,
+                name: card.name || 'Carta sin nombre',
+                image: card.image ? `${card.image}/high.png` : '',
+                rarityInternal: rarityKey,
+                apiRarity: card.rarity || 'Común',
+                setName: set.name || 'Base Set',
+                types: card.types || [],
+                holographic: rarityKey === 'superrare' || apiRarity.includes('holo'),
+                priceEur: null,
+                priceUsd: null
+              };
+
+              if (cardsByRarity[rarityKey]) {
+                cardsByRarity[rarityKey].push(cardObj);
+              }
+              // Backup in common to avoid empty pool issues
+              if (rarityKey !== 'common') {
+                cardsByRarity['common'].push(cardObj);
+              }
+            });
+          }
+
+          if (resultBox) {
+            resultBox.innerHTML = '<span class="xsmall text-success"><i class="bi bi-check-circle me-1"></i>Mercado listo.</span>';
+          }
+          enableSpinButtons();
+          generateDailyCards(); // Trigger store generation once cards are ready
+        } catch (err) {
+          console.error('Error loading cards:', err);
+          if (resultBox) {
+            resultBox.innerHTML = '<span class="xsmall text-danger">Error al cargar cartas de la API.</span>';
+          }
+        }
+      }
+
+      function enableSpinButtons() {
+        if (btnSpin) btnSpin.disabled = balance < spinCost;
+        if (btnAuto) btnAuto.disabled = balance < spinCost;
+      }
+
+      function getRandomCardFromRarity(rarityKey) {
+        const pool = cardsByRarity[rarityKey] || [];
+        if (!pool.length) return null;
+        const base = pool[Math.floor(Math.random() * pool.length)];
+        return {
+          ...base,
+          rarityInternal: rarityKey,
+          rarity: rarityDefs.find(r => r.key === rarityKey) || rarityDefs[0]
+        };
+      }
+
+      function getDailySeed() {
+        const now = new Date();
+        const y = now.getUTCFullYear();
+        const m = now.getUTCMonth() + 1;
+        const d = now.getUTCDate();
+        return `${y}-${m}-${d}`;
+      }
+
+      function seededRandom(seed, max) {
+        const hash = fnv1aHash(seed);
+        return hash % max;
+      }
+
+      function pickPackRarity(packId) {
+        const cfg = packRarityProbs[packId];
+        if (!cfg) return rarityDefs[0];
+        const entries = Object.entries(cfg.probs);
+        const total = entries.reduce((sum, [, p]) => sum + p, 0);
+        const r = Math.random() * total;
+        let acc = 0;
+        for (const [key, p] of entries) {
+          acc += p;
+          if (r <= acc) {
+            return rarityDefs.find(rd => rd.key === key);
+          }
+        }
+        const fallbackKey = entries[0][0];
+        return rarityDefs.find(rd => rd.key === fallbackKey);
+      }
+
+      function getRandomCardFromPack(packId) {
+        const rarity = pickPackRarity(packId);
+        const pool = cardsByRarity[rarity.key] || [];
+        if (!pool.length) {
+          return {
+            id: null,
+            name: 'Carta desconocida',
+            image: '',
+            rarityInternal: rarity.key,
+            rarity,
+            apiRarity: '',
+            setName: '',
+            types: [],
+            holographic: false,
+            priceEur: null,
+            priceUsd: null
+          };
+        }
+        const base = pool[Math.floor(Math.random() * pool.length)];
+        return {
+          ...base,
+          rarity,
+          rarityInternal: rarity.key
+        };
+      }
+
+      const rouletteStrip = document.getElementById('rouletteStrip');
+      const btnSpin = document.getElementById('btnSpin');
+      const btnAuto = document.getElementById('btnAuto');
+      const btnStopAuto = document.getElementById('btnStopAuto');
+      const autoCountSelect = document.getElementById('autoCount');
+      const resultBox = document.getElementById('rouletteResult');
+      const lastDropsList = document.getElementById('lastDrops');
+      const currentProbList = document.getElementById('currentProbList');
+      const baseProbList = document.getElementById('baseProbList');
+      const balanceBox = document.getElementById('balanceCredits');
+      const spinCostEl = document.getElementById('spinCost');
+      const toastContainer = document.getElementById('toastContainer');
+      const wheelCards = document.querySelectorAll('.roulette-choice-card');
+      const btnGoCollection = document.getElementById('btnGoCollection');
+      const globalCreditsEl = document.getElementById('globalCredits');
+      const shopCreditsEl = document.getElementById('shopCredits');
+      const packsGrid = document.getElementById('packsGrid');
+      const openPackModalEl = document.getElementById('openPackModal');
+      const packInfoModalEl = document.getElementById('packInfoModal');
+      const packInfoTitleEl = document.getElementById('packInfoTitle');
+      const packInfoListEl = document.getElementById('packInfoList');
+      const packRevealStage = document.getElementById('packRevealStage');
+      const packSummaryStage = document.getElementById('packSummaryStage');
+      const packRevealSlot = packRevealStage ? packRevealStage.querySelector('.pack-reveal-card-slot') : null;
+      const packRevealCounter = document.getElementById('packRevealCounter');
+      const btnNextReveal = document.getElementById('btnNextReveal');
+      const dailyCardsGrid = document.getElementById('dailyCardsGrid');
+      const dailyCardTemplate = document.getElementById('dailyCardTemplate');
+      const dailyEmptyText = document.getElementById('dailyEmptyText');
+      const btnRefreshDaily = document.getElementById('btnRefreshDaily');
+      const refreshCostLabel = document.getElementById('refreshCostLabel');
+      const rewardModalEl = document.getElementById('rewardModal');
+      const rewardContinueBtn = document.getElementById('rewardContinueBtn');
+
+      let openPackModal = openPackModalEl ? new bootstrap.Modal(openPackModalEl) : null;
+      let packInfoModal = packInfoModalEl ? new bootstrap.Modal(packInfoModalEl) : null;
+
+      let balance = 0;
+      let currentWheelKey = 'common';
+      let spinCost = wheelsConfig[currentWheelKey].cost;
+      let isSpinning = false;
+      let autoSpinsRemaining = 0;
+      let autoSpinTimer = null;
+      let lastDrops = [];
+      let statsCounts = {
+        common: 0,
+        uncommon: 0,
+        rare: 0,
+        superrare: 0,
+        elite: 0,
+        epic: 0,
+        mythic: 0,
+        legendary: 0
+      };
+      let refreshDailyCost = 1000;
+      let autoSpinQueueActive = false; // controla si estamos en modo autogiros
+      let rewardModalInstance = rewardModalEl ? new bootstrap.Modal(rewardModalEl) : null;
+
+      function updateRefreshCostUI() {
+        if (refreshCostLabel) refreshCostLabel.textContent = refreshDailyCost.toString();
+      }
+
+      function syncCreditsUI() {
+        if (balanceBox) {
+          const span = balanceBox.querySelector('span:last-child');
+          if (span) span.textContent = balance;
+        }
+        if (globalCreditsEl) {
+          globalCreditsEl.innerHTML = `
+        <i class="bi bi-coin text-warning"></i>
+        <span class="fw-bold">${balance}</span>
+      `;
+        }
+        if (shopCreditsEl) {
+          shopCreditsEl.innerHTML = `
+        <i class="bi bi-coin text-warning small"></i>
+        <span>${balance}</span>
+      `;
+        }
+      }
+
+      function updateSpinCostUI() {
+        spinCost = wheelsConfig[currentWheelKey].cost;
+        if (spinCostEl) {
+          spinCostEl.innerHTML = `
+        <i class="bi bi-coin text-warning small"></i>
+        <span>${spinCost}</span>
+      `;
+        }
+      }
+
+      function isNewToCollection(cardId) {
+        try {
+          const raw = localStorage.getItem('pm_collection');
+          if (!raw) return true;
+          const current = JSON.parse(raw);
+          return !current.some(c => c.id === cardId);
+        } catch (e) { return true; }
+      }
+
+      function addCardToCollection(card) {
+        try {
+          const key = 'pm_collection';
+          const raw = localStorage.getItem(key);
+          const current = raw ? JSON.parse(raw) : [];
+          current.push({
+            id: card.id,
+            localId: card.localId || (card.id ? card.id.split('-')[1] : '1'),
+            setId: card.setId || (card.id ? card.id.split('-')[0] : 'base1'),
+            name: card.name || 'Carta desconocida',
+            rarityInternal: card.rarityInternal || 'common',
+            rarityLabel: card.rarityLabel || (card.rarity ? card.rarity.label : 'Base Set'),
+            apiRarity: card.apiRarity || '',
+            image: card.image || '',
+            setName: card.setName || 'Base Set',
+            types: card.types || [],
+            holographic: !!card.holographic,
+            priceEur: card.priceEur ?? null,
+            priceUsd: card.priceUsd ?? null,
+            obtainedAt: new Date().toISOString()
+          });
+          localStorage.setItem(key, JSON.stringify(current));
+        } catch (e) {
+          console.error('Error guardando colección:', e);
+        }
+      }
+
+      function showToast(card) {
+        if (!toastContainer) return;
+        const rarityKey = card.rarityInternal || 'common';
+        const rarityDef = card.rarity || rarityDefs.find(r => r.key === rarityKey) || rarityDefs[0];
+
+        const toast = document.createElement('div');
+        toast.className = 'roulette-toast';
+
+        toast.innerHTML = `
+      <div class="roulette-toast-inner rarity-${rarityKey}">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span class="roulette-toast-title">
+            ${isNewToCollection(card.id) ? '<span class="badge bg-danger me-1">¡NUEVA!</span>' : ''}
+            Drop ${rarityDef.label}
+          </span>
+          <span class="xsmall">${new Date().toLocaleTimeString()}</span>
+        </div>
+        <div class="roulette-toast-body">
+          ${card.name || 'Carta obtenida'}
+        </div>
+      </div>
+    `;
+
+        toastContainer.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.add('show');
+        });
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 250);
+        }, 2500);
+      }
+
+      function raritySymbol(key) {
+        return '🔴'; // Una simple Pokéball para todo el Base Set
+      }
+
+      function updateBaseProbabilitiesUI() {
+        if (!baseProbList) return;
+        const cfg = wheelsConfig[currentWheelKey];
+        baseProbList.innerHTML = '';
+        const entries = Object.entries(cfg.probs);
+
+        entries.forEach(([key, p]) => {
+          const rd = rarityDefs.find(r => r.key === key);
+          if (!rd) return;
+          const pct = (p * 100).toFixed(1);
+          const li = document.createElement('li');
+          li.className = 'stats-bar-row mb-1';
+          li.innerHTML = `
+        <span class="stats-bar-label">${rd.label}</span>
+        <div class="stats-bar-track">
+          <div class="stats-bar-fill rarity-${rd.key}" style="width:${pct}%"></div>
+        </div>
+        <span class="stats-bar-value">${pct}%</span>
+      `;
+          baseProbList.appendChild(li);
+        });
+      }
+
+      function updateCurrentProbabilities() {
+        if (!currentProbList) return;
+        const total = Object.values(statsCounts).reduce((a, b) => a + b, 0);
+        currentProbList.innerHTML = '';
+
+        rarityDefs.forEach(rd => {
+          const count = statsCounts[rd.key] || 0;
+          const pct = total > 0 ? ((count / total) * 100).toFixed(1) : '0.0';
+          const li = document.createElement('li');
+          li.className = 'stats-bar-row mb-1';
+          li.innerHTML = `
+        <span class="stats-bar-label">${rd.label}</span>
+        <div class="stats-bar-track">
+          <div class="stats-bar-fill rarity-${rd.key}" style="width:${pct}%"></div>
+        </div>
+        <span class="stats-bar-value">${pct}%</span>
+      `;
+          currentProbList.appendChild(li);
+        });
+      }
+
+      function fillStrip() {
+        if (!rouletteStrip) return;
+        rouletteStrip.innerHTML = '';
+        const cfg = wheelsConfig[currentWheelKey];
+        if (!cfg) return;
+
+        const items = [];
+        const rarityEntries = Object.entries(cfg.probs);
+        for (let i = 0; i < 50; i++) {
+          let r = Math.random();
+          let acc = 0;
+          let chosenKey = 'common';
+          for (const [key, prob] of rarityEntries) {
+            acc += prob;
+            if (r <= acc) {
+              chosenKey = key;
+              break;
+            }
+          }
+          const card = getRandomCardFromRarity(chosenKey);
+          if (!card) continue;
+          items.push(card);
+        }
+
+        items.forEach(card => {
+          const rd = rarityDefs.find(r => r.key === card.rarityInternal) || rarityDefs[0];
+          const div = document.createElement('div');
+          div.className = `roulette-item rarity-${card.rarityInternal}`;
+          div.setAttribute('data-card-id', card.id || '');
+          div.setAttribute('data-set-id', card.setId || '');
+          div.setAttribute('data-local-id', card.localId || '');
+          div.setAttribute('data-set-name', card.setName || '');
+          div.innerHTML = `
+        <div class="roulette-item-inner">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="roulette-item-rarity">${rd.label}</span>
+            <img src="${card.image || 'img/avatars/pokeball.png'}"
+                 alt="${card.name}"
+                 class="roulette-item-image">
+          </div>
+          <div class="roulette-item-name text-truncate">${card.name}</div>
+        </div>
+      `;
+          rouletteStrip.appendChild(div);
+        });
+      }
+
+      function pickResultFromStrip() {
+        const items = rouletteStrip ? rouletteStrip.querySelectorAll('.roulette-item') : [];
+        if (!items.length) return null;
+
+        const centerIndex = Math.floor(items.length / 2);
+        const chosen = items[centerIndex];
+        if (!chosen) return null;
+
+        const img = chosen.querySelector('img');
+        const nameEl = chosen.querySelector('.roulette-item-name');
+        const rarityClass = Array.from(chosen.classList).find(c => c.startsWith('rarity-')) || 'rarity-common';
+        const rarityKey = rarityClass.replace('rarity-', '');
+        const rd = rarityDefs.find(r => r.key === rarityKey) || rarityDefs[0];
+
+        const card = {
+          id: chosen.getAttribute('data-card-id'),
+          setId: chosen.getAttribute('data-set-id'),
+          localId: chosen.getAttribute('data-local-id'),
+          setName: chosen.getAttribute('data-set-name') || 'Base Set',
+          name: nameEl ? nameEl.textContent : 'Carta',
+          image: img ? img.src : 'img/avatars/pokeball.png',
+          rarityInternal: rarityKey,
+          rarity: rd,
+          apiRarity: '',
+        };
+
+        return { card, elementIndex: centerIndex, itemWidth: chosen.offsetWidth };
+      }
+
+      function animateSpin() {
+        if (!rouletteStrip) return;
+        isSpinning = true;
+        btnSpin.disabled = true;
+        btnAuto.disabled = true;
+
+        const totalItems = rouletteStrip.children.length;
+        if (!totalItems) {
+          isSpinning = false;
+          btnSpin.disabled = false;
+          btnAuto.disabled = false;
+          return;
+        }
+
+        const itemWidth = rouletteStrip.children[0].offsetWidth + 4;
+        const totalWidth = totalItems * itemWidth;
+
+        const visibleWidth = rouletteStrip.parentElement.offsetWidth;
+        const centerOffset = (visibleWidth / 2) - (itemWidth / 2);
+
+        const targetIndex = Math.floor(totalItems / 2);
+        const targetX = - (targetIndex * itemWidth) + centerOffset;
+
+        const startX = targetX + totalWidth * 1.5;
+
+        let start = null;
+        const duration = 2600;
+
+        function step(timestamp) {
+          if (!start) start = timestamp;
+          const elapsed = timestamp - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 5); // Quintic ease-out más fluido
+          const current = startX + (targetX - startX) * eased;
+          rouletteStrip.style.transform = `translateX(${current}px)`;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            rouletteStrip.style.setProperty('--roulette-offset', `${current}px`);
+            rouletteStrip.classList.add('roulette-strip-bounce');
+            setTimeout(() => {
+              rouletteStrip.classList.remove('roulette-strip-bounce');
+              onSpinEnd();
+            }, 220);
+          }
+        }
+
+        window.requestAnimationFrame(step);
+      }
+
+      function onSpinEnd() {
+        isSpinning = false;
+        const result = pickResultFromStrip();
+        if (!result) {
+          if (resultBox) {
+            resultBox.innerHTML = `
+          <span class="small text-danger">
+            <i class="bi bi-exclamation-triangle me-1"></i>No se pudo determinar la carta.
+          </span>
+        `;
+          }
+        } else {
+          const card = result.card;
+          const rd = card.rarity;
+
+          statsCounts[card.rarityInternal] = (statsCounts[card.rarityInternal] || 0) + 1;
+          updateCurrentProbabilities();
+
+          lastDrops.unshift(card);
+          if (lastDrops.length > 6) lastDrops.pop();
+          if (lastDropsList) {
+            lastDropsList.innerHTML = '';
+            lastDrops.forEach(c => {
+              const li = document.createElement('li');
+              li.className = 'd-flex align-items-center justify-content-between mb-1';
+              li.innerHTML = `
+            <div class="d-flex align-items-center gap-1 text-truncate me-2">
+              <span>${raritySymbol(c.rarityInternal)}</span>
+              <span class="text-truncate">${c.name}</span>
+            </div>
+            <span class="badge xsmall rarity-${c.rarityInternal}">${c.rarity.label}</span>
+          `;
+              lastDropsList.appendChild(li);
+            });
+          }
+
+          addCardToCollection(card);
+
+          if (resultBox) {
+            resultBox.innerHTML = `
+          <div class="d-flex flex-column align-items-center">
+            <span class="small mb-1">Última carta:</span>
+            <span class="fw-semibold">${card.name}</span>
+            <span class="badge mt-1 xsmall rarity-${card.rarityInternal}">${rd.label}</span>
+          </div>
+        `;
+          }
+
+          showToast(card);
+
+          if (rewardModalEl && rewardModalInstance) {
+            const rewardTitle = document.getElementById('rewardTitle');
+            const rewardImg = document.getElementById('rewardImage');
+            const rewardBadge = document.getElementById('rewardRarityBadge');
+            const rewardSet = document.getElementById('rewardSetName');
+
+            if (rewardTitle) {
+              const symbol = isNewToCollection(card.id) ? ' <span class="badge bg-danger">NEW</span>' : '';
+              rewardTitle.innerHTML = `¡${rd.label}! ${card.name}${symbol}`;
+            }
+            if (rewardImg) rewardImg.src = card.image || 'img/avatars/pokeball.png';
+            if (rewardBadge) {
+              rewardBadge.textContent = rd.label;
+              rewardBadge.className = 'badge rarity-' + card.rarityInternal;
+            }
+            if (rewardSet) rewardSet.textContent = card.setName || '';
+
+            rewardModalInstance.show();
+          }
+        }
+
+        // NO continuamos aquí los autogiros, solo marcamos que hay pendientes
+        if (autoSpinsRemaining > 0) {
+          autoSpinQueueActive = true;
+        } else {
+          autoSpinQueueActive = false;
+          btnAuto.classList.remove('d-none');
+          btnStopAuto.classList.add('d-none');
+          btnSpin.disabled = balance < spinCost;
+          btnAuto.disabled = balance < spinCost;
+        }
+      }
+
+      function startSpin() {
+        if (isSpinning) return;
+        if (balance < spinCost) {
+          showToast({
+            name: 'No tienes monedas suficientes',
+            rarity: { id: 1, label: 'Común', key: 'common' },
+            rarityInternal: 'common'
+          });
+          autoSpinsRemaining = 0;
+          autoSpinQueueActive = false;
+          if (btnStopAuto) btnStopAuto.classList.add('d-none');
+          if (btnAuto) btnAuto.classList.remove('d-none');
+          return;
+        }
+        balance -= spinCost;
+        syncCreditsUI();
+        persistCredits();
+        fillStrip();
+        animateSpin();
+      }
+
+      if (btnSpin) {
+        btnSpin.addEventListener('click', () => {
+          autoSpinsRemaining = 0;
+          autoSpinQueueActive = false;
+          startSpin();
+        });
+      }
+
+      if (btnAuto && btnStopAuto) {
+        btnAuto.addEventListener('click', () => {
+          if (isSpinning) return;
+          const count = parseInt(autoCountSelect.value, 10) || 10;
+          autoSpinsRemaining = count;
+          autoSpinQueueActive = true;
+          btnAuto.classList.add('d-none');
+          btnStopAuto.classList.remove('d-none');
+          startSpin();
+        });
+
+        btnStopAuto.addEventListener('click', () => {
+          autoSpinsRemaining = 0;
+          autoSpinQueueActive = false;
+          if (autoSpinTimer) {
+            clearTimeout(autoSpinTimer);
+            autoSpinTimer = null;
+          }
+          btnAuto.classList.remove('d-none');
+          btnStopAuto.classList.add('d-none');
+          btnSpin.disabled = balance < spinCost;
+          btnAuto.disabled = balance < spinCost;
+        });
+      }
+
+      // Cuando cierras el modal de recompensa o pulsas "Seguir girando",
+      // si quedan autogiros pendientes, lanza el siguiente.
+      if (rewardContinueBtn && rewardModalEl && rewardModalInstance) {
+        rewardContinueBtn.addEventListener('click', () => {
+          rewardModalInstance.hide();
+          if (autoSpinsRemaining > 0 && autoSpinQueueActive) {
+            autoSpinsRemaining--;
+            if (balance >= spinCost) {
+              setTimeout(() => startSpin(), 250);
+            } else {
+              autoSpinsRemaining = 0;
+              autoSpinQueueActive = false;
+              btnAuto.classList.remove('d-none');
+              btnStopAuto.classList.add('d-none');
+            }
+          } else {
+            autoSpinQueueActive = false;
+            btnAuto.classList.remove('d-none');
+            btnStopAuto.classList.add('d-none');
+            btnSpin.disabled = balance < spinCost;
+            btnAuto.disabled = balance < spinCost;
+          }
+        });
+      }
+
+      if (wheelCards.length) {
+        wheelCards.forEach(cardEl => {
+          cardEl.addEventListener('click', () => {
+            if (cardEl.classList.contains('active') || isSpinning) return;
+            wheelCards.forEach(c => c.classList.remove('active'));
+            cardEl.classList.add('active');
+
+            currentWheelKey = cardEl.getAttribute('data-wheel') || 'common';
+            updateSpinCostUI();
+            updateBaseProbabilitiesUI();
+            fillStrip();
+          });
+        });
+      }
+
+      if (btnGoCollection) {
+        btnGoCollection.addEventListener('click', () => {
+          window.location.href = 'Pages/Colección.html';
+        });
+      }
+
+      const storedCredits = localStorage.getItem('pm_credits');
+      if (storedCredits) {
+        const parsed = parseInt(storedCredits, 10);
+        if (!isNaN(parsed)) {
+          balance = parsed;
+        }
+      }
+
+      function persistCredits() {
+        localStorage.setItem('pm_credits', String(balance));
+      }
+
+      const creditButtons = document.querySelectorAll('.credit-buy-btn');
+      creditButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const amount = parseInt(btn.getAttribute('data-amount'), 10) || 0;
+          balance += amount;
+          syncCreditsUI();
+          persistCredits();
+          btnSpin.disabled = balance < spinCost;
+          btnAuto.disabled = balance < spinCost;
+        });
+      });
+
+      function showPackInfo(packId) {
+        const cfg = packRarityProbs[packId];
+        if (!cfg || !packInfoModal) return;
+
+        if (packInfoTitleEl) {
+          packInfoTitleEl.textContent = `Probabilidades – ${cfg.name}`;
+        }
+        if (packInfoListEl) {
+          packInfoListEl.innerHTML = '';
+          const entries = Object.entries(cfg.probs);
+          entries.forEach(([key, p]) => {
+            const rd = rarityDefs.find(r => r.key === key);
+            const li = document.createElement('li');
+            li.className = 'd-flex justify-content-between align-items-center mb-1';
+            li.innerHTML = `
+          <span>${rd ? rd.label : key}</span>
+          <span class="fw-semibold">${(p * 100).toFixed(1)}%</span>
+        `;
+            packInfoListEl.appendChild(li);
+          });
+        }
+        packInfoModal.show();
+      }
+
+      if (packsGrid) {
+        const infoBtns = packsGrid.querySelectorAll('.pack-info-btn');
+        infoBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const packId = btn.getAttribute('data-pack-id');
+            showPackInfo(packId);
+          });
+        });
+      }
+
+      function showPackAnimation(cards, cfg) {
+        if (!openPackModalEl || !packRevealStage || !packSummaryStage || !packRevealSlot) return;
+        if (!openPackModal) openPackModal = new bootstrap.Modal(openPackModalEl);
+
+        let index = 0;
+        const total = cards.length;
+
+        packSummaryStage.classList.add('d-none');
+        packRevealStage.classList.remove('d-none');
+
+        function renderCard(i) {
+          const c = cards[i];
+          const rd = c.rarity;
+          packRevealSlot.innerHTML = `
+        <div class="pack-reveal-card-inner rarity-${rd.key}">
+          ${c.isNew ? '<div class="badge-new-indicator">NEW</div>' : ''}
+          <img src="${c.image || 'img/avatars/pokeball.png'}"
+               alt="${c.name}"
+               style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      `;
+          if (packRevealCounter) {
+            packRevealCounter.textContent = `Carta ${i + 1} de ${total}`;
+          }
+        }
+
+        renderCard(index);
+
+        if (btnNextReveal) {
+          btnNextReveal.onclick = () => {
+            index++;
+            if (index >= total) {
+              packRevealStage.classList.add('d-none');
+              packSummaryStage.classList.remove('d-none');
+              const grid = document.getElementById('packCardsGrid');
+              if (grid) {
+                grid.innerHTML = '';
+                cards.forEach(c => {
+                  const rd = c.rarity;
+                  const col = document.createElement('div');
+                  col.className = 'col-6 col-md-4 col-lg-3 mb-2';
+                  col.innerHTML = `
+                <article class="card card-carta h-100">
+                  <div class="card-carta-frame">
+                    ${c.isNew ? '<div class="badge-new-indicator">NEW</div>' : ''}
+                    <div class="carta-img-placeholder d-flex align-items-center justify-content-center">
+                      <img src="${c.image || 'img/avatars/pokeball.png'}"
+                           class="carta-img-real"
+                           alt="${c.name}">
+                    </div>
+                  </div>
+                  <div class="card-body p-2">
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                      <h5 class="small fw-semibold mb-0 text-truncate">${c.name}</h5>
+                      <span class="badge xsmall rarity-${rd.key}">${rd.label}</span>
+                    </div>
+                    <p class="xsmall text-muted mb-0 text-truncate">${c.setName || ''}</p>
+                  </div>
+                </article>
+              `;
+                  grid.appendChild(col);
+                });
+              }
+              return;
+            }
+            renderCard(index);
+          };
+        }
+
+        const titleEl = openPackModalEl.querySelector('#openPackTitle');
+        if (titleEl) titleEl.textContent = `${cfg.name} – Apertura dopamina`;
+        openPackModal.show();
+      }
+
+      function openPack(packId) {
+        const cfg = packRarityProbs[packId];
+        if (!cfg) return;
+
+        if (balance < cfg.price) {
+          showToast({
+            name: `Necesitas ${cfg.price} monedas para este sobre`,
+            rarity: rarityDefs[0],
+            rarityInternal: 'common'
+          });
+          return;
+        }
+
+        const pool = (cardsByRarity['common'] || []);
+        if (!pool.length) {
+          showToast({
+            name: 'Cargando cartas... Reintenta en unos segundos',
+            rarity: rarityDefs[0],
+            rarityInternal: 'common'
+          });
+          return;
+        }
+
+        balance -= cfg.price;
+        syncCreditsUI();
+        persistCredits();
+
+        const cards = [];
+        const numCards = cfg.cardCount || 3;
+
+        for (let i = 0; i < numCards; i++) {
+          const base = pool[Math.floor(Math.random() * pool.length)];
+          const isNew = isNewToCollection(base.id);
+          const cardWithSymbols = {
+            ...base,
+            isNew: isNew,
+            rarityInternal: base.rarityInternal || 'common',
+            rarity: rarityDefs.find(r => r.key === (base.rarityInternal || 'common')) || rarityDefs[0]
+          };
+          cards.push(cardWithSymbols);
+          addCardToCollection(cardWithSymbols);
+        }
+
+        showPackAnimation(cards, cfg);
+      }
+
+      if (packsGrid) {
+        const openButtons = packsGrid.querySelectorAll('.pack-open-btn');
+        openButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const packId = btn.getAttribute('data-pack-id');
+            openPack(packId);
+          });
+        });
+      }
+
+      function generateDailyCards(forceRandom = false) {
+        if (!dailyCardsGrid || !dailyCardTemplate) return;
+
+        dailyCardsGrid.innerHTML = '';
+        const seedBase = getDailySeed();
+
+        const pool = Object.values(cardsByRarity).flat();
+        console.log('Daily shop pool size:', pool.length);
+
+        if (!pool.length) {
+          if (dailyEmptyText) {
+            dailyEmptyText.textContent = 'Mercado sincronizando... (Vuelve a entrar o pulsa Recargar)';
+            dailyCardsGrid.appendChild(dailyEmptyText);
+          }
+          return;
+        }
+
+        const numDaily = 8;
+        const usedIndexes = new Set();
+
+        for (let i = 0; i < numDaily; i++) {
+          let idx;
+          if (forceRandom) {
+            let tries = 0;
+            do {
+              idx = Math.floor(Math.random() * pool.length);
+              tries++;
+            } while (usedIndexes.has(idx) && tries < 20);
+          } else {
+            const seed = `${seedBase}-${i}`;
+            idx = seededRandom(seed, pool.length);
+          }
+
+          usedIndexes.add(idx);
+          const card = pool[idx];
+
+          const clone = dailyCardTemplate.cloneNode(true);
+          clone.id = '';
+          clone.classList.remove('d-none');
+
+          const nameEl = clone.querySelector('.daily-name');
+          const rarityEl = clone.querySelector('.daily-rarity');
+          const setEl = clone.querySelector('.daily-set');
+          const priceEl = clone.querySelector('.daily-price');
+          const stockEl = clone.querySelector('.daily-stock');
+          const buyBtn = clone.querySelector('.daily-buy-btn');
+          const imgWrap = clone.querySelector('.carta-img-placeholder');
+
+          if (nameEl) nameEl.textContent = card.name || 'Carta sin nombre';
+          if (setEl) setEl.textContent = card.setName || 'Set desconocido';
+
+          // Usar la rareza interna precalculada o recalcular
+          const internal = card.rarityInternal || 'rare';
+          const rd = rarityDefs.find(r => r.key === internal) || rarityDefs[2];
+
+          const basePrice = rarityPriceMap[internal] || 50;
+          if (priceEl) priceEl.textContent = basePrice.toString();
+
+          if (rarityEl) {
+            rarityEl.textContent = rd.label;
+            rarityEl.className = 'badge xsmall rarity-' + rd.key;
+          }
+
+          if (stockEl) stockEl.textContent = 'Stock: ∞';
+
+          if (imgWrap) {
+            const cardImgUrl = card.image || 'img/avatars/pokeball.png';
+            const isNew = isNewToCollection(card.id);
+            imgWrap.innerHTML = `
+              ${isNew ? '<div class="badge-new-indicator">NEW</div>' : ''}
+              <img src="${cardImgUrl}" class="daily-img carta-img-real" alt="${card.name}">
+            `;
+          }
+
+          if (buyBtn) {
+            buyBtn.addEventListener('click', () => {
+              const price = parseInt(priceEl.textContent, 10) || 0;
+              if (balance < price) {
+                showToast({
+                  name: 'No tienes monedas suficientes',
+                  rarity: { id: 1, label: 'Común', key: 'common' },
+                  rarityInternal: 'common'
+                });
+                return;
+              }
+              balance -= price;
+              syncCreditsUI();
+              persistCredits();
+
+              addCardToCollection({
+                id: card.id,
+                setId: card.setId,
+                localId: card.localId,
+                name: card.name,
+                rarityInternal: internal,
+                rarity: rd,
+                image: card.image,
+                apiRarity: card.apiRarity,
+                setName: card.setName,
+                types: card.types || [],
+                holographic: card.holographic || false,
+                priceEur: card.priceEur ?? null,
+                priceUsd: card.priceUsd ?? null
+              });
+              showToast({
+                name: `Comprada: ${card.name}`,
+                rarity: rd,
+                rarityInternal: internal
+              });
+
+              // Quitar el circulito de NEW ya que ha sido comprada
+              const badge = clone.querySelector('.badge-new-indicator');
+              if (badge) badge.remove();
+            });
+          }
+
+          dailyCardsGrid.appendChild(clone);
+        }
+
+        if (dailyEmptyText) {
+          dailyEmptyText.textContent = '';
+        }
+      }
+
+      if (btnRefreshDaily) {
+        btnRefreshDaily.addEventListener('click', () => {
+          if (balance < refreshDailyCost) {
+            showToast({
+              name: 'No tienes monedas para recargar la tienda',
+              rarity: { id: 1, label: 'Común', key: 'common' },
+              rarityInternal: 'common'
+            });
+            return;
+          }
+          balance -= refreshDailyCost;
+          syncCreditsUI();
+          persistCredits();
+          refreshDailyCost += 50;
+          updateRefreshCostUI();
+          generateDailyCards(true);
+        });
+      }
+
+      // Carga inicial optimizada
+      loadAllCardsFromApi().then(() => {
+        fillStrip();
+        generateDailyCards();
+      });
+
+      updateSpinCostUI();
+      updateBaseProbabilitiesUI();
+      updateCurrentProbabilities();
+      updateRefreshCostUI();
+      syncCreditsUI();
+
+      // Lógica Tienda de Monedas (Nueva + Admin)
+      const coinCards = document.querySelectorAll('.coin-pack-card');
+      const adminInput = document.getElementById('adminCodeInput');
+      const btnRedeem = document.getElementById('btnRedeemCode');
+
+      coinCards.forEach(card => {
+        card.addEventListener('click', () => {
+          if (card.classList.contains('processing')) return; // Prevent double click
+
+          const amount = parseInt(card.getAttribute('data-amount')) || 0;
+          const cost = card.getAttribute('data-cost');
+
+          // Simulation visual feedback (2 seconds)
+          const originalText = card.querySelector('.coin-pack-price').textContent;
+          const priceEl = card.querySelector('.coin-pack-price');
+
+          card.classList.add('processing');
+          priceEl.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Procesando...';
+
+          setTimeout(() => {
+            card.classList.remove('processing');
+            priceEl.textContent = originalText;
+
+            balance += amount;
+            syncCreditsUI();
+
+            // Safe persist
+            if (typeof persistCredits === 'function') persistCredits();
+            localStorage.setItem('pm_credits', balance);
+
+            // Close modal by ID
+            const modalEl = document.getElementById('creditShopModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+
+            showToast({
+              name: `¡Pago completado! Has recibido ${amount.toLocaleString()} monedas.`,
+              rarity: { id: 7, label: 'Pago Exitoso', key: 'mythic' },
+              rarityInternal: 'mythic'
+            });
+          }, 2000); // 2.0s delay simulation
+        });
+      });
+
+      if (btnRedeem) {
+        btnRedeem.addEventListener('click', () => {
+          const code = adminInput.value.trim();
+          if (code === '1234') {
+            const bonus = 100000;
+            balance += bonus;
+            syncCreditsUI();
+            if (typeof persistCredits === 'function') persistCredits();
+            localStorage.setItem('pm_credits', balance);
+
+            showToast({
+              name: `Código ADMIN canjeado: +${bonus.toLocaleString()}`,
+              rarity: { id: 8, label: 'ADMIN', key: 'legendary' },
+              rarityInternal: 'legendary'
+            });
+            adminInput.value = '';
+          } else {
+            showToast({
+              name: 'Código inválido (Prueba 1234)',
+              rarity: { id: 1, label: 'Error', key: 'common' },
+              rarityInternal: 'common'
+            });
+          }
+        });
+      }
+
+      window.addEventListener('beforeunload', () => {
+        persistCredits();
+      });
+    });
+  </script>
+
+  <!-- Modal PEGI 18 / Juego Responsable -->
+  <div class="modal fade shadow-lg" id="pegiModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header bg-danger text-white border-0 py-3">
+          <h5 class="modal-title d-flex align-items-center gap-2 fw-bold">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            ¡ADVERTENCIA DE SEGURIDAD!
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body p-4 text-center bg-white">
+          <img src="img/pegi18.svg" alt="PEGI 18" style="width: 100px;" class="mb-4">
+          <h4 class="fw-bold mb-3 text-black">Clasificación PEGI 18</h4>
+
+          <div class="alert alert-warning border-0 px-3 py-3 text-start mb-4 shadow-sm"
+            style="background-color: #fff3cd; color: #856404; font-size: 0.95rem;">
+            <p class="mb-2"><strong><i class="bi bi-info-circle-fill me-1"></i> Contenido:</strong> Gasto de moneda
+              virtual para obtención de recompensas aleatorias (Simulación de apuestas).</p>
+            <p class="mb-0"><strong><i class="bi bi-person-fill-lock me-1"></i> Restricción:</strong> Funciones
+              restringidas estrictamente a personas <strong>mayores de 18 años</strong>.</p>
+          </div>
+
+          <div class="text-start mb-4">
+            <h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Sobre el Juego Responsable:</h6>
+            <p class="text-black mb-3" style="font-size: 1rem; line-height: 1.5;">La mecánica de ruletas y sobres puede
+              generar comportamientos adictivos. La <strong>ludopatía</strong> es un problema de salud serio que afecta
+              a la vida personal y financiera.</p>
+            <ul class="ps-3 mb-4 text-black" style="font-size: 0.95rem; line-height: 1.6;">
+              <li class="mb-2">No utilices esta aplicación para evadir problemas o estados de ánimo negativos.</li>
+              <li class="mb-2">Establece límites de tiempo y gasto, y nunca intentes "recuperar" lo perdido.</li>
+              <li>Los objetos obtenidos son virtuales y <strong>no tienen valor monetario real</strong>.</li>
+            </ul>
+
+            <div class="p-3 rounded-3 border border-danger-subtle bg-light text-center">
+              <p class="mb-2 text-dark font-monospace small">¿NECESITAS AYUDA PROFESIONAL?</p>
+              <div class="d-flex flex-column gap-2">
+                <a href="https://www.jugarbien.es" target="_blank" class="btn btn-sm btn-danger fw-bold shadow-sm">
+                  <i class="bi bi-box-arrow-up-right me-1"></i> VISITAR JUGARBIEN.ES
+                </a>
+                <a href="https://fejar.org" target="_blank" class="btn btn-sm btn-outline-danger shadow-sm">
+                  <i class="bi bi-telephone-fill me-1"></i> CONTACTAR CON FEJAR
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow mt-2" data-bs-dismiss="modal"
+            style="font-size: 1.1rem; letter-spacing: 0.5px;">
+            HE LEÍDO Y ENTIENDO LOS RIESGOS
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
