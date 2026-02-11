@@ -15,6 +15,7 @@
   <!-- CSS global compartido -->
   <link rel="stylesheet" href="CSS/style.css">
   <script src="js/api-service.js"></script>
+  <script src="js/custom_db.js"></script>
 </head>
 
 <body class="bg-pokeballs">
@@ -26,7 +27,7 @@
       <!-- Lado izquierdo: logo + nombre + botón colección -->
       <div class="d-flex align-items-center gap-3">
         <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="index.html">
-          <img src="img/Masterball.png" alt="Masterball" style="width: 32px; height: 32px;">
+          <img src="img/Masterball.png" alt="Masterball" style="width: 40px; height: 40px;">
           <span class="brand-text">PokeMarket</span>
         </a>
         <a href="Pages/Colección.html" class="btn btn-sm btn-outline-light d-inline-flex align-items-center gap-1">
@@ -34,7 +35,7 @@
           <span class="d-none d-md-inline">Colección</span>
         </a>
       </div>
- 
+
       <!-- Lado derecho: créditos + perfil -->
       <div class="d-flex align-items-center gap-2 flex-nowrap">
 
@@ -91,26 +92,30 @@
 
       <!-- SECCIÓN RULETA PRINCIPAL -->
       <section class="mb-4">
-        <header class="text-center mb-3 roulette-header position-relative">
+        <header class="text-center mb-5 roulette-header position-relative hero-enhanced">
           <div class="pegi-indicator shadow-sm" data-bs-toggle="modal" data-bs-target="#pegiModal"
             title="Información de clasificación y juego responsable">
             <img src="img/pegi18.svg" alt="PEGI 18">
           </div>
-          <p class="text-uppercase xsmall text-muted mb-1">Casino de cartas</p>
-          <h1 class="h3 fw-bold mb-1">Ruletas Insanas de PokeMarket</h1>
-          <p class="small text-muted mb-0">
+          <p class="text-uppercase small text-muted mb-2 tracking-wide">Casino de cartas</p>
+          <h1 class="display-4 fw-black mb-3 text-shadow-hero">Ruletas Insanas de PokeMarket</h1>
+          <p class="lead text-muted mb-0">
             Gira la ruleta, sube de rareza y convierte tus
-            <span class="text-warning fw-semibold"><i class="bi bi-coin text-warning"></i> monedas</span>
+            <span class="fw-semibold text-body-emphasis"><i class="bi bi-coin text-warning"></i> monedas</span>
             en cartas absurdamente buenas.
           </p>
         </header>
 
-        <!-- Botón comprar créditos -->
-        <div class="d-flex justify-content-center mb-3">
-          <button type="button" class="btn btn-buy-credits" data-bs-toggle="modal" data-bs-target="#creditShopModal">
+        <!-- Botones Hero CTAs -->
+        <div class="d-flex justify-content-center align-items-center gap-3 mb-5">
+          <button type="button" class="btn btn-buy-credits btn-lg px-4" data-bs-toggle="modal"
+            data-bs-target="#creditShopModal">
             <span class="btn-buy-credits-glow"></span>
             <i class="bi bi-plus-circle-fill me-2"></i>Comprar monedas
           </button>
+          <a href="Pages/Colección.html" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">
+            <i class="bi bi-collection me-2"></i>Colección
+          </a>
         </div>
 
         <!-- Selector de ruletas (Solo Base Set) -->
@@ -310,7 +315,7 @@
         <div class="card-body">
           <div class="row g-3" id="dailyCardsGrid">
             <!-- Plantilla -->
-            <div class="col-6 col-md-4 col-lg-3 d-none" id="dailyCardTemplate">
+            <div class="col-12 col-md-6 col-lg-3 d-none" id="dailyCardTemplate">
               <article class="card card-carta h-100 tienda-card-dia">
                 <div class="card-carta-frame">
                   <div class="carta-img-placeholder d-flex align-items-center justify-content-center">
@@ -322,7 +327,7 @@
                     <h5 class="small fw-semibold mb-0 text-truncate daily-name">Nombre carta</h5>
                     <span class="badge xsmall daily-rarity">Rara</span>
                   </div>
-                  <p class="xsmall text-muted mb-1 text-truncate daily-set">Set</p>
+                  <p class="xsmall text-muted mb-1 text-truncate daily-set d-none">Set</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center gap-1">
                       <i class="bi bi-coin text-warning small"></i>
@@ -652,15 +657,52 @@
         });
       }
 
+      // Sistema de Notificaciones (Toasts)
+      window.showToast = function (data) {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+
+        const rarityClass = data.rarityInternal ? `rarity-${data.rarityInternal}` : 'rarity-common';
+        // Icono según rareza o tipo
+        let iconHtml = '<i class="bi bi-info-lg"></i>';
+        if (data.rarityInternal === 'mythic' || data.rarityInternal === 'legendary') {
+          iconHtml = '<i class="bi bi-star-fill text-warning"></i>';
+        } else if (data.rarityInternal === 'epic') {
+          iconHtml = '<i class="bi bi-lightning-fill text-warning"></i>';
+        } else if (data.name && data.name.includes('Error')) {
+          iconHtml = '<i class="bi bi-x-lg"></i>';
+        } else if (data.name && data.name.includes('Comprada')) {
+          iconHtml = '<i class="bi bi-bag-check-fill"></i>';
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${rarityClass}`;
+        toast.innerHTML = `
+          <div class="toast-icon">${iconHtml}</div>
+          <div class="toast-body">
+            <div class="toast-title">${data.name || 'Notificación'}</div>
+            ${data.rarity ? `<div class="toast-desc">${data.rarity.label}</div>` : ''}
+          </div>
+        `;
+
+        container.appendChild(toast);
+
+        // Auto remove
+        setTimeout(() => {
+          toast.style.animation = 'toast-out 0.4s forwards';
+          toast.addEventListener('animationend', () => {
+            toast.remove();
+          });
+        }, 3500);
+      };
+
       const rarityDefs = [
-        { id: 1, key: 'common', label: 'Base Set' },
-        { id: 2, key: 'uncommon', label: 'Base Set' },
-        { id: 3, key: 'rare', label: 'Base Set' },
-        { id: 4, key: 'superrare', label: 'Base Set' },
-        { id: 5, key: 'elite', label: 'Base Set' },
-        { id: 6, key: 'epic', label: 'Base Set' },
-        { id: 7, key: 'mythic', label: 'Base Set' },
-        { id: 8, key: 'legendary', label: 'Base Set' }
+        { id: 1, key: 'basic', label: 'Básico' },
+        { id: 2, key: 'common', label: 'Común' },
+        { id: 3, key: 'uncommon', label: 'Poco Común' },
+        { id: 4, key: 'rare', label: 'Raro' },
+        { id: 5, key: 'epic', label: 'Épico' },
+        { id: 6, key: 'legendary', label: 'Legendario' }
       ];
 
       const wheelsConfig = {
@@ -668,7 +710,12 @@
           name: 'Ruleta Base Set',
           cost: 400,
           probs: {
-            common: 1.0
+            basic: 0.55,
+            common: 0.28,
+            uncommon: 0.12,
+            rare: 0.04,
+            epic: 0.009,
+            legendary: 0.001
           }
         }
       };
@@ -679,33 +726,31 @@
           price: 1500,
           cardCount: 3,
           artClass: 'pack-art-venusaur',
-          probs: { common: 1.0 }
+          probs: { basic: 0.55, common: 0.28, uncommon: 0.12, rare: 0.04, epic: 0.009, legendary: 0.001 }
         },
         base1_charizard: {
           name: 'Sobre Charizard',
           price: 1500,
           cardCount: 3,
           artClass: 'pack-art-charizard',
-          probs: { common: 1.0 }
+          probs: { basic: 0.55, common: 0.28, uncommon: 0.12, rare: 0.04, epic: 0.009, legendary: 0.001 }
         },
         base1_blastoise: {
           name: 'Sobre Blastoise',
           price: 1500,
           cardCount: 3,
           artClass: 'pack-art-blastoise',
-          probs: { common: 1.0 }
+          probs: { basic: 0.55, common: 0.28, uncommon: 0.12, rare: 0.04, epic: 0.009, legendary: 0.001 }
         }
       };
 
       const rarityPriceMap = {
-        common: 400,
-        uncommon: 800,
-        rare: 1600,
-        superrare: 3000,
-        elite: 5200,
-        epic: 8400,
-        mythic: 14000,
-        legendary: 24000
+        basic: 1,
+        common: 5,
+        uncommon: 15,
+        rare: 40,
+        epic: 90,
+        legendary: 280
       };
 
       const TCG_API_BASE = 'https://api.tcgdex.net/v2/en/cards';
@@ -724,8 +769,7 @@
       }
 
       const cardsByRarity = {
-        common: [], uncommon: [], rare: [],
-        superrare: [], elite: [], epic: [], mythic: [], legendary: []
+        basic: [], common: [], uncommon: [], rare: [], epic: [], legendary: []
       };
       window.cardsByRarity = cardsByRarity;
 
@@ -743,51 +787,37 @@
             console.warn("Base Set 1 not found in sets list.");
           }
 
+          // Use our custom DB for card data, but API for images/ids
           const targetSets = baseSet ? [baseSet] : [];
 
           for (const set of targetSets) {
             const cards = await ApiService.fetchCardsBySet(set.id);
             cards.forEach(card => {
-              let rarityKey = 'common';
-              const apiRarity = (card.rarity || '').toLowerCase();
-              const localIdNum = parseInt(card.localId, 10) || 0;
+              // Use localId as key string "1", "2"
+              const localIdStr = String(parseInt(card.localId || '0'));
+              const customData = window.BASE_SET_DB ? window.BASE_SET_DB[localIdStr] : null;
 
-              // Mapeo experto para Base Set (base1)
-              if (apiRarity.includes('uncommon')) {
-                rarityKey = 'uncommon';
-              } else if (apiRarity.includes('rare')) {
-                rarityKey = 'rare';
-                // En Base Set original, del #1 al #16 son Holos
-                if (set.id === 'base1' && localIdNum <= 16) {
-                  rarityKey = 'superrare';
+              if (customData) {
+                const rarityKey = customData.r; // basic, common, uncommon...
+                const cardObj = {
+                  id: card.id,
+                  localId: card.localId,
+                  setId: set.id,
+                  name: customData.n,
+                  image: card.image ? `${card.image}/high.png` : 'img/avatars/pokeball.png',
+                  rarityInternal: rarityKey,
+                  apiRarity: card.rarity || '',
+                  rarityLabel: rarityDefs.find(r => r.key === rarityKey)?.label || 'Básico',
+                  setName: 'Base Set',
+                  types: card.types || [],
+                  holographic: rarityKey === 'epic' || rarityKey === 'legendary' || rarityKey === 'rare',
+                  priceEur: customData.p,
+                  priceUsd: Number((customData.p * 1.1).toFixed(2))
+                };
+
+                if (cardsByRarity[rarityKey]) {
+                  cardsByRarity[rarityKey].push(cardObj);
                 }
-              } else if (apiRarity.includes('ultra') || apiRarity.includes('ex')) {
-                rarityKey = 'superrare'; // Map to highest available in Base Set
-              } else if (apiRarity.includes('secret')) {
-                rarityKey = 'superrare'; // Map to highest available
-              }
-
-              const cardObj = {
-                id: card.id,
-                localId: card.localId,
-                setId: set.id,
-                name: card.name || 'Carta sin nombre',
-                image: card.image ? `${card.image}/high.png` : '',
-                rarityInternal: rarityKey,
-                apiRarity: card.rarity || 'Común',
-                setName: set.name || 'Base Set',
-                types: card.types || [],
-                holographic: rarityKey === 'superrare' || apiRarity.includes('holo'),
-                priceEur: null,
-                priceUsd: null
-              };
-
-              if (cardsByRarity[rarityKey]) {
-                cardsByRarity[rarityKey].push(cardObj);
-              }
-              // Backup in common to avoid empty pool issues
-              if (rarityKey !== 'common') {
-                cardsByRarity['common'].push(cardObj);
               }
             });
           }
@@ -922,13 +952,11 @@
       let autoSpinTimer = null;
       let lastDrops = [];
       let statsCounts = {
+        basic: 0,
         common: 0,
         uncommon: 0,
         rare: 0,
-        superrare: 0,
-        elite: 0,
         epic: 0,
-        mythic: 0,
         legendary: 0
       };
       let refreshDailyCost = 1000;
@@ -1271,8 +1299,26 @@
             const rewardSet = document.getElementById('rewardSetName');
 
             if (rewardTitle) {
-              const symbol = isNewToCollection(card.id) ? ' <span class="badge bg-danger">NEW</span>' : '';
-              rewardTitle.innerHTML = `¡${rd.label}! ${card.name}${symbol}`;
+              // const symbol = isNewToCollection(card.id) ? ' <span class="badge bg-danger">NEW</span>' : '';
+              // rewardTitle.innerHTML = `¡${rd.label}! ${card.name}${symbol}`;
+              // User specified badge on the card image, keeping title clean or minimal
+              rewardTitle.innerHTML = `¡${rd.label}! ${card.name}`;
+            }
+
+            // Inject badge into image container
+            const rewardCardInner = document.querySelector('.reward-card-inner');
+            if (rewardCardInner) {
+              // Remove old badge if any
+              const oldBadge = rewardCardInner.querySelector('.badge-new-indicator');
+              if (oldBadge) oldBadge.remove();
+
+              if (isNewToCollection(card.id)) {
+                const badge = document.createElement('div');
+                badge.className = 'badge-new-indicator';
+                badge.textContent = 'NEW';
+                // Remove animation for static display if preferred, or keep it
+                rewardCardInner.appendChild(badge);
+              }
             }
             if (rewardImg) rewardImg.src = card.image || 'img/avatars/pokeball.png';
             if (rewardBadge) {
@@ -1838,7 +1884,7 @@
             <p class="mb-0"><strong><i class="bi bi-person-fill-lock me-1"></i> Restricción:</strong> Funciones
               restringidas estrictamente a personas <strong>mayores de 18 años</strong>.</p>
           </div>
-   
+
           <div class="text-start mb-4">
             <h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Sobre el Juego Responsable:</h6>
             <p class="text-black mb-3" style="font-size: 1rem; line-height: 1.5;">La mecánica de ruletas y sobres puede

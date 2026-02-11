@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../CSS/style.css">
   <script src="../js/api-service.js"></script>
+  <script src="../js/custom_db.js"></script>
 </head>
 
 <body class="bg-pokeballs">
@@ -133,7 +134,12 @@
                     <label class="form-label xsmall text-uppercase text-muted mb-1">Rareza</label>
                     <select class="form-select form-select-sm" id="rarityFilter">
                       <option value="all">Todas</option>
-                      <option value="common">Base Set</option>
+                      <option value="common">Común</option>
+                      <option value="basic">Básico</option>
+                      <option value="uncommon">Poco Común</option>
+                      <option value="rare">Raro</option>
+                      <option value="epic">Épico</option>
+                      <option value="legendary">Legendario</option>
                     </select>
                   </div>
 
@@ -446,9 +452,14 @@
       const statsSummaryList = document.getElementById('statsSummaryList');
       const statsTopRarities = document.getElementById('statsTopRarities');
 
-      const rarityOrder = ['common'];
+      const rarityOrder = ['basic', 'common', 'uncommon', 'rare', 'epic', 'legendary'];
       const rarityLabels = {
-        common: 'Base Set'
+        basic: 'Básico',
+        common: 'Común',
+        uncommon: 'Poco Común',
+        rare: 'Raro',
+        epic: 'Épico',
+        legendary: 'Legendario'
       };
 
       function loadCollection() {
@@ -495,6 +506,33 @@
               }
               if (!card.localId) {
                 card.localId = card.id.split('-')[1];
+                changed = true;
+              }
+            }
+          }
+
+          // Inject updated data from DB if available
+          if (card.localId && window.BASE_SET_DB) {
+            const customData = window.BASE_SET_DB[String(parseInt(card.localId))];
+            if (customData) {
+              const newRarity = customData.r;
+              if (card.priceEur !== customData.p) {
+                card.priceEur = customData.p;
+                card.priceUsd = Number((customData.p * 1.1).toFixed(2));
+                changed = true;
+              }
+              if (card.rarityInternal !== newRarity) {
+                card.rarityInternal = newRarity;
+                changed = true;
+              }
+              if (card.name !== customData.n) {
+                card.name = customData.n;
+                changed = true;
+              }
+              // Force label update
+              const newLabel = rarityLabels[newRarity] || 'Básico';
+              if (card.rarityLabel !== newLabel) {
+                card.rarityLabel = newLabel;
                 changed = true;
               }
             }
