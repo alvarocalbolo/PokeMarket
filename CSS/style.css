@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&family=Roboto+Mono:wght@500;700&display=swap');
+@import url('shop-header.css');
 
 /* ============================
    PALETA Y TEMAS
@@ -11,11 +12,17 @@
   --poke-yellow: #facc15;
   --poke-yellow-soft: #fde047;
   --surface-light: #f3f4f6;
+  /* Mantener por si acaso alguna referencia, pero no se usará */
   --surface-dark: #020617;
   --text-light: #e5e7eb;
   --text-dark: #0f172a;
 
-  /* Rarezas (colección y ruleta) */
+  /* Variables del tema oscuro por defecto */
+  --bs-body-bg: var(--surface-dark);
+  --bs-body-color: var(--text-light);
+  --bs-card-bg: #020617;
+  --bs-card-border-color: rgba(148, 163, 184, 0.25);
+
   /* Rarezas (colección y ruleta) */
   --rarity-basic: #cbd5e1;
   /* Slate 300 */
@@ -45,18 +52,33 @@
   --type-normal: #9ca3af;
 }
 
-/* Tema claro eliminado */
-
-/* Tema oscuro */
-html[data-bs-theme="dark"] {
-  --bs-body-bg: var(--surface-dark);
-  --bs-body-color: var(--text-light);
-  --bs-card-bg: #020617;
-  --bs-card-border-color: rgba(148, 163, 184, 0.25);
+/* Text Colors per Rarity */
+.text-rarity-basic {
+  color: var(--rarity-basic) !important;
 }
 
-/* Capa de fondo para modo oscuro (Overlay solicitado #444 70%) */
-html[data-bs-theme="dark"] body::before {
+.text-rarity-common {
+  color: var(--rarity-common) !important;
+}
+
+.text-rarity-uncommon {
+  color: var(--rarity-uncommon) !important;
+}
+
+.text-rarity-rare {
+  color: var(--rarity-rare) !important;
+}
+
+.text-rarity-epic {
+  color: var(--rarity-epic) !important;
+}
+
+.text-rarity-legendary {
+  color: var(--rarity-legendary) !important;
+}
+
+/* Capa de fondo permanente (Overlay solicitado #444 70%) */
+body::before {
   content: "";
   position: fixed;
   top: 0;
@@ -100,7 +122,7 @@ body {
   opacity: 0.8;
 }
 
-html[data-bs-theme="dark"] .invalid-feedback {
+.invalid-feedback {
   color: #fecaca;
 }
 
@@ -119,19 +141,14 @@ html[data-bs-theme="dark"] .invalid-feedback {
 }
 
 /* Input-group base */
+/* Input-group base - Dark Mode Default */
 .input-group-text {
-  background-color: rgba(148, 163, 184, 0.12);
-  border-color: rgba(148, 163, 184, 0.6);
-  color: var(--bs-body-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-html[data-bs-theme="dark"] .input-group-text {
   background-color: rgba(15, 23, 42, 0.9);
   border-color: rgba(148, 163, 184, 0.6);
   color: #e5e7eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ============================
@@ -149,7 +166,8 @@ html[data-bs-theme="dark"] .input-group-text {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  background: #fff !important;
+  background: #e2e8f0 !important;
+  /* Off-white for better blend in dark mode */
   /* Base for Multiply blend */
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 10px;
@@ -159,12 +177,6 @@ html[data-bs-theme="dark"] .input-group-text {
   /* Important to clip the lids */
   padding: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark mode adjustment */
-html[data-bs-theme="dark"] .unown-btn {
-  background: #e2e8f0 !important;
-  /* Off-white for better blend in dark mode */
 }
 
 .unown-btn:hover {
@@ -659,12 +671,13 @@ html[data-bs-theme="dark"] .unown-btn {
 
 
 
-html[data-bs-theme="dark"] .btn-outline-secondary {
+.btn-outline-secondary {
   color: #e5e7eb;
   border-color: #4b5563;
+  border-width: 1px;
 }
 
-html[data-bs-theme="dark"] .btn-outline-secondary:hover {
+.btn-outline-secondary:hover {
   background-color: #4b5563;
   border-color: #6b7280;
 }
@@ -763,19 +776,33 @@ html[data-bs-theme="dark"] .btn-outline-secondary:hover {
 /* ============================
    FONDO GENERAL / LOGIN / PERFIL
    ============================ */
-a .bg-pokeballs {
+.bg-pokeballs {
   position: relative;
   min-height: 100vh;
+  /* El color de fondo base se mantiene, la imagen va en pseudo-elemento */
   background-color: var(--bs-body-bg);
-  background-image: url("../img/FondoClaro.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  isolation: isolate;
 }
 
-html[data-bs-theme="dark"] .bg-pokeballs {
-  background-color: var(--bs-body-bg);
+/* Capa de imagen de fondo optimizada (Fija y escalada perfectamente) */
+.bg-pokeballs::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  /* Detrás del overlay (-1) y contenido (0) */
+
   background-image: url("../img/FondoOscuro.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Mejora de rendimiento y renderizado */
+  will-change: transform;
+  pointer-events: none;
 }
 
 /* Cabecera amarilla de la card */
@@ -2039,35 +2066,308 @@ html[data-bs-theme="dark"] .profile-nav-pills .nav-link {
 
 
 
-.tienda-card-dia .carta-img-placeholder {
-  height: 140px;
+/* Old styles removed - Replaced by Hearthstone Style block below */
+
+/* SOLD OUT STATE */
+.tienda-card-dia.sold {
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(15, 23, 42, 0.6) !important;
 }
 
-.tienda-dia-btn-comprar {
-  font-size: 0.75rem;
-  padding-inline: 0.55rem;
+.tienda-card-dia.sold .card-carta-frame,
+.tienda-card-dia.sold .daily-card-body {
+  filter: grayscale(100%) opacity(0.4);
+  transition: filter 0.3s ease;
 }
+
+.tienda-card-dia.sold .tienda-dia-btn-comprar {
+  background: #333;
+  border-color: #444;
+  color: #777;
+}
+
+/* Legacy sold styles removed */
 
 /* Botón recargar tienda */
+/* Botón recargar tienda - Styled to match theme but distinct */
 .btn-recargar-tienda {
   position: relative;
   overflow: hidden;
-  border-radius: 999px;
-  background: radial-gradient(circle at top, #22c55e 0, #16a34a 35%, #14532d 100%);
-  border: 1px solid rgba(34, 197, 94, 0.8);
-  color: #ecfdf5;
-  box-shadow:
-    0 0 0 1px rgba(22, 163, 74, 0.6),
-    0 10px 22px rgba(22, 101, 52, 0.9);
-  padding-inline: 0.9rem;
-  font-size: 0.7rem;
+  border-radius: 8px;
+  background: radial-gradient(circle at top, #3b82f6 0, #1d4ed8 100%);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.4);
+  padding: 0.5rem 1.2rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.btn-recargar-tienda:hover {
+/* === DAILY SHOP HEARTHSTONE STYLE === */
+
+.tienda-card-dia {
+  background: #2D2342;
+  /* Deep purple base */
+  border: 4px solid #3E3159;
+  /* Thick border */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  overflow: visible;
+  /* Allow button overlap if needed, but safe to keep hidden for now */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  height: auto;
+}
+
+.tienda-card-dia:hover {
+  transform: translateY(-5px);
+  border-color: #6C5CE7;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 15px rgba(108, 92, 231, 0.4);
+}
+
+.tienda-card-dia .carta-img-placeholder {
+  min-height: 200px;
+  /* SLightly reduced from 260px for tighter feel */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Internal body layout */
+.daily-card-body {
+  background: linear-gradient(to bottom, #2D2342 0%, #1F182D 100%);
+  padding: 0 0.5rem 0.8rem 0.5rem;
+  /* Tight padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Decorative Separator */
+.daily-separator {
+  position: relative;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -10px;
+  /* Interaction with image area */
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.separator-line {
+  height: 2px;
+  flex-grow: 1;
+  background: linear-gradient(90deg, transparent, #8375A8, transparent);
+}
+
+.separator-diamond {
+  color: #8375A8;
+  font-size: 0.8rem;
+}
+
+/* Info Section */
+.daily-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #DDD6F3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.daily-rarity {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  margin-top: 4px;
+  text-align: center;
+  /* Explicitly center text */
+  display: inline-block;
+  /* Ensure it takes width of content */
+}
+
+.daily-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.daily-action-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* SKEUOMORPHIC BUY BUTTON */
+.tienda-dia-btn-comprar {
+  background: linear-gradient(to bottom, #2b2b2b, #000000);
+  border: 2px solid #3d3d3d;
+  border-bottom-color: #1a1a1a;
+  border-radius: 999px;
+  /* PILL SHAPE */
+  padding: 0.6rem 2rem;
+  /* Wider padding */
+  width: 90%;
+  /* Take most of the width */
+  color: #FACC15;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  font-family: 'Cinzel', 'Trajan Pro', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
+  position: relative;
+  transition: all 0.1s;
+}
+
+.tienda-dia-btn-comprar:hover {
+  background: linear-gradient(to bottom, #3a3a3a, #111111);
   transform: translateY(-1px);
   box-shadow:
-    0 0 0 1px rgba(34, 197, 94, 0.9),
-    0 14px 28px rgba(22, 101, 52, 1);
+    0 6px 14px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: #555;
+  color: #FEF08A;
+}
+
+.tienda-dia-btn-comprar:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-color: #444;
+}
+
+.tienda-dia-btn-comprar:disabled {
+  background: #222;
+  color: #555;
+  border-color: #333;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Gold Coin Icon CSS */
+.daily-coin-icon {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 30% 30%, #FCD34D, #F59E0B);
+  border-radius: 50%;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.6);
+  border: 1px solid #B45309;
+  position: relative;
+}
+
+.daily-coin-icon::before {
+  content: "$";
+  /* Or similar symbol */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: #92400E;
+  font-weight: bold;
+}
+
+/* Conflicting sold style removed */
+
+.tienda-card-dia.sold .daily-name {
+  color: #777;
+  text-shadow: none;
+}
+
+.daily-sold-overlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  /* High z-index */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.daily-sold-overlap.d-none {
+  display: none !important;
+}
+
+/* Updated Daily Rarity - Perfectly Centered */
+.daily-rarity {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 2px 10px;
+  /* More horizontal padding */
+  margin: 4px auto 0 auto;
+  /* Auto margins for centering */
+  text-align: center;
+  display: inline-flex;
+  /* Use inline-flex for better internal centering */
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  /* Consistent width */
+  border-radius: 4px;
+}
+
+/* Updated Sold Stamp - Premium Red 3D Style */
+/* Updated Sold Stamp - Fixed Positioning */
+/* Updated Sold Stamp - 3D Slab Style (Red) */
+.daily-sold-overlap span {
+  font-family: 'Stencil', 'Impact', 'Arial Black', sans-serif;
+  font-size: 3.5rem;
+  color: #ef4444;
+  text-transform: uppercase;
+  font-weight: 900;
+
+  /* Stamp Look */
+  border: 4px dashed #ef4444;
+  padding: 0.2rem 1.5rem;
+  border-radius: 8px;
+
+  /* Positioning */
+  transform: rotate(-15deg);
+
+  /* Effects */
+  opacity: 0.9;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2), inset 0 0 10px rgba(239, 68, 68, 0.2);
+
+  /* Ensure it sits on top */
+  position: relative;
+  z-index: 50;
+  display: inline-block;
+
+  /* Grunge/Realism simulation via mask (optional if no image) */
+  /* Using mix-blend to look like ink on paper */
+  mix-blend-mode: hard-light;
 }
 
 .btn-recargar-tienda .recargar-icon-wrap {

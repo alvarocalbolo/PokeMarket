@@ -902,7 +902,10 @@
               cardEl.dataset.saleIndex = idx;
               cardEl.classList.add('sale-card-clickable');
             }
-            if (nombreEl) nombreEl.textContent = v.name || 'Carta';
+            if (nombreEl) {
+              nombreEl.textContent = v.name || 'Carta';
+              nombreEl.classList.add('text-rarity-' + (v.rarityInternal || 'common'));
+            }
             if (rarezaEl) rarezaEl.textContent = rarityLabel(v);
             if (rarezaBadge) {
               rarezaBadge.textContent = rarityLabel(v);
@@ -977,7 +980,7 @@
             </div>
             <div class="card-body p-2">
               <div class="d-flex justify-content-between align-items-start mb-1">
-                <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+                <span class="small fw-semibold text-truncate text-rarity-${card.rarityInternal || 'common'}">${card.name || 'Carta'}</span>
                 <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
               </div>
               <p class="xsmall text-muted mb-1 text-truncate">${card.setName || '-'}</p>
@@ -1141,7 +1144,7 @@
           </div>
           <div class="card-body p-2">
             <div class="d-flex justify-content-between align-items-start mb-1">
-              <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+              <span class="small fw-semibold text-truncate text-rarity-${card.rarityInternal || 'common'}">${card.name || 'Carta'}</span>
               <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
             </div>
             <p class="xsmall text-muted mb-0 text-truncate">${card.setName || '-'}</p>
@@ -1194,7 +1197,7 @@
             </div>
             <div class="card-body p-2">
               <div class="d-flex justify-content-between align-items-start mb-1">
-                <span class="small fw-semibold text-truncate">${card.name || 'Carta'}</span>
+                <span class="small fw-semibold text-truncate text-rarity-${card.rarityInternal || 'common'}">${card.name || 'Carta'}</span>
                 <span class="${rarityBadgeClass(card)} xsmall">${rarityLabel(card)}</span>
               </div>
               <p class="xsmall text-muted mb-0 text-truncate">${card.setName || '-'}</p>

@@ -1,0 +1,97 @@
+/* ==========================================================================
+   SHOP HEADER (Standard Aesthetic)
+   ========================================================================== */
+
+.shop-header-container {
+    /* Match the .tienda-pack-card style */
+    background: radial-gradient(circle at top, #020617 0, #020617 65%, #020617 100%) !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9) !important;
+
+    /* Remove glassmorphism */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.shop-header-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 1) !important;
+}
+
+/* Background Pattern/Abstract Shape - Toned down */
+.shop-header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.1;
+    background-image:
+        radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+/* Balance Pill - Match dark card aesthetic */
+.shop-balance-pill {
+    min-width: 180px;
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.shop-balance-pill:hover {
+    border-color: rgba(250, 204, 21, 0.3) !important;
+    background: rgba(15, 23, 42, 0.8) !important;
+}
+
+.shop-balance-amount {
+    font-family: 'Roboto Mono', monospace;
+    text-shadow: none;
+}
+
+/* Button Standard Redesign to match Bootstrap/Theme */
+.btn-recargar-tienda-premium {
+    background: var(--pm-accent, #fbbf24);
+    /* Default to accent color */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #0f172a;
+    /* Dark text on accent */
+    border-radius: 8px;
+    /* Match standard radius in style.css */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-recargar-tienda-premium:hover {
+    background: #f59e0b;
+    /* Darker accent */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+    color: #0f172a;
+}
+
+.btn-recargar-tienda-premium:active {
+    transform: translateY(0);
+}
+
+.btn-recargar-tienda-premium i.bi-arrow-repeat {
+    transition: transform 0.5s ease;
+}
+
+.btn-recargar-tienda-premium:hover i.bi-arrow-repeat {
+    transform: rotate(180deg);
+}
+
+.btn-recargar-tienda-premium .text-warning {
+    color: #451a03 !important;
+    /* Darker text for coin amount on yellow button */
+}

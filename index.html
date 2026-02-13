@@ -44,7 +44,7 @@
           <i class="bi bi-coin text-warning"></i>
           <span class="fw-bold">0</span>
         </div>
-        
+
         <!-- Dropdown perfil -->
         <div class="dropdown">
           <button class="btn btn-profile d-flex align-items-center" type="button" id="profileDropdown"
@@ -268,74 +268,111 @@
       <!-- SECCIÓN TIENDA RÁPIDA -->
       <hr class="my-5">
 
-      <section class="mb-4">
-        <header class="d-flex flex-wrap justify-content-between align-items-center mb-2">
-          <div>
-            <p class="text-uppercase xsmall text-muted mb-1">Mercado instantáneo</p>
-            <h2 class="h4 fw-semibold mb-1">Tienda de Cartas – Picks del Día</h2>
-            <p class="xsmall text-muted mb-0">Cartas seleccionadas por rareza, compradas al momento con tus mismas
-              monedas.</p>
-          </div>
-          <!-- Badge créditos tienda: solo icono + número -->
-          <span class="badge bg-dark-subtle text-light-emphasis xsmall d-flex align-items-center gap-1"
-            id="shopCredits">
-            <i class="bi bi-coin text-warning small"></i>
-            <span>0</span>
-          </span>
-        </header>
-      </section>
+      <!-- Tienda Header Redesign -->
+      <div class="shop-header-container mb-4 p-4 rounded-4 shadow-lg position-relative overflow-hidden">
+        <div class="shop-header-bg"></div>
+        <div class="d-flex flex-wrap justify-content-between align-items-center position-relative z-1 gap-3">
 
-      <!-- Cartas diarias -->
-      <section class="card border-0 shadow-sm mb-4 tienda-section">
-        <div class="card-header border-0 bg-transparent d-flex flex-wrap justify-content-between align-items-center">
-          <div>
-            <h3 class="h6 mb-1 text-uppercase text-muted xsmall">Selección diaria</h3>
-            <h4 class="h5 mb-0 fw-semibold">Cartas destacadas de hoy</h4>
-            <p class="xsmall text-muted mb-0">Rotación diaria, stock ilimitado por carta. Caza gangas antes de que
-              cambien.</p>
+          <!-- Title Area -->
+          <div class="shop-title-area">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <span class="badge bg-warning text-dark fw-bold px-2 py-1"
+                style="font-size: 0.7rem; letter-spacing: 1px;">MERCADO</span>
+              <span class="xsmall text-info text-uppercase" style="letter-spacing: 2px;">• INSTANTÁNEO</span>
+            </div>
+            <h2 class="display-6 fw-bold text-white mb-0" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+              Tienda Diaria
+            </h2>
+            <p class="text-light opacity-75 mb-0 xsmall" style="max-width: 400px;">
+              Selección rotativa de cartas. Adquiere piezas únicas directamente con tu saldo.
+              Stock limitado a tu velocidad de clic.
+            </p>
           </div>
-          <div class="d-flex flex-column align-items-end gap-1">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-sm btn-recargar-tienda d-flex align-items-center gap-1" id="btnRefreshDaily">
-                <span class="recargar-icon-wrap">
-                  <i class="bi bi-arrow-clockwise"></i>
-                </span>
-                <span class="xsmall fw-semibold text-uppercase">Recargar tienda</span>
-                <span class="badge bg-dark-subtle text-warning-emphasis xsmall d-flex align-items-center gap-1">
-                  <i class="bi bi-coin text-warning"></i>
-                  <span id="refreshCostLabel">1000</span>
-                </span>
+
+          <!-- Action Area -->
+          <div class="d-flex flex-column align-items-end gap-3">
+
+            <!-- Balance Wallet -->
+            <div
+              class="shop-balance-pill d-flex align-items-center gap-3 px-3 py-2 rounded-pill bg-dark border border-secondary shadow-sm">
+              <span class="xsmall text-muted text-uppercase fw-bold" style="letter-spacing: 1px;">Tu Saldo</span>
+              <span class="shop-balance-amount text-warning fw-bold fs-5 d-flex align-items-center gap-2"
+                id="shopCredits">
+                <i class="bi bi-coin"></i>
+                <span>0</span>
+              </span>
+            </div>
+
+            <!-- Reload Control -->
+            <div class="d-flex align-items-center gap-3">
+              <span class="xsmall text-muted fst-italic text-end d-none d-md-block" id="dailyResetLabel">
+                <i class="bi bi-clock me-1"></i>Reset: 00:00
+              </span>
+
+              <button class="btn btn-recargar-tienda-premium position-relative overflow-hidden" id="btnRefreshDaily">
+                <div class="d-flex align-items-center gap-2 px-3 py-2">
+                  <i class="bi bi-arrow-repeat fs-5"></i>
+                  <div class="d-flex flex-column align-items-start lh-1">
+                    <span class="fw-bold xsmall text-uppercase">Recargar</span>
+                    <span class="text-warning xsmall fw-bold d-flex align-items-center gap-1">
+                      <i class="bi bi-coin" style="font-size: 0.65rem;"></i>
+                      <span id="refreshCostLabel">1000</span>
+                    </span>
+                  </div>
+                </div>
               </button>
             </div>
-            <div class="text-end xsmall text-muted">
-              <span id="dailyResetLabel">Cambio diario a las 00:00</span>
-            </div>
+
           </div>
         </div>
+      </div>
+
+      <!-- Cartas diarias Grid -->
+      <section class="mb-5 tienda-section-grid">
+        <!-- (Header removed from here, moved up) -->
+
         <div class="card-body">
           <div class="row g-3" id="dailyCardsGrid">
             <!-- Plantilla -->
-            <div class="col-12 col-md-6 col-lg-3 d-none" id="dailyCardTemplate">
+            <!-- Plantilla -->
+            <div class="col-12 col-md-6 col-lg-4 d-none" id="dailyCardTemplate">
               <article class="card card-carta h-100 tienda-card-dia">
+                <div class="daily-sold-overlap d-none">
+                  <span>SOLD</span>
+                </div>
+
                 <div class="card-carta-frame">
                   <div class="carta-img-placeholder d-flex align-items-center justify-content-center">
-                    <span class="xsmall text-muted">Imagen carta</span>
+                    <span class="xsmall text-muted">Imagen</span>
                   </div>
                 </div>
-                <div class="card-body p-2">
-                  <div class="d-flex justify-content-between align-items-start mb-1">
-                    <h5 class="small fw-semibold mb-0 text-truncate daily-name">Nombre carta</h5>
+
+                <div class="card-body daily-card-body p-0">
+                  <!-- Separator -->
+                  <div class="daily-separator">
+                    <span class="separator-line"></span>
+                    <span class="separator-diamond">❖</span>
+                    <span class="separator-line"></span>
+                  </div>
+
+                  <!-- Name info -->
+                  <div class="daily-info-container">
+                    <h5 class="daily-name text-truncate">Nombre</h5>
                     <span class="badge xsmall daily-rarity">Rara</span>
                   </div>
-                  <p class="xsmall text-muted mb-1 text-truncate daily-set d-none">Set</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center gap-1">
-                      <i class="bi bi-coin text-warning small"></i>
-                      <span class="small fw-semibold daily-price">120</span>
-                    </div>
-                    <button class="btn btn-sm btn-poke daily-buy-btn tienda-dia-btn-comprar">Comprar</button>
+
+                  <!-- Price Button -->
+                  <div class="daily-action-container">
+                    <button class="btn daily-buy-btn tienda-dia-btn-comprar">
+                      <div class="d-flex align-items-center justify-content-center gap-1">
+                        <div class="daily-coin-icon"></div>
+                        <span class="daily-price">0</span>
+                      </div>
+                    </button>
                   </div>
-                  <p class="xsmall text-muted mt-1 mb-0 daily-stock">Stock: ∞</p>
+
+                  <p class="xsmall text-muted mb-0 daily-stock d-none">Stock: 1</p>
+                  <p class="daily-set d-none"></p>
                 </div>
               </article>
             </div>
@@ -610,19 +647,9 @@
   <!-- Script principal: tema, usuario, ruleta, tienda, sobres -->
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      const html = document.documentElement;
-      const switchElement = document.getElementById('darkModeSwitch');
-
-      const savedTheme = localStorage.getItem('bsTheme') || 'light';
-      html.setAttribute('data-bs-theme', savedTheme);
-      if (switchElement) {
-        switchElement.checked = savedTheme === 'dark';
-        switchElement.addEventListener('change', function () {
-          const theme = this.checked ? 'dark' : 'light';
-          html.setAttribute('data-bs-theme', theme);
-          localStorage.setItem('bsTheme', theme);
-        });
-      }
+      // Force Dark Mode
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
+      localStorage.setItem('bsTheme', 'dark');
 
       const defaultName = 'Entrenador';
       const defaultEmail = 'entrenador@pokemarket.com';
@@ -1270,7 +1297,7 @@
               li.innerHTML = `
             <div class="d-flex align-items-center gap-1 text-truncate me-2">
               <span>${raritySymbol(c.rarityInternal)}</span>
-              <span class="text-truncate">${c.name}</span>
+              <span class="text-truncate text-rarity-${c.rarityInternal}">${c.name}</span>
             </div>
             <span class="badge xsmall rarity-${c.rarityInternal}">${c.rarity.label}</span>
           `;
@@ -1278,14 +1305,18 @@
             });
           }
 
+          const isNew = isNewToCollection(card.id);
           addCardToCollection(card);
 
           if (resultBox) {
             resultBox.innerHTML = `
           <div class="d-flex flex-column align-items-center">
             <span class="small mb-1">Última carta:</span>
-            <span class="fw-semibold">${card.name}</span>
-            <span class="badge mt-1 xsmall rarity-${card.rarityInternal}">${rd.label}</span>
+            <span class="fw-semibold text-rarity-${card.rarityInternal}">${card.name}</span>
+            <div class="d-flex gap-2 align-items-center mt-1">
+               <span class="badge xsmall rarity-${card.rarityInternal}">${rd.label}</span>
+               ${isNew ? '<span class="badge bg-danger xsmall">NEW</span>' : ''}
+            </div>
           </div>
         `;
           }
@@ -1312,7 +1343,8 @@
               const oldBadge = rewardCardInner.querySelector('.badge-new-indicator');
               if (oldBadge) oldBadge.remove();
 
-              if (isNewToCollection(card.id)) {
+              // Badge lógica movida arriba (isNew)
+              if (isNew) {
                 const badge = document.createElement('div');
                 badge.className = 'badge-new-indicator';
                 badge.textContent = 'NEW';
@@ -1554,7 +1586,7 @@
                   </div>
                   <div class="card-body p-2">
                     <div class="d-flex justify-content-between align-items-start mb-1">
-                      <h5 class="small fw-semibold mb-0 text-truncate">${c.name}</h5>
+                      <h5 class="small fw-semibold mb-0 text-truncate text-rarity-${rd.key}">${c.name}</h5>
                       <span class="badge xsmall rarity-${rd.key}">${rd.label}</span>
                     </div>
                     <p class="xsmall text-muted mb-0 text-truncate">${c.setName || ''}</p>
@@ -1648,7 +1680,7 @@
           return;
         }
 
-        const numDaily = 8;
+        const numDaily = 3;
         const usedIndexes = new Set();
 
         for (let i = 0; i < numDaily; i++) {
@@ -1694,18 +1726,36 @@
             rarityEl.className = 'badge xsmall rarity-' + rd.key;
           }
 
-          if (stockEl) stockEl.textContent = 'Stock: ∞';
+          if (nameEl) {
+            nameEl.classList.add(`text-rarity-${internal}`);
+          }
+
+          // Check if sold
+          const soldKey = `daily_sold_${seedBase}_${i}`;
+          const isSold = localStorage.getItem(soldKey) === 'true';
+
+          if (stockEl) stockEl.textContent = 'Stock: ' + (isSold ? '0' : '1');
+
+          const soldOverlap = clone.querySelector('.daily-sold-overlap');
+          if (isSold) {
+            clone.querySelector('.tienda-card-dia').classList.add('sold');
+            if (soldOverlap) soldOverlap.classList.remove('d-none');
+            if (buyBtn) {
+              buyBtn.disabled = true;
+              buyBtn.textContent = 'Agotado';
+            }
+          }
 
           if (imgWrap) {
             const cardImgUrl = card.image || 'img/avatars/pokeball.png';
             const isNew = isNewToCollection(card.id);
             imgWrap.innerHTML = `
-              ${isNew ? '<div class="badge-new-indicator">NEW</div>' : ''}
+              ${(isNew && !isSold) ? '<div class="badge-new-indicator">NEW</div>' : ''}
               <img src="${cardImgUrl}" class="daily-img carta-img-real" alt="${card.name}">
             `;
           }
 
-          if (buyBtn) {
+          if (buyBtn && !isSold) {
             buyBtn.addEventListener('click', () => {
               const price = parseInt(priceEl.textContent, 10) || 0;
               if (balance < price) {
@@ -1719,6 +1769,17 @@
               balance -= price;
               syncCreditsUI();
               persistCredits();
+
+              // Mark as sold
+              localStorage.setItem(soldKey, 'true');
+
+              // UI update
+              const cardArticle = clone.querySelector('.tienda-card-dia');
+              cardArticle.classList.add('sold');
+              if (soldOverlap) soldOverlap.classList.remove('d-none');
+              buyBtn.disabled = true;
+              buyBtn.textContent = 'Agotado';
+              if (stockEl) stockEl.textContent = 'Stock: 0';
 
               addCardToCollection({
                 id: card.id,
@@ -1768,6 +1829,14 @@
           balance -= refreshDailyCost;
           syncCreditsUI();
           persistCredits();
+
+          // Clear sold status for the current day's slots before regenerating
+          const todaySeed = getDailySeed();
+          // We know numDaily is 3 constant now, but let's be safe
+          for (let i = 0; i < 8; i++) {
+            localStorage.removeItem(`daily_sold_${todaySeed}_${i}`);
+          }
+
           refreshDailyCost += 50;
           updateRefreshCostUI();
           generateDailyCards(true);

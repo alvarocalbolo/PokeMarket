@@ -33,15 +33,7 @@
 
         <!-- Lado derecho: tema -->
         <div class="d-flex align-items-center gap-3 flex-wrap justify-content-end">
-          <!-- Switch claro/oscuro -->
-          <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-sun small text-warning"></i>
-            <div class="form-check form-switch mb-0">
-              <input class="form-check-input theme-switch" type="checkbox" id="darkModeSwitch"
-                aria-label="Cambiar entre modo claro y oscuro">
-            </div>
-            <i class="bi bi-moon-stars small text-secondary-emphasis"></i>
-          </div>
+          <!-- Switch removed -->
         </div>
       </div>
     </nav>
@@ -151,19 +143,10 @@
 
   <script>
     // SWITCH modo claro / oscuro (data-bs-theme + localStorage)
+    // Force Dark Mode
     document.addEventListener('DOMContentLoaded', () => {
-      const html = document.documentElement;
-      const switchElement = document.getElementById('darkModeSwitch');
-
-      const savedTheme = localStorage.getItem('bsTheme') || 'light';
-      html.setAttribute('data-bs-theme', savedTheme);
-      switchElement.checked = savedTheme === 'dark';
-
-      switchElement.addEventListener('change', function () {
-        const theme = this.checked ? 'dark' : 'light';
-        html.setAttribute('data-bs-theme', theme);
-        localStorage.setItem('bsTheme', theme);
-      });
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
+      localStorage.setItem('bsTheme', 'dark');
     });
 
     // Lógica login: ojo + validación básica
