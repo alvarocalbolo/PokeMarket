@@ -1,0 +1,223 @@
+/* ==========================================================================
+   SHOP PACKS (Hearthstone Style)
+   ========================================================================== */
+
+.shop-packs-container {
+    background: #2a1a11;
+    /* Dark wood base */
+    border: 4px solid #6b4c35;
+    /* Wood border lighter */
+    border-radius: 12px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 40px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 992px) {
+    .shop-packs-container {
+        flex-direction: row;
+        min-height: 480px;
+    }
+}
+
+/* --- Left Panel: Featured Set (The Box) --- */
+.pack-feature-panel {
+    flex: 0 0 35%;
+    background: radial-gradient(circle at center, #3d261a 0%, #1e120b 100%);
+    border-right: 4px solid #6b4c35;
+    border-bottom: 4px solid #6b4c35;
+    /* Mobile */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 992px) {
+    .pack-feature-panel {
+        border-bottom: none;
+    }
+}
+
+/* Diagonal Ribbon */
+.pack-feature-ribbon {
+    position: absolute;
+    top: 20px;
+    left: -30px;
+    background: linear-gradient(to bottom, #d4af37, #aa8c2c);
+    color: #3e2723;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 5px 40px;
+    transform: rotate(-35deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid #fceeb5;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+/* The Booster Box Image */
+.booster-box-display {
+    width: 280px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+    transition: transform 0.3s ease;
+}
+
+.booster-box-display:hover {
+    transform: scale(1.03) translateY(-5px);
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+}
+
+.pack-feature-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    text-align: center;
+    color: #ff9900;
+    text-shadow:
+        0 2px 0 #3e2723,
+        0 0 10px rgba(255, 165, 0, 0.5);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.pack-feature-subtitle {
+    font-family: 'Cinzel', serif;
+    color: #deb887;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 1px solid #8b4513;
+    border-bottom: 1px solid #8b4513;
+    padding: 0.2rem 1rem;
+}
+
+
+/* --- Right Panel: The Packs --- */
+.pack-grid-panel {
+    flex: 1;
+    background: #251610;
+    /* Very dark inner */
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pack-grid-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Individual Pack Item (Refined) */
+.hearth-pack-item {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.hearth-pack-item:hover {
+    transform: translateY(-5px);
+}
+
+.hearth-pack-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #1a100c;
+    border: 2px solid #5e4034;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+/* Highlight Selected/Hover */
+.hearth-pack-item:hover .hearth-pack-frame {
+    border-color: #d4af37;
+    box-shadow:
+        0 0 10px rgba(212, 175, 55, 0.3),
+        inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.hearth-pack-image {
+    width: 80%;
+    height: auto;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.hearth-pack-item:hover .hearth-pack-image {
+    transform: scale(1.1);
+}
+
+.hearth-pack-label {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #d8c3a5;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.hearth-pack-price {
+    background: #111;
+    border: 1px solid #444;
+    border-radius: 99px;
+    padding: 2px 10px;
+    color: #fbbf24;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Open Button Overriding */
+.hearth-pack-btn {
+    margin-top: 10px;
+    background: linear-gradient(to bottom, #ffc800, #ff8800);
+    border: 1px solid #994d00;
+    color: #3e2723;
+    font-weight: 800;
+    font-family: 'Roboto Mono', sans-serif;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 0 #994d00, 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.1s;
+}
+
+.hearth-pack-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.hearth-pack-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #994d00, 0 2px 5px rgba(0, 0, 0, 0.5);
+}

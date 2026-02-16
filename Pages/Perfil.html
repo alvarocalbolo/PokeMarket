@@ -46,7 +46,7 @@
 
         <!-- Créditos globales -->
         <div class="d-flex align-items-center gap-1" id="globalCredits">
-          <i class="bi bi-coin text-warning"></i>
+          <img src="../img/moneda_PokeMarket.png" class="coin-icon me-1" alt="Coins">
           <span class="fw-bold">0</span>
         </div>
 
@@ -660,7 +660,7 @@
       function syncCreditsUIProfile() {
         if (!globalCreditsEl) return;
         globalCreditsEl.innerHTML = `
-          <i class="bi bi-coin text-warning"></i>
+          <img src="../img/moneda_PokeMarket.png" class="coin-icon me-1" alt="Coins">
           <span class="fw-bold">${balance}</span>
         `;
       }

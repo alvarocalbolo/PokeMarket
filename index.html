@@ -41,7 +41,7 @@
 
         <!-- Créditos globales: solo icono + número -->
         <div class="d-flex align-items-center gap-1" id="globalCredits">
-          <i class="bi bi-coin text-warning"></i>
+          <img src="img/moneda_PokeMarket.png" class="coin-icon me-1" alt="Coins">
           <span class="fw-bold">0</span>
         </div>
 
@@ -101,7 +101,8 @@
           <h1 class="display-4 fw-black mb-3 text-shadow-hero">Ruletas Insanas de PokeMarket</h1>
           <p class="lead text-muted mb-0">
             Gira la ruleta, sube de rareza y convierte tus
-            <span class="fw-semibold text-body-emphasis"><i class="bi bi-coin text-warning"></i> monedas</span>
+            <span class="fw-semibold text-body-emphasis"><img src="img/moneda_PokeMarket.png" class="coin-icon"
+                alt="Coins"> monedas</span>
             en cartas absurdamente buenas.
           </p>
         </header>
@@ -129,11 +130,11 @@
                   activar!</p>
                 <ul class="roulette-choice-tags xsmall mb-2">
                   <li>Tipo: Colección Principal</li>
-                  <li>Coste por giro: <i class="bi bi-coin text-warning"></i> 400</li>
+                  <li>Coste por giro: <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins"> 400</li>
                 </ul>
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="roulette-choice-price d-flex align-items-center gap-1">
-                    <i class="bi bi-coin text-warning small"></i>
+                    <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                     <span>400</span>
                   </span>
                   <span class="badge bg-warning-subtle text-warning-emphasis xsmall">Solo Base Set</span>
@@ -164,7 +165,7 @@
                     <span class="xsmall text-muted d-block">Balance</span>
                     <span class="small fw-semibold text-success d-flex align-items-center justify-content-end gap-1"
                       id="balanceCredits">
-                      <i class="bi bi-coin text-warning small"></i>
+                      <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                       <span>0</span>
                     </span>
                   </div>
@@ -219,7 +220,7 @@
                     <div class="xsmall text-muted mb-1 d-flex align-items-center justify-content-end gap-1">
                       <span>Coste por giro:</span>
                       <span class="text-warning fw-semibold d-flex align-items-center gap-1" id="spinCost">
-                        <i class="bi bi-coin text-warning small"></i>
+                        <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                         <span>20</span>
                       </span>
                     </div>
@@ -298,7 +299,7 @@
               <span class="xsmall text-muted text-uppercase fw-bold" style="letter-spacing: 1px;">Tu Saldo</span>
               <span class="shop-balance-amount text-warning fw-bold fs-5 d-flex align-items-center gap-2"
                 id="shopCredits">
-                <i class="bi bi-coin"></i>
+                <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                 <span>0</span>
               </span>
             </div>
@@ -315,7 +316,7 @@
                   <div class="d-flex flex-column align-items-start lh-1">
                     <span class="fw-bold xsmall text-uppercase">Recargar</span>
                     <span class="text-warning xsmall fw-bold d-flex align-items-center gap-1">
-                      <i class="bi bi-coin" style="font-size: 0.65rem;"></i>
+                      <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                       <span id="refreshCostLabel">1000</span>
                     </span>
                   </div>
@@ -365,7 +366,7 @@
                   <div class="daily-action-container">
                     <button class="btn daily-buy-btn tienda-dia-btn-comprar">
                       <div class="d-flex align-items-center justify-content-center gap-1">
-                        <div class="daily-coin-icon"></div>
+                        <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins">
                         <span class="daily-price">0</span>
                       </div>
                     </button>
@@ -383,88 +384,73 @@
       </section>
 
       <!-- SECCIÓN SOBRES -->
-      <section class="card border-0 shadow-sm mb-4 tienda-section">
-        <div class="card-header border-0 bg-transparent d-flex flex-wrap justify-content-between align-items-center">
-          <div>
-            <p class="text-uppercase xsmall text-muted mb-1">Fábrica de dopamina</p>
-            <h3 class="h5 mb-1 fw-semibold">Sobres PokeMarket – Abre y reza</h3>
-            <p class="xsmall text-muted mb-0">Cada carta del sobre tiene su propia probabilidad según el tipo de sobre.
-              Elige tu riesgo y mira qué sale.</p>
+      <!-- SECCIÓN SOBRES (Hearthstone Style) -->
+      <section class="mb-5">
+        <header class="mb-3">
+          <p class="text-uppercase xsmall text-muted mb-1">Fábrica de dopamina</p>
+          <h3 class="h5 fw-semibold">Sobres PokeMarket – Abre y reza</h3>
+        </header>
+
+        <div class="shop-packs-container">
+
+          <!-- LEFT PANEL: FEATURED SET -->
+          <div class="pack-feature-panel">
+            <div class="pack-feature-ribbon">Latest Expansion</div>
+
+            <!-- 3D CSS BOX Placeholder (Fallback until PNG is added) -->
+            <!-- 3D CSS BOX Placeholder (Fallback until PNG is added) -->
+            <img src="img/caja199.png" class="booster-box-display" alt="Base Set 1999 Booster Box">
+
+            <h2 class="pack-feature-title">BASE SET</h2>
+            <div class="pack-feature-subtitle">1st Edition • 1999</div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="row g-3 align-items-stretch">
-            <!-- Lista de sobres -->
-            <div class="col-12">
-              <div class="row g-3" id="packsGrid">
-                <!-- Sobres Venusaur, Charizard, Blastoise -->
-                <div class="col-12 col-lg-4">
-                  <article class="card tienda-pack-card h-100" data-pack-id="base1_venusaur">
-                    <div class="card-body d-flex flex-column text-center">
-                      <div class="tienda-pack-art pack-art-venusaur mx-auto mb-3">
-                        <div class="tienda-pack-emblem">BS</div>
-                      </div>
-                      <h5 class="fw-bold mb-1">Sobre Venusaur</h5>
-                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
-                      <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-1">
-                          <i class="bi bi-coin text-warning small"></i>
-                          <span class="fw-bold">1500</span>
-                        </div>
-                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
-                          data-pack-id="base1_venusaur">Abrir</button>
-                      </div>
-                    </div>
-                  </article>
-                </div>
 
-                <div class="col-12 col-lg-4">
-                  <article class="card tienda-pack-card h-100" data-pack-id="base1_charizard">
-                    <div class="card-body d-flex flex-column text-center">
-                      <div class="tienda-pack-art pack-art-charizard mx-auto mb-3">
-                        <div class="tienda-pack-emblem">BS</div>
-                      </div>
-                      <h5 class="fw-bold mb-1">Sobre Charizard</h5>
-                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
-                      <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-1">
-                          <i class="bi bi-coin text-warning small"></i>
-                          <span class="fw-bold">1500</span>
-                        </div>
-                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
-                          data-pack-id="base1_charizard">Abrir</button>
-                      </div>
-                    </div>
-                  </article>
-                </div>
+          <!-- RIGHT PANEL: PACK GRID -->
+          <div class="pack-grid-panel">
+            <div class="pack-grid-inner" id="packsGrid">
 
-                <div class="col-12 col-lg-4">
-                  <article class="card tienda-pack-card h-100" data-pack-id="base1_blastoise">
-                    <div class="card-body d-flex flex-column text-center">
-                      <div class="tienda-pack-art pack-art-blastoise mx-auto mb-3">
-                        <div class="tienda-pack-emblem">BS</div>
-                      </div>
-                      <h5 class="fw-bold mb-1">Sobre Blastoise</h5>
-                      <p class="xsmall text-muted mb-3">3 cartas del Base Set original.</p>
-                      <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-1">
-                          <i class="bi bi-coin text-warning small"></i>
-                          <span class="fw-bold">1500</span>
-                        </div>
-                        <button class="btn btn-poke pack-open-btn btn-sm px-3"
-                          data-pack-id="base1_blastoise">Abrir</button>
-                      </div>
-                    </div>
-                  </article>
+              <!-- Item 1: Venusaur -->
+              <div class="hearth-pack-item" onclick="openPack('base1_venusaur')">
+                <!-- JS handler manual fallback or let existing script attach -->
+                <div class="hearth-pack-frame">
+                  <img src="img/pack-venusaur.png" class="hearth-pack-image" alt="Venusaur Pack">
                 </div>
-                <!-- Solo Sobre Base Set (Grail eliminado) -->
-
+                <div class="hearth-pack-label">Venusaur</div>
+                <div class="hearth-pack-price">
+                  <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins"> 1500
+                </div>
+                <button class="hearth-pack-btn pack-open-btn" data-pack-id="base1_venusaur">ABRIR</button>
               </div>
+
+              <!-- Item 2: Charizard -->
+              <div class="hearth-pack-item" onclick="openPack('base1_charizard')">
+                <div class="hearth-pack-frame">
+                  <img src="img/pack-charizard.png" class="hearth-pack-image" alt="Charizard Pack">
+                </div>
+                <div class="hearth-pack-label">Charizard</div>
+                <div class="hearth-pack-price">
+                  <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins"> 1500
+                </div>
+                <button class="hearth-pack-btn pack-open-btn" data-pack-id="base1_charizard">ABRIR</button>
+              </div>
+
+              <!-- Item 3: Blastoise -->
+              <div class="hearth-pack-item" onclick="openPack('base1_blastoise')">
+                <div class="hearth-pack-frame">
+                  <img src="img/pack-blastoise.png" class="hearth-pack-image" alt="Blastoise Pack">
+                </div>
+                <div class="hearth-pack-label">Blastoise</div>
+                <div class="hearth-pack-price">
+                  <img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins"> 1500
+                </div>
+                <button class="hearth-pack-btn pack-open-btn" data-pack-id="base1_blastoise">ABRIR</button>
+              </div>
+
             </div>
           </div>
+
         </div>
       </section>
-
       <p class="roulette-disclaimer text-center mt-4">
         Probabilidades fijas por rareza, ruleta y tipo de sobre. Juega con cabeza y disfruta del vicio controlado.
       </p>
@@ -525,7 +511,7 @@
             <!-- Pack 1 -->
             <div class="col-12 col-md-4">
               <div class="coin-pack-card tier-1" data-amount="2500" data-cost="2.99">
-                <div class="coin-pack-icon"><i class="bi bi-coin"></i></div>
+                <div class="coin-pack-icon"><img src="img/moneda_PokeMarket.png" class="coin-icon" alt="Coins"></div>
                 <div class="coin-pack-amount">2,500</div>
                 <div class="coin-pack-bonus"><span
                     class="badge bg-secondary-subtle text-secondary-emphasis xsmall">Básico</span></div>
